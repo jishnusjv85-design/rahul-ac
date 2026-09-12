@@ -1,0 +1,1691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COOLTECH • book fast</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
+        
+        :root {
+            --primary: 255 107 107;
+        }
+        
+        * {
+            transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 150ms;
+        }
+        
+        .tail-container {
+            font-family: 'Poppins', system_ui, sans-serif;
+        }
+        
+        .logo-font {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .hero-bg {
+            background: radial-gradient(at center bottom, #7e22ce 0%, #f97316 40%, #22d3ee 80%);
+            background-size: 200% 200%;
+            animation: heroShift 15s ease infinite;
+        }
+
+        @keyframes heroShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .neon-text {
+            text-shadow: 
+                0 0 10px rgb(249 115 22),
+                0 0 20px rgb(249 115 22),
+                0 0 40px rgb(165 243 252);
+        }
+
+        .glass {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+
+        .service-card {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 40%;
+            height: 400%;
+            background: linear-gradient(
+                120deg,
+                transparent,
+                rgba(255,255,255,0.4),
+                transparent
+            );
+            transform: skewX(-25deg);
+            animation: shimmer 4s infinite;
+        }
+
+        @keyframes shimmer {
+            100% {
+                transform: translateX(400%);
+            }
+        }
+
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: rgb(249 115 22);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover:after {
+            width: 100%;
+        }
+
+        .slot {
+            position: relative;
+        }
+        
+        .slot.available:hover {
+            transform: scale(1.08);
+            box-shadow: 0 0 0 4px rgb(165 243 252);
+        }
+        
+        .slot.booked {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .blob {
+            animation: blobFloat 25s infinite linear;
+            filter: blur(80px);
+            opacity: 0.15;
+        }
+
+        @keyframes blobFloat {
+            0%, 100% { transform: translate(0px, 0px) rotate(0deg); }
+            25% { transform: translate(120px, -80px) rotate(90deg); }
+            50% { transform: translate(-80px, 120px) rotate(180deg); }
+            75% { transform: translate(60px, -60px) rotate(270deg); }
+        }
+
+        .modal {
+            animation: modalPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        @keyframes modalPop {
+            0% {
+                opacity: 0;
+                transform: scale(0.7) translateY(60px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .success-confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            animation: confetti-fall 4s linear forwards;
+        }
+
+        .page {
+            display: none;
+        }
+        
+        .page.active {
+            display: block;
+        }
+
+        .status-dot {
+            animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #f97316, #22d3ee, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="tail-container bg-zinc-950 text-white overflow-x-hidden">
+    <!-- background elements -->
+    <div class="fixed inset-0 z-0 pointer-events-none">
+        <div class="absolute top-0 left-0 w-96 h-96 bg-orange-500 blob rounded-full -translate-x-1/3 -translate-y-1/3"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-cyan-400 blob rounded-full translate-x-1/3 translate-y-1/3" style="animation-delay: 8s"></div>
+        <div class="absolute top-1/3 right-1/4 w-64 h-64 bg-violet-500 blob rounded-full" style="animation-delay: 15s"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(#27272a_1px,transparent_1px)] [background-size:50px_50px] opacity-20"></div>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="bg-zinc-900 border-b border-white/10 backdrop-blur-xl fixed w-full z-50">
+        <div class="max-w-screen-2xl mx-auto">
+            <div class="px-8 py-5 flex items-center justify-between">
+                <!-- logo -->
+                <div onclick="navigateTo('landing')" 
+                     class="flex items-center gap-x-3 cursor-pointer group">
+                    <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-orange-500 via-pink-500 to-cyan-400 flex items-center justify-center shadow-[0_0_25px_-3px] shadow-orange-500 group-active:scale-95">
+                        <i class="fa-solid fa-bolt text-3xl text-white -rotate-12"></i>
+                    </div>
+                    <div>
+                        <span class="logo-font text-4xl font-semibold tracking-tighter gradient-text">COOL</span>
+                        <span class="logo-font text-4xl font-semibold tracking-tighter text-white">TECH</span>
+                    </div>
+                </div>
+
+                <!-- menu -->
+                <div class="hidden md:flex items-center gap-x-8 text-sm font-medium">
+                    <a onclick="navigateTo('landing'); return false" 
+                       class="nav-link text-zinc-400 hover:text-white cursor-pointer flex items-center gap-x-1.5">
+                        <i class="fa-solid fa-house text-xs"></i>
+                        <span>HOME</span>
+                    </a>
+                    <a onclick="navigateTo('services'); return false" 
+                       class="nav-link text-zinc-400 hover:text-white cursor-pointer flex items-center gap-x-1.5">
+                        <i class="fa-solid fa-tools text-xs"></i>
+                        <span>SERVICES</span>
+                    </a>
+                    <a onclick="navigateTo('book'); return false" 
+                       class="nav-link px-5 py-2.5 bg-white text-zinc-900 hover:bg-amber-300 rounded-3xl font-semibold flex items-center gap-x-2">
+                        <i class="fa-solid fa-calendar-day"></i>
+                        <span>BOOK NOW</span>
+                    </a>
+                </div>
+
+                <div class="flex items-center gap-x-6">
+                    <div id="live-indicator" 
+                         onclick="showToast('12 pros online right now 🔥', 'lime')"
+                         class="hidden md:flex items-center gap-x-2 bg-emerald-900 text-emerald-300 text-xs font-medium px-4 h-7 rounded-3xl cursor-pointer">
+                        <div class="w-2 h-2 bg-emerald-400 rounded-full status-dot"></div>
+                        <span>LIVE</span>
+                    </div>
+
+                    <!-- user area -->
+                    <div id="user-section" class="hidden items-center gap-x-3 cursor-pointer" onclick="toggleProfileMenu()">
+                        <div class="text-right">
+                            <div id="user-name" class="text-sm font-semibold text-white">Alex Chen</div>
+                            <div id="user-email" class="text-[10px] text-zinc-500 -mt-0.5">alex@demo.dev</div>
+                        </div>
+                        <div id="user-avatar" 
+                             class="w-9 h-9 bg-zinc-700 text-white text-xs font-bold rounded-2xl flex items-center justify-center ring-2 ring-orange-400 overflow-hidden">
+                        </div>
+                    </div>
+
+                    <button onclick="showLoginModal()"
+                            id="login-btn"
+                            class="px-6 py-3 text-sm font-semibold bg-white text-zinc-900 rounded-3xl flex items-center gap-x-2 hover:shadow-xl hover:shadow-orange-500/30 active:scale-95">
+                        <i class="fa-solid fa-right-to-bracket"></i>
+                        <span>LOGIN</span>
+                    </button>
+
+                    <button onclick="toggleMobileMenu()" 
+                            class="md:hidden w-10 h-10 flex items-center justify-center text-2xl">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- MOBILE MENU -->
+        <div id="mobile-menu" class="hidden md:hidden bg-zinc-900 border-t border-white/10 py-4 px-6 text-sm">
+            <div class="flex flex-col gap-y-6">
+                <a onclick="navigateTo('landing');toggleMobileMenu()" class="flex items-center gap-x-3 text-zinc-300">
+                    <i class="fa-solid fa-house w-5"></i>
+                    <span>Home</span>
+                </a>
+                <a onclick="navigateTo('services');toggleMobileMenu()" class="flex items-center gap-x-3 text-zinc-300">
+                    <i class="fa-solid fa-tools w-5"></i>
+                    <span>Services</span>
+                </a>
+                <a onclick="navigateTo('book');toggleMobileMenu()" class="flex items-center gap-x-3 text-zinc-300">
+                    <i class="fa-solid fa-calendar w-5"></i>
+                    <span>Book a fix</span>
+                </a>
+                <a onclick="navigateTo('mybookings');toggleMobileMenu()" class="flex items-center gap-x-3 text-zinc-300">
+                    <i class="fa-solid fa-list-check w-5"></i>
+                    <span>My bookings</span>
+                </a>
+                <div onclick="switchToAdmin();toggleMobileMenu()" 
+                     class="flex items-center gap-x-3 text-rose-400 border border-rose-400/30 rounded-3xl px-5 py-3 text-sm font-medium">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <span>ADMIN PORTAL (DEMO)</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="h-20"></div>
+
+    <!-- LANDING PAGE -->
+    <div id="landing" class="page active">
+        <!-- HERO -->
+        <div class="hero-bg min-h-screen flex items-center relative">
+            <div class="max-w-screen-2xl mx-auto px-6 pt-16 grid md:grid-cols-12 gap-8 items-center">
+                <div class="md:col-span-7">
+                    <div class="inline-flex items-center gap-x-3 bg-white/20 text-white text-xs font-medium tracking-widest px-6 py-3 rounded-3xl mb-6 backdrop-blur-md">
+                        <div class="px-3 py-1 bg-white text-orange-600 rounded-3xl text-[10px] font-bold">NEW</div>
+                        INSTANT CONFIRMATION
+                    </div>
+                    
+                    <h1 class="text-7xl md:text-8xl font-semibold leading-none tracking-tighter text-white logo-font neon-text mb-4">
+                        NEED A FIX?<br>WE GOT YOU.
+                    </h1>
+                    
+                    <p class="max-w-md text-2xl text-orange-100 mb-10">
+                        Electricians, plumbers &amp; AC pros. Book in 30 seconds. 
+                        <span class="line-through opacity-40">Waiting weeks.</span>
+                    </p>
+                    
+                    <div class="flex items-center gap-x-4">
+                        <button onclick="navigateTo('book')" 
+                                class="px-10 py-6 bg-white text-zinc-950 rounded-3xl text-2xl font-semibold flex items-center gap-x-4 shadow-2xl shadow-orange-600/40 hover:scale-105 active:scale-95">
+                            <span>BOOK NOW</span>
+                            <i class="fa-solid fa-arrow-right text-3xl"></i>
+                        </button>
+                        
+                        <button onclick="watchDemo()" 
+                                class="px-7 py-6 border border-white/60 hover:border-white rounded-3xl flex items-center gap-x-3 text-white">
+                            <i class="fa-solid fa-play text-xl"></i>
+                            <span class="font-medium">watch 38s demo</span>
+                        </button>
+                    </div>
+                    
+                    <div class="mt-16 flex items-center gap-x-8">
+                        <div class="flex -space-x-4">
+                            <div class="w-7 h-7 bg-pink-400 border-2 border-white rounded-2xl flex items-center justify-center text-[10px]">🔧</div>
+                            <div class="w-7 h-7 bg-cyan-400 border-2 border-white rounded-2xl flex items-center justify-center text-[10px]">⚡</div>
+                            <div class="w-7 h-7 bg-violet-400 border-2 border-white rounded-2xl flex items-center justify-center text-[10px]">❄️</div>
+                        </div>
+                        <div>
+                            <div class="text-xs text-orange-200">4,892 happy fixes today</div>
+                            <div class="flex text-amber-300 text-sm">
+                                ★★★★☆ <span class="text-white/70 ml-2 text-xs">(4.98 avg)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- floating booking card -->
+                <div class="md:col-span-5 relative">
+                    <div class="glass border border-white/20 rounded-3xl p-5 shadow-2xl max-w-xs mx-auto">
+                        <div class="bg-zinc-900 rounded-3xl p-5">
+                            <div class="flex justify-between items-center mb-6">
+                                <div class="flex items-center gap-x-3">
+                                    <div class="text-4xl">⚡</div>
+                                    <div>
+                                        <div class="text-sm font-medium">Electrician needed</div>
+                                        <div class="text-xs text-emerald-400">Today • 3:30pm</div>
+                                    </div>
+                                </div>
+                                <div onclick="fakeQuickBook()" 
+                                     class="text-xs font-mono bg-emerald-400 text-zinc-900 px-5 py-2 rounded-3xl cursor-pointer hover:bg-white">BOOK $49</div>
+                            </div>
+                            
+                            <div class="h-2 bg-white/10 rounded-3xl overflow-hidden mb-8">
+                                <div class="h-2 w-3/4 bg-gradient-to-r from-orange-400 to-pink-400 rounded-3xl"></div>
+                            </div>
+                            
+                            <div class="grid grid-cols-3 gap-3 text-center text-xs">
+                                <div class="bg-zinc-800 rounded-2xl py-4">
+                                    <div class="text-emerald-400 text-xl">12</div>
+                                    <div class="text-zinc-400 text-[10px]">PROS ONLINE</div>
+                                </div>
+                                <div class="bg-zinc-800 rounded-2xl py-4">
+                                    <div class="text-cyan-400 text-xl">8m</div>
+                                    <div class="text-zinc-400 text-[10px]">AVG WAIT</div>
+                                </div>
+                                <div class="bg-zinc-800 rounded-2xl py-4">
+                                    <div class="text-violet-400 text-xl">94</div>
+                                    <div class="text-zinc-400 text-[10px]">JOBS TODAY</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-center gap-x-2 text-xs text-white/60 mt-6">
+                            <i class="fa-solid fa-lock"></i>
+                            <span>256-bit secured • powered by stripe</span>
+                        </div>
+                    </div>
+                    
+                    <!-- badge -->
+                    <div class="absolute -top-6 -right-6 bg-white text-zinc-900 text-xs font-bold px-6 py-2 rounded-3xl rotate-12 shadow-xl flex items-center gap-x-2">
+                        <span class="text-red-500">●</span>
+                        4 PROS NEAR YOU
+                    </div>
+                </div>
+            </div>
+            
+            <!-- scroll prompt -->
+            <div class="absolute bottom-12 left-1/2 flex flex-col items-center gap-y-1 text-xs text-white/30">
+                <div class="animate-bounce">↓</div>
+                <div>SCROLL FOR MORE</div>
+            </div>
+            
+            <!-- trust logos -->
+            <div class="absolute bottom-8 left-0 right-0 flex justify-center gap-x-8 text-white/30 text-4xl">
+                <i class="fa-brands fa-google"></i>
+                <i class="fa-brands fa-apple"></i>
+                <i class="fa-solid fa-shield"></i>
+            </div>
+        </div>
+        
+        <!-- CATEGORIES BAR -->
+        <div class="max-w-screen-2xl mx-auto px-8 py-6 bg-zinc-900 border-b border-t border-white/10">
+            <div class="flex items-center justify-center md:justify-start gap-x-8 overflow-x-auto scrollbar-thin pb-2">
+                <div onclick="selectCategoryFilter(this)" 
+                     class="cat-chip flex-shrink-0 px-7 py-3 bg-zinc-800 hover:bg-orange-900 rounded-3xl text-sm font-medium flex items-center gap-x-3 cursor-pointer active:scale-95">
+                    <span class="text-2xl">⚡</span>
+                    <span>Electrician</span>
+                </div>
+                <div onclick="selectCategoryFilter(this)" 
+                     class="cat-chip flex-shrink-0 px-7 py-3 bg-zinc-800 hover:bg-cyan-900 rounded-3xl text-sm font-medium flex items-center gap-x-3 cursor-pointer active:scale-95">
+                    <span class="text-2xl">🔧</span>
+                    <span>Plumber</span>
+                </div>
+                <div onclick="selectCategoryFilter(this)" 
+                     class="cat-chip flex-shrink-0 px-7 py-3 bg-zinc-800 hover:bg-sky-900 rounded-3xl text-sm font-medium flex items-center gap-x-3 cursor-pointer active:scale-95">
+                    <span class="text-2xl">❄️</span>
+                    <span>AC Repair</span>
+                </div>
+                <div class="h-7 w-px bg-white/10 mx-4"></div>
+                <div onclick="navigateTo('book')" 
+                     class="flex-shrink-0 text-xs flex items-center gap-x-2 bg-gradient-to-r from-pink-500 to-violet-500 px-8 h-10 rounded-3xl font-semibold cursor-pointer">
+                    <i class="fa-solid fa-magic"></i>
+                    <span>ANY SERVICE</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- HOW IT WORKS -->
+        <div class="max-w-screen-2xl mx-auto px-8 py-20">
+            <div class="flex justify-center mb-6">
+                <span onclick="showToast('This is how we roll 🚀', 'amber')" 
+                      class="px-5 py-2 bg-white/10 text-white/70 text-xs font-mono tracking-[2px] rounded-3xl">3 STEPS • 60 SECONDS</span>
+            </div>
+            <h2 class="text-center text-5xl font-semibold mb-16 tracking-tighter">Lightning fast booking</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- step 1 -->
+                <div class="glass border border-white/10 rounded-3xl p-8 relative">
+                    <div class="absolute -top-5 left-8 bg-orange-500 text-white text-xs w-8 h-8 rounded-2xl flex items-center justify-center font-bold">1</div>
+                    <div class="text-6xl mb-6">📍</div>
+                    <div class="font-semibold text-2xl mb-3">Tell us where + when</div>
+                    <div class="text-zinc-400">Pick your address, date and the exact time that works. No more phone tag.</div>
+                    <div class="mt-auto pt-12 text-[180px] font-black text-white/5 leading-none">01</div>
+                </div>
+                
+                <!-- step 2 -->
+                <div class="glass border border-white/10 rounded-3xl p-8 relative scale-110 shadow-2xl shadow-orange-400/20 z-10">
+                    <div class="absolute -top-5 left-8 bg-cyan-500 text-white text-xs w-8 h-8 rounded-2xl flex items-center justify-center font-bold">2</div>
+                    <div class="text-6xl mb-6">👷</div>
+                    <div class="font-semibold text-2xl mb-3">We match the best pro</div>
+                    <div class="text-zinc-400">Our AI instantly connects you with the nearest available expert in your area.</div>
+                    <div class="absolute bottom-8 right-8 bg-white text-zinc-900 text-xs px-6 py-3 rounded-3xl font-medium flex items-center gap-x-2">
+                        <div class="w-3 h-3 bg-lime-400 rounded-full animate-pulse"></div>
+                        MATCHED
+                    </div>
+                </div>
+                
+                <!-- step 3 -->
+                <div class="glass border border-white/10 rounded-3xl p-8 relative">
+                    <div class="absolute -top-5 left-8 bg-violet-500 text-white text-xs w-8 h-8 rounded-2xl flex items-center justify-center font-bold">3</div>
+                    <div class="text-6xl mb-6">💸</div>
+                    <div class="font-semibold text-2xl mb-3">Pay when done</div>
+                    <div class="text-zinc-400">Only pay once the job is complete. Cancel anytime before the pro arrives.</div>
+                    <div class="mt-auto pt-12 text-[180px] font-black text-white/5 leading-none">03</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- SERVICES TEASER -->
+        <div id="services-teaser" class="max-w-screen-2xl mx-auto px-8 py-16 bg-zinc-900">
+            <div class="flex items-end justify-between mb-8">
+                <div>
+                    <span class="text-orange-400 text-sm font-medium">SERVICES</span>
+                    <h2 class="text-5xl font-semibold tracking-tight">What needs fixing?</h2>
+                </div>
+                <button onclick="navigateTo('services')" 
+                        class="flex items-center gap-x-3 group">
+                    <span class="text-sm uppercase tracking-widest group-hover:underline">All services</span>
+                    <span class="block w-10 h-px bg-white"></span>
+                </button>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="service-cards">
+                <!-- populated by JS -->
+            </div>
+        </div>
+        
+        <!-- TESTIMONIALS -->
+        <div class="max-w-screen-2xl mx-auto px-8 py-20">
+            <div class="max-w-md mx-auto text-center mb-12">
+                <span class="bg-gradient-to-r from-pink-400 to-cyan-400 text-transparent bg-clip-text text-sm font-bold">REAL HUMANS • REAL FAST</span>
+                <h2 class="text-4xl font-semibold mt-3">Don't just take our word</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="glass p-7 rounded-3xl">
+                    <div class="flex gap-x-1 text-yellow-400 mb-6">
+                        ★★★★☆
+                    </div>
+                    <p class="text-zinc-300">"Booked an electrician at 11pm and he was at my door by midnight. Fixed my outlet in 15 minutes. Unreal."</p>
+                    <div class="flex items-center gap-x-3 mt-12">
+                        <div class="w-9 h-9 bg-zinc-700 rounded-2xl"></div>
+                        <div>
+                            <div class="text-sm">Priya Sharma</div>
+                            <div class="text-xs text-zinc-500">Bangalore • 2 days ago</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="glass p-7 rounded-3xl">
+                    <div class="flex gap-x-1 text-yellow-400 mb-6">
+                        ★★★★★
+                    </div>
+                    <p class="text-zinc-300">"AC stopped working in 42°C heat. Booked at 9:15am, mechanic arrived by 10. Saved our entire family."</p>
+                    <div class="flex items-center gap-x-3 mt-12">
+                        <div class="w-9 h-9 bg-amber-300 rounded-2xl flex items-center justify-center text-xs">JD</div>
+                        <div>
+                            <div class="text-sm">Jatin Desai</div>
+                            <div class="text-xs text-zinc-500">Mumbai • yesterday</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="glass p-7 rounded-3xl">
+                    <div class="flex gap-x-1 text-yellow-400 mb-6">
+                        ★★★★☆
+                    </div>
+                    <p class="text-zinc-300">"Plumber came and fixed my leaking sink. Super friendly, charged exactly what was quoted. 10/10 would book again."</p>
+                    <div class="flex items-center gap-x-3 mt-12">
+                        <div class="w-9 h-9 bg-sky-300 rounded-2xl"></div>
+                        <div>
+                            <div class="text-sm">Meera Patel</div>
+                            <div class="text-xs text-zinc-500">Hyderabad • 5 days ago</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- FOOTER TEASER -->
+        <div class="bg-black py-6 text-center text-xs text-white/30 flex items-center justify-center gap-x-8">
+            <div class="flex items-center gap-x-5">
+                <i class="fa-solid fa-copyright"></i>
+                <span>COOLTECH 2025 • demo build</span>
+            </div>
+            <div onclick="switchToAdmin()" class="cursor-pointer hover:text-orange-400">ADMIN DASHBOARD →</div>
+        </div>
+    </div>
+    
+    <!-- SERVICES PAGE -->
+    <div id="services" class="page">
+        <div class="max-w-screen-2xl mx-auto px-8 py-12">
+            <div onclick="navigateTo('landing')" class="flex items-center gap-x-2 text-orange-300 mb-6 cursor-pointer">
+                <i class="fa-solid fa-chevron-left"></i>
+                <span class="uppercase text-xs tracking-widest">Back home</span>
+            </div>
+            
+            <h1 class="text-6xl font-semibold tracking-tighter mb-2">Choose your service</h1>
+            <p class="text-zinc-400 max-w-xs">All experts are background checked, rated 4.9+, and arrive in under 90 minutes on average.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16" id="full-service-list">
+                <!-- populated by JS -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- BOOKING PAGE -->
+    <div id="book" class="page">
+        <div class="max-w-screen-2xl mx-auto">
+            <div class="flex">
+                <!-- left panel: selection -->
+                <div class="flex-1 p-8 lg:p-12">
+                    <div class="max-w-lg mx-auto">
+                        <!-- step indicator -->
+                        <div class="flex items-center gap-x-4 mb-8">
+                            <div onclick="setBookingStep(1)" id="step-1-dot"
+                                 class="step-dot w-8 h-8 rounded-2xl bg-orange-500 flex items-center justify-center text-xs font-bold cursor-pointer">1</div>
+                            <div class="flex-1 h-px bg-white/10"></div>
+                            <div onclick="setBookingStep(2)" id="step-2-dot"
+                                 class="step-dot w-8 h-8 rounded-2xl bg-white/20 flex items-center justify-center text-xs font-bold cursor-pointer">2</div>
+                            <div class="flex-1 h-px bg-white/10"></div>
+                            <div onclick="setBookingStep(3)" id="step-3-dot"
+                                 class="step-dot w-8 h-8 rounded-2xl bg-white/20 flex items-center justify-center text-xs font-bold cursor-pointer">3</div>
+                        </div>
+                        
+                        <!-- STEP 1: CATEGORY -->
+                        <div id="booking-step-1">
+                            <h2 class="text-3xl font-semibold mb-8">What do you need fixed?</h2>
+                            
+                            <div class="grid grid-cols-3 gap-4" id="category-select">
+                                <!-- populated by JS -->
+                            </div>
+                            
+                            <button onclick="setBookingStep(2)" 
+                                    class="mt-16 w-full h-14 bg-white text-zinc-950 rounded-3xl text-lg font-semibold flex items-center justify-center gap-x-3">
+                                CONTINUE 
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                        
+                        <!-- STEP 2: DATE &amp; TIME -->
+                        <div id="booking-step-2" class="hidden">
+                            <h2 class="text-3xl font-semibold mb-2">When are you free?</h2>
+                            <p class="text-zinc-400 mb-8">We have pros ready almost every hour.</p>
+                            
+                            <!-- date scroller -->
+                            <div class="flex gap-x-3 overflow-x-auto pb-6 scrollbar-thin" id="date-scroller">
+                                <!-- populated by JS -->
+                            </div>
+                            
+                            <div class="mt-4 mb-8">
+                                <div class="text-xs font-medium text-white/40 mb-4 px-1">AVAILABLE TIMES</div>
+                                <div class="grid grid-cols-4 gap-3" id="time-slots">
+                                    <!-- populated by JS -->
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center gap-x-6">
+                                <button onclick="setBookingStep(1)" 
+                                        class="flex-1 h-14 border border-white/30 rounded-3xl text-sm font-medium">BACK</button>
+                                <button onclick="setBookingStep(3)" 
+                                        class="flex-1 h-14 bg-gradient-to-r from-orange-400 to-pink-500 rounded-3xl text-white font-semibold">NEXT: DETAILS</button>
+                            </div>
+                        </div>
+                        
+                        <!-- STEP 3: DETAILS -->
+                        <div id="booking-step-3" class="hidden">
+                            <h2 class="text-3xl font-semibold mb-8">Almost done...</h2>
+                            
+                            <div class="space-y-8">
+                                <div>
+                                    <label class="block text-xs font-medium text-white/60 mb-3">YOUR PHONE NUMBER</label>
+                                    <div class="flex">
+                                        <div class="bg-white/10 w-16 flex items-center justify-center text-lg rounded-l-3xl">🇮🇳</div>
+                                        <input id="phone-input" type="tel" 
+                                               class="flex-1 bg-white/10 border border-white/20 focus:border-orange-400 outline-none px-6 rounded-r-3xl text-lg"
+                                               placeholder="98765 43210" value="9876543210">
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-xs font-medium text-white/60 mb-3">WORK DESCRIPTION</label>
+                                    <textarea id="description-input" rows="3"
+                                        class="w-full bg-white/10 border border-white/20 focus:border-orange-400 outline-none p-6 rounded-3xl resize-none"
+                                        placeholder="Kitchen switch not working. Need urgent help..."></textarea>
+                                </div>
+                                
+                                <div class="grid grid-cols-2 gap-6">
+                                    <div>
+                                        <label class="block text-xs font-medium text-white/60 mb-3">EST. DURATION</label>
+                                        <select id="duration-select" 
+                                                class="w-full bg-white/10 border border-white/20 focus:border-orange-400 outline-none h-14 px-6 rounded-3xl text-white">
+                                            <option value="30">30 minutes</option>
+                                            <option value="60" selected>1 hour</option>
+                                            <option value="120">2 hours</option>
+                                            <option value="180">3+ hours</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-medium text-white/60 mb-3">PREFERRED PRO</label>
+                                        <div class="bg-white/10 border border-white/20 h-14 rounded-3xl flex items-center px-6 text-sm">
+                                            Any available
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div onclick="submitBooking()" 
+                                 class="cursor-pointer mt-12 bg-gradient-to-r from-cyan-400 to-violet-500 text-zinc-950 h-16 rounded-3xl flex items-center justify-between px-8 text-xl font-semibold">
+                                <span>CONFIRM BOOKING • ₹399</span>
+                                <i class="fa-solid fa-check-circle text-4xl"></i>
+                            </div>
+                            
+                            <div class="text-center text-xs text-white/40 mt-8">You will not be charged until the job is complete</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- right panel: summary -->
+                <div class="hidden lg:flex w-96 bg-zinc-900 border-l border-white/10 p-8 flex-col">
+                    <div class="text-xs font-mono mb-3 text-orange-400">YOUR FIX SUMMARY</div>
+                    
+                    <div id="summary-card" class="glass rounded-3xl p-6 flex-1">
+                        <div class="flex justify-between">
+                            <div id="summary-icon" class="text-6xl">⚡</div>
+                            <div class="text-right">
+                                <div id="summary-category" class="font-semibold text-2xl">Electrician</div>
+                                <div id="summary-date" class="text-xs text-emerald-300">MAR 18 • 10:30 AM</div>
+                            </div>
+                        </div>
+                        
+                        <div class="my-8 border border-dashed border-white/30 rounded-2xl p-5 text-xs">
+                            <div class="flex justify-between py-3 border-b border-white/10">
+                                <div class="text-white/60">Address</div>
+                                <div class="text-right text-sm">12, MG Road<br><span class="text-white/40">Bangalore, KA</span></div>
+                            </div>
+                            <div class="flex justify-between py-3">
+                                <div class="text-white/60">Est. cost</div>
+                                <div class="font-medium">₹399 - ₹899</div>
+                            </div>
+                        </div>
+                        
+                        <div class="text-[10px] flex justify-between items-center">
+                            <div class="flex items-center gap-x-2">
+                                <span class="inline-block w-3 h-px bg-white"></span>
+                                <span>PROS AVAILABLE</span>
+                            </div>
+                            <div class="text-emerald-400 font-medium">4 nearby</div>
+                        </div>
+                    </div>
+                    
+                    <div onclick="navigateTo('landing')" 
+                         class="text-center text-xs text-white/30 hover:text-white/70 mt-auto pt-8 cursor-pointer">← back to homepage</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- MY BOOKINGS PAGE -->
+    <div id="mybookings" class="page">
+        <div class="max-w-screen-2xl mx-auto px-6 py-8">
+            <div class="flex justify-between items-baseline mb-8">
+                <div class="text-5xl font-semibold tracking-tighter">My Bookings</div>
+                <div onclick="navigateTo('book')" 
+                     class="px-6 py-4 bg-white/5 hover:bg-white/10 rounded-3xl text-sm flex items-center gap-x-2 cursor-pointer">
+                    <i class="fa-solid fa-plus"></i>
+                    <span>NEW BOOKING</span>
+                </div>
+            </div>
+            
+            <div id="bookings-list" class="space-y-4">
+                <!-- populated by JS -->
+            </div>
+            
+            <div id="no-bookings" class="hidden py-12 text-center">
+                <div class="mx-auto w-16 h-16 rounded-3xl bg-white/5 flex items-center justify-center text-4xl mb-6">📪</div>
+                <div class="font-medium">No bookings yet</div>
+                <div onclick="navigateTo('book')" class="text-orange-400 text-sm mt-6 cursor-pointer">Make your first booking now →</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ADMIN DASHBOARD -->
+    <div id="admin" class="page hidden">
+        <div class="max-w-screen-2xl mx-auto px-8 py-8">
+            <!-- admin header -->
+            <div class="flex items-center justify-between mb-8 bg-zinc-900 border border-white/10 rounded-3xl px-8 py-6">
+                <div class="flex items-center gap-x-4">
+                    <i class="fa-solid fa-shield-halved text-4xl text-violet-400"></i>
+                    <div>
+                        <div class="font-mono text-xs text-violet-300">ADMIN CONSOLE</div>
+                        <div class="text-3xl font-semibold tracking-tight">All Requests</div>
+                    </div>
+                </div>
+                
+                <div class="flex items-center gap-x-8">
+                    <div onclick="filterAdminBookings('all')" class="admin-filter active px-5 py-2 text-sm cursor-pointer">ALL</div>
+                    <div onclick="filterAdminBookings('pending')" class="admin-filter px-5 py-2 text-sm cursor-pointer">PENDING</div>
+                    <div onclick="filterAdminBookings('confirmed')" class="admin-filter px-5 py-2 text-sm cursor-pointer">CONFIRMED</div>
+                    
+                    <div class="h-7 w-px bg-white/10"></div>
+                    
+                    <div onclick="logout()" 
+                         class="flex items-center gap-x-2 text-xs text-white/40 hover:text-rose-400 cursor-pointer">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        <span>EXIT ADMIN</span>
+                    </div>
+                </div>
+                
+                <div class="text-xs text-right">
+                    <div class="text-emerald-400">jishnusjv85@gmail.com</div>
+                    <div class="text-white/30 text-[10px]">NOTIFICATIONS ENABLED</div>
+                </div>
+            </div>
+            
+            <div class="bg-zinc-900 rounded-3xl overflow-hidden border border-white/10">
+                <table class="w-full">
+                    <thead>
+                        <tr class="border-b border-white/10 text-xs text-white/40">
+                            <th class="py-6 px-8 text-left font-normal">ID</th>
+                            <th class="py-6 px-8 text-left font-normal">CUSTOMER</th>
+                            <th class="py-6 px-8 text-left font-normal">SERVICE</th>
+                            <th class="py-6 px-8 text-left font-normal">WHEN</th>
+                            <th class="py-6 px-8 text-left font-normal">PHONE</th>
+                            <th class="py-6 px-8 text-left font-normal">STATUS</th>
+                            <th class="py-6 px-8 text-right font-normal">ACTION</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admin-table-body" class="text-sm divide-y divide-white/10">
+                        <!-- populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="text-[10px] text-center text-white/20 mt-8">DEMO ONLY • EMAILS SENT TO JISHNUSJV85@GMAIL.COM</div>
+        </div>
+    </div>
+    
+    <!-- LOGIN MODAL -->
+    <div onclick="if(event.target.id === 'login-modal') hideLoginModal()" 
+         id="login-modal" 
+         class="hidden fixed inset-0 bg-black/70 backdrop-blur-xl z-[9999] flex items-center justify-center">
+        <div onclick="event.stopImmediatePropagation()" 
+             class="modal glass border border-white/30 max-w-md w-full mx-4 rounded-3xl overflow-hidden">
+            
+            <!-- modal header -->
+            <div class="px-8 pt-8 pb-6 border-b border-white/10 flex items-center justify-between">
+                <div class="logo-font text-4xl tracking-tighter gradient-text">COOLTECH</div>
+                <button onclick="hideLoginModal()" class="text-3xl leading-none text-white/30">×</button>
+            </div>
+            
+            <div class="p-8">
+                <div class="text-center mb-8">
+                    <div class="inline-flex items-center justify-center w-16 h-16 bg-white/10 rounded-2xl mb-6">
+                        <i class="fa-solid fa-user text-4xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-3xl">Sign in to continue</h3>
+                    <p class="text-zinc-400 text-sm mt-3">Use your Google account to book instantly</p>
+                </div>
+                
+                <!-- google button -->
+                <div onclick="fakeGoogleLogin()" 
+                     class="g-btn border border-white/30 hover:border-white/70 rounded-3xl py-6 px-8 flex items-center justify-center gap-x-4 cursor-pointer">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/2048px-Google_%22G%22_logo.svg.png" 
+                         class="w-5 h-5">
+                    <span class="font-medium text-zinc-900">Continue with Google</span>
+                </div>
+                
+                <div class="my-8 flex items-center gap-x-4">
+                    <div class="flex-1 h-px bg-white/10"></div>
+                    <span class="text-xs text-white/30 font-medium">OR</span>
+                    <div class="flex-1 h-px bg-white/10"></div>
+                </div>
+                
+                <!-- demo logins -->
+                <div class="grid grid-cols-2 gap-4 text-xs">
+                    <div onclick="demoLogin('user')" 
+                         class="border border-dashed border-white/40 hover:border-orange-400 rounded-3xl p-4 cursor-pointer">
+                        <div class="font-medium">Demo User</div>
+                        <div class="text-emerald-400 text-[10px]">alexchen@gmail.com</div>
+                    </div>
+                    <div onclick="demoLogin('admin')" 
+                         class="border border-dashed border-white/40 hover:border-violet-400 rounded-3xl p-4 cursor-pointer">
+                        <div class="font-medium">Demo Admin</div>
+                        <div class="text-violet-400 text-[10px]">jishnusjv85@gmail.com</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-black/40 px-8 py-6 text-center text-[10px] text-white/30">
+                Your data is safe. We never sell your information.
+            </div>
+        </div>
+    </div>
+    
+    <!-- SUCCESS MODAL -->
+    <div onclick="if(event.target.id==='success-modal') hideSuccessModal()" id="success-modal" 
+         class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-[99999]">
+        <div class="modal max-w-md w-full mx-4 bg-zinc-900 rounded-3xl p-8 relative overflow-hidden">
+            <!-- confetti container -->
+            <div id="confetti-container" class="absolute inset-0 pointer-events-none"></div>
+            
+            <div class="text-center relative z-10">
+                <div class="w-24 h-24 mx-auto rounded-full bg-gradient-to-br from-cyan-400 to-violet-400 flex items-center justify-center mb-6 shadow-inner">
+                    <i class="fa-solid fa-circle-check text-6xl text-white"></i>
+                </div>
+                
+                <div class="text-4xl font-semibold mb-1">Booking confirmed!</div>
+                <div id="success-service" class="text-orange-300">Electrician • Tomorrow 11:00am</div>
+                
+                <div class="my-8 p-5 bg-black/30 rounded-2xl text-left text-sm">
+                    <div class="flex justify-between text-xs mb-4">
+                        <span class="text-white/60">BOOKING ID</span>
+                        <span id="success-id" class="font-mono">#F82491</span>
+                    </div>
+                    <div class="h-px bg-white/10 my-4"></div>
+                    <div class="text-emerald-400 text-center text-xs font-medium flex items-center justify-center gap-x-2">
+                        <i class="fa-solid fa-envelope"></i>
+                        <span>Notification sent to jishnusjv85@gmail.com</span>
+                    </div>
+                </div>
+                
+                <button onclick="hideSuccessModal(); navigateTo('mybookings')" 
+                        class="w-full py-6 text-lg bg-white text-zinc-900 rounded-3xl font-semibold">VIEW MY BOOKINGS</button>
+                
+                <div onclick="hideSuccessModal()" 
+                     class="block text-xs text-white/40 mt-8 cursor-pointer">CLOSE WINDOW</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- TOAST -->
+    <div id="toast" onclick="this.classList.add('hidden')" 
+         class="hidden fixed bottom-6 right-6 bg-zinc-800 border border-orange-400 text-white text-sm px-5 py-4 rounded-3xl shadow-2xl flex items-center gap-x-3 z-[99999]">
+        <span id="toast-text"></span>
+    </div>
+    
+    <!-- PROFILE MENU -->
+    <div onclick="if(!event.target.closest('#profile-menu-content')) toggleProfileMenu()" 
+         id="profile-menu" class="hidden fixed top-20 right-8 bg-zinc-800 rounded-3xl shadow-2xl border border-white/10 py-2 w-56 z-[9999]">
+        <div id="profile-menu-content" class="px-2">
+            <div class="px-4 py-5 border-b border-white/10 flex gap-x-3">
+                <div id="profile-avatar-small" 
+                     class="w-10 h-10 bg-orange-400 text-white rounded-2xl flex items-center justify-center text-xl"></div>
+                <div>
+                    <div id="profile-name" class="font-semibold">Alex Chen</div>
+                    <div id="profile-email" class="text-xs text-zinc-400">demo@fixitnow.dev</div>
+                </div>
+            </div>
+            
+            <div onclick="navigateTo('mybookings');toggleProfileMenu()" class="px-6 py-4 hover:bg-white/5 flex items-center gap-x-4 text-sm cursor-pointer">
+                <i class="fa-solid fa-calendar w-4"></i>
+                <span>My Bookings</span>
+            </div>
+            <div onclick="navigateTo('admin');toggleProfileMenu()" class="px-6 py-4 hover:bg-white/5 flex items-center gap-x-4 text-sm cursor-pointer">
+                <i class="fa-solid fa-table w-4"></i>
+                <span>Admin View</span>
+            </div>
+            <div onclick="logout();toggleProfileMenu()" class="px-6 py-4 hover:bg-white/5 flex items-center gap-x-4 text-sm text-red-400 cursor-pointer">
+                <i class="fa-solid fa-arrow-right-from-bracket w-4"></i>
+                <span>Sign out</span>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Tailwind script run
+        function initializeTailwind() {
+            tailwind.config = {
+                content: [],
+                theme: {
+                    extend: {}
+                }
+            }
+        }
+        
+        // Mock data
+        let currentUser = null
+        let isAdminMode = false
+        let bookings = []
+        let selectedCategory = null
+        let selectedDate = null
+        let selectedTime = null
+        let currentBookingStep = 1
+        
+        const services = [
+            {
+                id: 1,
+                name: "Electrician",
+                icon: "⚡",
+                color: "orange",
+                description: "Switches, lights, wiring & more",
+                price: "₹299"
+            },
+            {
+                id: 2,
+                name: "Plumber",
+                icon: "🔧",
+                color: "cyan",
+                description: "Leaks, taps, pipes & toilets",
+                price: "₹349"
+            },
+            {
+                id: 3,
+                name: "AC Mechanic",
+                icon: "❄️",
+                color: "sky",
+                description: "Service, repair & gas refill",
+                price: "₹499"
+            }
+        ]
+        
+        // Sample bookings
+        function seedBookings() {
+            bookings = [
+                {
+                    id: "F82491",
+                    user: "Alex Chen",
+                    email: "alexchen@gmail.com",
+                    service: "Electrician",
+                    date: "Mar 18",
+                    time: "11:00 AM",
+                    phone: "9876543210",
+                    status: "confirmed",
+                    icon: "⚡",
+                    description: "Fix bedroom ceiling fan"
+                },
+                {
+                    id: "F82492",
+                    user: "Meera Rao",
+                    email: "meera@example.com",
+                    service: "Plumber",
+                    date: "Mar 19",
+                    time: "09:30 AM",
+                    phone: "8123456789",
+                    status: "pending",
+                    icon: "🔧",
+                    description: "Kitchen sink leaking"
+                },
+                {
+                    id: "F82493",
+                    user: "Ravi Sharma",
+                    email: "ravi@demo.com",
+                    service: "AC Mechanic",
+                    date: "Mar 17",
+                    time: "04:00 PM",
+                    phone: "9988776655",
+                    status: "completed",
+                    icon: "❄️",
+                    description: "AC gas top up"
+                }
+            ]
+        }
+        
+        let bookedSlots = {}
+        
+        // Generate next 10 days
+        function getNextDates() {
+            const dates = []
+            const today = new Date()
+            const days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"]
+            
+            for (let i = 0; i < 10; i++) {
+                const date = new Date(today)
+                date.setDate(today.getDate() + i)
+                dates.push({
+                    day: days[date.getDay()],
+                    date: date.getDate(),
+                    full: date.toISOString().split('T')[0],
+                    display: `${days[date.getDay()]} ${date.getDate()}`
+                })
+            }
+            return dates
+        }
+        
+        const sampleTimes = [
+            "09:00 AM", "10:00 AM", "11:00 AM", 
+            "01:30 PM", "03:00 PM", "04:30 PM", "06:00 PM"
+        ]
+        
+        function renderServiceCards() {
+            const container = document.getElementById("service-cards")
+            container.innerHTML = ""
+            
+            services.forEach(service => {
+                const div = document.createElement("div")
+                div.className = `service-card bg-zinc-900 border border-white/10 rounded-3xl p-6 cursor-pointer hover:border-${service.color}-400`
+                div.innerHTML = `
+                    <div class="text-7xl mb-6">${service.icon}</div>
+                    <div class="font-semibold text-3xl">${service.name}</div>
+                    <div class="text-zinc-400 text-sm mt-1">${service.description}</div>
+                    <div class="mt-8 flex justify-between items-end">
+                        <div>
+                            <span class="text-xs text-white/30">STARTING AT</span>
+                            <div class="text-4xl font-semibold text-white">${service.price}</div>
+                        </div>
+                        <button onclick="quickBookService(${service.id}); event.stopImmediatePropagation()" 
+                                class="text-xs px-8 py-4 bg-white/5 hover:bg-white/10 rounded-3xl">BOOK</button>
+                    </div>
+                `
+                div.onclick = () => {
+                    selectedCategory = service
+                    navigateTo("book")
+                    setTimeout(() => {
+                        setBookingStep(1)
+                        renderCategorySelection()
+                    }, 400)
+                }
+                container.append(div)
+            })
+        }
+        
+        function renderFullServices() {
+            const container = document.getElementById("full-service-list")
+            container.innerHTML = ""
+            
+            services.forEach(service => {
+                const cardHTML = `
+                <div onclick="selectServiceFromFullList(${service.id});" class="service-card bg-zinc-900 border border-white/10 rounded-3xl px-8 py-10 cursor-pointer group">
+                    <div class="flex justify-between">
+                        <div class="text-8xl group-active:scale-110">${service.icon}</div>
+                        <div class="text-right">
+                            <div class="uppercase text-xs bg-white/10 px-4 py-1 rounded-3xl text-white/70 inline-block">${service.price}</div>
+                        </div>
+                    </div>
+                    <div class="mt-8">
+                        <div class="text-4xl font-semibold">${service.name}</div>
+                        <div class="text-zinc-400">${service.description}</div>
+                    </div>
+                    <div class="text-xs flex items-center gap-x-2 mt-16 text-emerald-400">
+                        <div class="flex-1 h-px bg-gradient-to-r from-transparent via-emerald-300 to-transparent"></div>
+                        <span>98% success rate</span>
+                    </div>
+                </div>`
+                container.innerHTML += cardHTML
+            })
+        }
+        
+        function selectServiceFromFullList(id) {
+            selectedCategory = services.find(s => s.id === id)
+            navigateTo("book")
+            setTimeout(() => {
+                setBookingStep(1)
+                renderCategorySelection()
+            }, 300)
+        }
+        
+        function renderCategorySelection() {
+            const container = document.getElementById("category-select")
+            container.innerHTML = ""
+            
+            services.forEach((service, index) => {
+                const isSelected = selectedCategory && selectedCategory.id === service.id
+                
+                const el = document.createElement("div")
+                el.className = `cat-option p-6 rounded-3xl flex flex-col items-center justify-center border ${isSelected ? 'border-orange-400 bg-orange-400/10' : 'border-white/10 hover:border-white/40'}`
+                el.innerHTML = `
+                    <div class="text-6xl mb-4">${service.icon}</div>
+                    <div class="font-semibold">${service.name}</div>
+                    ${isSelected ? `<div class="check absolute top-4 right-4 text-emerald-400"><i class="fa-solid fa-circle-check"></i></div>` : ''}
+                `
+                el.onclick = () => {
+                    selectedCategory = service
+                    renderCategorySelection()
+                }
+                container.append(el)
+            })
+        }
+        
+        function renderDateScroller() {
+            const container = document.getElementById("date-scroller")
+            container.innerHTML = ""
+            const dates = getNextDates()
+            
+            dates.forEach((dateObj, i) => {
+                const active = i === 2 // default to 3rd day
+                
+                if (active) {
+                    selectedDate = dateObj.full
+                }
+                
+                const div = document.createElement("div")
+                div.className = `slot flex-shrink-0 text-center px-7 py-4 rounded-3xl cursor-pointer ${active ? 'bg-white text-zinc-900' : 'bg-zinc-800 hover:bg-zinc-700'}`
+                div.innerHTML = `
+                    <div class="text-xs tracking-widest ${active ? 'text-orange-400' : 'text-white/40'}">${dateObj.day}</div>
+                    <div class="text-4xl font-semibold">${dateObj.date}</div>
+                `
+                div.onclick = function() {
+                    selectedDate = dateObj.full
+                    document.querySelectorAll('#date-scroller > div').forEach(d => {
+                        d.classList.remove("bg-white", "text-zinc-900")
+                        d.classList.add("bg-zinc-800", "hover:bg-zinc-700")
+                    })
+                    this.classList.add("bg-white", "text-zinc-900")
+                    this.classList.remove("bg-zinc-800", "hover:bg-zinc-700")
+                    renderTimeSlots()
+                }
+                container.append(div)
+            })
+        }
+        
+        function renderTimeSlots() {
+            const container = document.getElementById("time-slots")
+            container.innerHTML = ""
+            
+            const key = `${selectedCategory ? selectedCategory.name : 'Electrician'}-${selectedDate || '2025-03-18'}`
+            
+            sampleTimes.forEach(time => {
+                const isBooked = Math.random() > 0.7 // simulate some booked
+                
+                const slotDiv = document.createElement("div")
+                slotDiv.className = `slot text-center py-5 rounded-3xl text-sm font-medium cursor-pointer border ${isBooked ? 'booked border-red-400/30 text-red-400/60' : 'available border-white/20 hover:border-cyan-400'}`
+                slotDiv.textContent = time
+                
+                if (!isBooked) {
+                    slotDiv.onclick = () => {
+                        selectedTime = time
+                        document.querySelectorAll('#time-slots > div').forEach(el => {
+                            el.style.borderColor = ''
+                            el.style.backgroundColor = ''
+                        })
+                        slotDiv.style.borderColor = '#67e8f9'
+                        slotDiv.style.backgroundColor = 'rgba(103, 232, 249, 0.1)'
+                    }
+                }
+                container.append(slotDiv)
+            })
+        }
+        
+        function setBookingStep(step) {
+            currentBookingStep = step
+            
+            document.getElementById("booking-step-1").classList.add("hidden")
+            document.getElementById("booking-step-2").classList.add("hidden")
+            document.getElementById("booking-step-3").classList.add("hidden")
+            
+            document.getElementById(`booking-step-${step}`).classList.remove("hidden")
+            
+            // update dots
+            for (let i = 1; i <= 3; i++) {
+                const dot = document.getElementById(`step-${i}-dot`)
+                if (i < step) {
+                    dot.classList.add("bg-emerald-400", "text-white")
+                    dot.classList.remove("bg-white/20")
+                } else if (i === step) {
+                    dot.classList.add("bg-orange-500")
+                    dot.classList.remove("bg-white/20")
+                } else {
+                    dot.classList.remove("bg-orange-500", "bg-emerald-400")
+                    dot.classList.add("bg-white/20")
+                }
+            }
+            
+            if (step === 2) {
+                renderDateScroller()
+                renderTimeSlots()
+            }
+            
+            // update summary live
+            updateLiveSummary()
+        }
+        
+        function updateLiveSummary() {
+            if (!selectedCategory) return
+            const summaryIcon = document.getElementById("summary-icon")
+            const summaryCategory = document.getElementById("summary-category")
+            const summaryDate = document.getElementById("summary-date")
+            
+            summaryIcon.textContent = selectedCategory.icon
+            summaryCategory.textContent = selectedCategory.name
+            
+            if (selectedDate && selectedTime) {
+                const d = new Date(selectedDate)
+                const monthNames = ["JAN","FEB","MAR","APR","MAY","JUN"]
+                summaryDate.textContent = `${monthNames[d.getMonth()]} ${d.getDate()} • ${selectedTime}`
+            }
+        }
+        
+        function submitBooking() {
+            if (!selectedCategory || !selectedTime) {
+                showToast("Please select date & time", "rose")
+                return
+            }
+            
+            const phone = document.getElementById("phone-input").value || "9876543210"
+            const description = document.getElementById("description-input").value || "General service request"
+            
+            const newBooking = {
+                id: "F" + Math.floor(10000 + Math.random() * 89999),
+                user: currentUser ? currentUser.name : "Guest User",
+                email: currentUser ? currentUser.email : "guest@demo.dev",
+                service: selectedCategory.name,
+                date: "Mar 22",
+                time: selectedTime,
+                phone: phone,
+                status: "pending",
+                icon: selectedCategory.icon,
+                description: description
+            }
+            
+            bookings.unshift(newBooking)
+            
+            // simulate sending admin email
+            console.log('%c📧 EMAIL SENT TO: jishnusjv85@gmail.com', 'color:#a3a3a3; font-family:monospace')
+            console.log('%cNew booking for ' + selectedCategory.name + ' on ' + selectedTime, 'color:#67e8f9')
+            
+            // show success
+            hideLoginModal()
+            showSuccessModal(newBooking)
+            
+            // reset form
+            selectedTime = null
+            setBookingStep(1)
+        }
+        
+        function showSuccessModal(booking) {
+            const modal = document.getElementById("success-modal")
+            modal.classList.remove("hidden")
+            modal.classList.add("flex")
+            
+            document.getElementById("success-service").innerHTML = `${booking.icon} ${booking.service} • ${booking.date} ${booking.time}`
+            document.getElementById("success-id").textContent = "#" + booking.id
+            
+            createConfetti()
+            
+            // auto hide in 7 seconds
+            setTimeout(() => {
+                if (!modal.classList.contains("hidden")) hideSuccessModal()
+            }, 6500)
+        }
+        
+        function hideSuccessModal() {
+            const modal = document.getElementById("success-modal")
+            modal.classList.add("hidden")
+            modal.classList.remove("flex")
+        }
+        
+        function createConfetti() {
+            const container = document.getElementById("confetti-container")
+            container.innerHTML = ""
+            
+            const colors = ["#f59e0b", "#22d3ee", "#a855f7", "#ec4899"]
+            
+            for (let i = 0; i < 80; i++) {
+                const confetti = document.createElement("div")
+                confetti.className = "success-confetti"
+                confetti.style.left = Math.random() * 100 + "%"
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)]
+                confetti.style.opacity = Math.random() + 0.5
+                confetti.style.transform = `rotate(${Math.random() * 360}deg)`
+                const duration = Math.random() * 3200 + 2400
+                confetti.style.animationDuration = duration + "ms"
+                confetti.style.animationDelay = Math.random() * 400 + "ms"
+                container.append(confetti)
+                
+                // remove after animation
+                setTimeout(() => {
+                    if (confetti.parentNode) confetti.parentNode.removeChild(confetti)
+                }, duration + 500)
+            }
+        }
+        
+        function fakeGoogleLogin() {
+            currentUser = {
+                name: "Alex Chen",
+                email: "alexchen@gmail.com",
+                avatar: "🧑‍🚀"
+            }
+            isAdminMode = false
+            updateAuthUI()
+            hideLoginModal()
+            showToast("Welcome back, Alex! 🎉", "emerald")
+        }
+        
+        function demoLogin(mode) {
+            if (mode === "user") {
+                currentUser = {
+                    name: "Alex Chen",
+                    email: "alexchen@gmail.com",
+                    avatar: "🧑‍🚀"
+                }
+                isAdminMode = false
+            } else if (mode === "admin") {
+                currentUser = {
+                    name: "Jishnu SJ",
+                    email: "jishnusjv85@gmail.com",
+                    avatar: "👑"
+                }
+                isAdminMode = true
+            }
+            updateAuthUI()
+            hideLoginModal()
+            
+            if (isAdminMode) {
+                navigateTo("admin")
+            } else {
+                showToast("Signed in as demo user", "sky")
+            }
+        }
+        
+        function updateAuthUI() {
+            const loginBtn = document.getElementById("login-btn")
+            const userSection = document.getElementById("user-section")
+            
+            if (currentUser) {
+                loginBtn.classList.add("hidden")
+                userSection.classList.remove("hidden")
+                userSection.classList.add("flex")
+                
+                document.getElementById("user-name").textContent = currentUser.name.split(" ")[0]
+                document.getElementById("user-email").textContent = currentUser.email.length > 17 ? currentUser.email.substring(0, 16) + "..." : currentUser.email
+                
+                const avatarEl = document.getElementById("user-avatar")
+                avatarEl.innerHTML = currentUser.avatar
+                avatarEl.style.background = isAdminMode ? "rgb(167 139 250)" : "rgb(251 146 60)"
+            }
+        }
+        
+        function toggleProfileMenu() {
+            const menu = document.getElementById("profile-menu")
+            menu.classList.toggle("hidden")
+        }
+        
+        function logout() {
+            currentUser = null
+            isAdminMode = false
+            const loginBtn = document.getElementById("login-btn")
+            const userSection = document.getElementById("user-section")
+            loginBtn.classList.remove("hidden")
+            userSection.classList.add("hidden")
+            userSection.classList.remove("flex")
+            showToast("Signed out successfully", "amber")
+            navigateTo("landing")
+        }
+        
+        function showLoginModal() {
+            document.getElementById("login-modal").classList.remove("hidden")
+            document.getElementById("login-modal").classList.add("flex")
+        }
+        
+        function hideLoginModal() {
+            const modal = document.getElementById("login-modal")
+            modal.classList.add("hidden")
+            modal.classList.remove("flex")
+        }
+        
+        function showToast(message, color = "orange") {
+            const toast = document.getElementById("toast")
+            const toastText = document.getElementById("toast-text")
+            toastText.innerHTML = message
+            toast.style.borderColor = color === "lime" ? "#a3e635" : (color === "amber" ? "#fcd34d" : "#fb923c")
+            toast.classList.remove("hidden")
+            toast.style.transform = 'translateY(30px)'
+            toast.style.opacity = 0
+            
+            // trigger animation
+            setTimeout(() => {
+                toast.style.transitionDuration = "300ms"
+                toast.style.transform = 'translateY(0)'
+                toast.style.opacity = 1
+            }, 10)
+            
+            setTimeout(() => {
+                toast.style.opacity = 0
+                setTimeout(() => {
+                    toast.classList.add("hidden")
+                }, 300)
+            }, 2700)
+        }
+        
+        function navigateTo(page) {
+            document.querySelectorAll(".page").forEach(p => {
+                p.classList.remove("active")
+            })
+            
+            const target = document.getElementById(page)
+            if (target) target.classList.add("active")
+            
+            // special case for admin
+            if (page === "admin" && !isAdminMode) {
+                showToast("Switching to ADMIN view (demo)", "violet")
+                isAdminMode = true
+                updateAuthUI()
+            }
+            
+            window.scrollTo(0, 0)
+        }
+        
+        function toggleMobileMenu() {
+            const menu = document.getElementById("mobile-menu")
+            menu.classList.toggle("hidden")
+        }
+        
+        function quickBookService(id) {
+            selectedCategory = services.find(s => s.id === id)
+            navigateTo("book")
+            setTimeout(() => {
+                setBookingStep(2)
+            }, 420)
+        }
+        
+        function fakeQuickBook() {
+            showToast("Quick booked! Check your bookings", "emerald")
+            setTimeout(() => {
+                if (!currentUser) {
+                    showLoginModal()
+                } else {
+                    navigateTo("mybookings")
+                }
+            }, 1200)
+        }
+        
+        function watchDemo() {
+            showToast("🎬 In a real app this would play a video", "sky")
+        }
+        
+        function selectCategoryFilter(el) {
+            document.querySelectorAll('.cat-chip').forEach(chip => {
+                chip.classList.remove("!bg-orange-500", "!text-white")
+            })
+            el.classList.add("!bg-orange-500", "!text-white")
+            showToast("Filtered to " + el.textContent.trim(), "amber")
+        }
+        
+        function renderBookingsList() {
+            const container = document.getElementById("bookings-list")
+            container.innerHTML = ""
+            
+            const userBookings = bookings.filter(b => {
+                if (!currentUser) return true
+                return b.email === currentUser.email
+            })
+            
+            if (userBookings.length === 0) {
+                document.getElementById("no-bookings").classList.remove("hidden")
+                return
+            } else {
+                document.getElementById("no-bookings").classList.add("hidden")
+            }
+            
+            userBookings.forEach(booking => {
+                const statusColor = booking.status === "confirmed" ? "emerald" : (booking.status === "completed" ? "violet" : "amber")
+                
+                const div = document.createElement("div")
+                div.className = "glass border border-white/10 rounded-3xl p-6 flex gap-6 items-center"
+                div.innerHTML = `
+                    <div class="w-12 h-12 text-5xl flex items-center justify-center">${booking.icon}</div>
+                    <div class="flex-1">
+                        <div class="flex justify-between">
+                            <div>
+                                <span class="font-semibold text-xl">${booking.service}</span>
+                                <span class="ml-4 text-xs px-4 py-1 bg-${statusColor}-400 text-zinc-900 rounded-3xl">${booking.status.toUpperCase()}</span>
+                            </div>
+                            <div class="font-mono text-xs text-white/30">${booking.id}</div>
+                        </div>
+                        <div class="text-xs text-white/40 mt-px">${booking.date} • ${booking.time}</div>
+                        <div class="text-xs text-zinc-400 mt-4">${booking.description}</div>
+                    </div>
+                    <div>
+                        <button onclick="cancelBooking('${booking.id}'); event.stopImmediatePropagation()" 
+                                class="text-xs px-5 py-4 border border-white/30 rounded-3xl text-white/60 hover:text-rose-400">CANCEL</button>
+                    </div>
+                `
+                container.append(div)
+            })
+        }
+        
+        function cancelBooking(id) {
+            if (confirm("Cancel this booking?")) {
+                bookings = bookings.filter(b => b.id !== id)
+                renderBookingsList()
+                showToast("Booking cancelled", "rose")
+            }
+        }
+        
+        function renderAdminTable(filter = "all") {
+            const tbody = document.getElementById("admin-table-body")
+            tbody.innerHTML = ""
+            
+            let filtered = bookings
+            
+            if (filter === "pending") {
+                filtered = bookings.filter(b => b.status === "pending")
+            } else if (filter === "confirmed") {
+                filtered = bookings.filter(b => b.status === "confirmed")
+            }
+            
+            filtered.forEach((booking, index) => {
+                const row = document.createElement("tr")
+                row.className = "table-row border-b border-white/10 last:border-none hover:bg-white/5"
+                row.innerHTML = `
+                    <td class="px-8 py-7 font-mono text-xs text-white/40">${booking.id}</td>
+                    <td class="px-8 py-7">
+                        <div class="font-medium">${booking.user}</div>
+                        <div class="text-xs text-white/30">${booking.email}</div>
+                    </td>
+                    <td class="px-8 py-7">
+                        <div class="flex items-center gap-x-3">
+                            <span class="text-3xl">${booking.icon}</span>
+                            <span>${booking.service}</span>
+                        </div>
+                    </td>
+                    <td class="px-8 py-7 text-sm">${booking.date}<br><span class="font-light text-xs">${booking.time}</span></td>
+                    <td class="px-8 py-7 font-medium text-sky-300">${booking.phone}</td>
+                    <td class="px-8 py-7">
+                        <span onclick="updateBookingStatus(${index}); event.stopImmediatePropagation()" 
+                              class="status-${booking.status} text-xs font-bold px-6 py-2 rounded-3xl">${booking.status}</span>
+                    </td>
+                    <td class="px-8 py-7 text-right">
+                        <button onclick="viewBookingDetail('${booking.id}');event.stopImmediatePropagation()" 
+                                class="text-xs bg-white/10 px-7 py-3.5 rounded-3xl">DETAILS</button>
+                    </td>
+                `
+                tbody.append(row)
+            })
+            
+            if (filtered.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="7" class="px-8 py-12 text-center text-white/30">No bookings match the filter</td></tr>`
+            }
+        }
+        
+        function updateBookingStatus(index) {
+            const statuses = ["pending", "confirmed", "completed"]
+            const currentIndex = statuses.indexOf(bookings[index].status)
+            bookings[index].status = statuses[(currentIndex + 1) % 3]
+            renderAdminTable("all")
+            showToast("Status updated • email would be sent", "violet")
+        }
+        
+        function viewBookingDetail(id) {
+            const booking = bookings.find(b => b.id === id)
+            if (!booking) return
+            showToast(`Details for booking ${booking.id} would open here`, "amber")
+        }
+        
+        function filterAdminBookings(mode) {
+            document.querySelectorAll(".admin-filter").forEach(el => {
+                el.classList.remove("active", "text-orange-400", "border-b-2", "border-orange-400")
+                if (el.getAttribute("onclick").includes(mode)) {
+                    el.classList.add("active", "text-orange-400")
+                }
+            })
+            renderAdminTable(mode)
+        }
+        
+        function switchToAdmin() {
+            isAdminMode = true
+            currentUser = {
+                name: "Jishnu SJ",
+                email: "jishnusjv85@gmail.com",
+                avatar: "👑"
+            }
+            updateAuthUI()
+            navigateTo("admin")
+            renderAdminTable("all")
+        }
+        
+        // Keyboard shortcuts
+        function handleKeys(e) {
+            if (e.metaKey && e.key === "k") {
+                e.preventDefault()
+                showToast("Command palette would appear here", "fuchsia")
+            }
+        }
+        
+        // Main initialization
+        function initializeApp() {
+            initializeTailwind()
+            seedBookings()
+            renderServiceCards()
+            renderFullServices()
+            
+            // default to landing
+            navigateTo("landing")
+            
+            // simulate live users
+            setInterval(() => {
+                const live = document.getElementById("live-indicator")
+                if (live) live.style.opacity = live.style.opacity === "1" ? "0.6" : "1"
+            }, 1800)
+            
+            // pre-select a category for demo
+            selectedCategory = services[0]
+            
+            // render initial bookings if on that page
+            setTimeout(() => {
+                renderBookingsList()
+                renderAdminTable("all")
+            }, 1200)
+            
+            // keyboard
+            document.addEventListener("keydown", handleKeys)
+            
+            // demo toast
+            setTimeout(() => {
+                if (document.getElementById("landing").classList.contains("active")) {
+                    showToast("👋 Welcome to the live demo!", "sky")
+                }
+            }, 2100)
+            
+            // make the navbar sticky shadow on scroll
+            window.addEventListener("scroll", () => {
+                const nav = document.querySelector("nav")
+                if (window.scrollY > 80) {
+                    nav.style.boxShadow = "0 10px 15px -3px rgb(0 0 0)"
+                } else {
+                    nav.style.boxShadow = "none"
+                }
+            })
+            
+            console.log('%c✅ COOLTECH demo ready for live use', 'font-family:monospace;color:#67e8f9;font-size:10px')
+        }
+        
+        // Expose some methods to onclick handlers
+        window.navigateTo = navigateTo
+        window.showLoginModal = showLoginModal
+        window.hideLoginModal = hideLoginModal
+        window.fakeGoogleLogin = fakeGoogleLogin
+        window.demoLogin = demoLogin
+        window.setBookingStep = setBookingStep
+        window.submitBooking = submitBooking
+        window.logout = logout
+        window.toggleProfileMenu = toggleProfileMenu
+        window.toggleMobileMenu = toggleMobileMenu
+        window.quickBookService = quickBookService
+        window.fakeQuickBook = fakeQuickBook
+        window.watchDemo = watchDemo
+        window.selectCategoryFilter = selectCategoryFilter
+        window.cancelBooking = cancelBooking
+        window.switchToAdmin = switchToAdmin
+        window.filterAdminBookings = filterAdminBookings
+        window.updateBookingStatus = updateBookingStatus
+        window.viewBookingDetail = viewBookingDetail
+        window.showToast = showToast
+        window.renderCategorySelection = renderCategorySelection
+        
+        // Boot app
+        window.onload = initializeApp
+    </script>
+</body>
+</html>

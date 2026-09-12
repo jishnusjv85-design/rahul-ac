@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MEPtech – Book Electricians, AC Mechanics & Plumbers</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: { poppins: ['Poppins', 'sans-serif'] },
+      colors: {
+        brand: {
+          coral: '#FF6B6B', orange: '#FF8E53', teal: '#4ECDC4', green: '#44B09E',
+          purple: '#667EEA', violet: '#764BA2', pink: '#F093FB', yellow: '#FFC837',
+          red: '#FF416C', lime: '#A8FF78', sky: '#38BDF8'
+        }
+      }
+    }
+  }
+}
+</script>
+<style>
+  * { font-family: 'Poppins', sans-serif; }
+  body { background: #0a0a1a; overflow-x: hidden; }
+  .gradient-bg { background: linear-gradient(135deg, #0a0a1a 0%, #161637 50%, #0a0a1a 100%); }
+  .hero-gradient { background: linear-gradient(135deg, #FF6B6B, #FF8E53, #FFC837, #4ECDC4, #667EEA, #764BA2); background-size: 300% 300%; animation: gradientShift 8s ease infinite; }
+  @keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+  .grad-coral { background: linear-gradient(135deg, #FF6B6B, #FF8E53); }
+  .grad-teal { background: linear-gradient(135deg, #4ECDC4, #44B09E); }
+  .grad-purple { background: linear-gradient(135deg, #667EEA, #764BA2); }
+  .grad-pink { background: linear-gradient(135deg, #F093FB, #F5576C); }
+  .grad-yellow { background: linear-gradient(135deg, #FFC837, #FF416C); }
+  .grad-sky { background: linear-gradient(135deg, #38BDF8, #667EEA); }
+  .glass { background: rgba(255,255,255,0.06); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); }
+  .glow-coral { box-shadow: 0 0 40px rgba(255,107,107,0.35); }
+  .glow-teal { box-shadow: 0 0 40px rgba(78,205,196,0.35); }
+  .glow-purple { box-shadow: 0 0 40px rgba(102,126,234,0.35); }
+  .btn { transition: all .3s ease; position: relative; overflow: hidden; }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-coral:hover { box-shadow: 0 10px 40px rgba(255,107,107,0.45); }
+  .btn-teal:hover { box-shadow: 0 10px 40px rgba(78,205,196,0.45); }
+  .btn-purple:hover { box-shadow: 0 10px 40px rgba(102,126,234,0.45); }
+  .btn:active { transform: translateY(0) scale(.98); }
+  .floating { animation: floating 3s ease-in-out infinite; }
+  @keyframes floating { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+  .slide-up { animation: slideUp .6s ease forwards; }
+  @keyframes slideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+  .fade-in { animation: fadeIn .4s ease forwards; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .bounce-in { animation: bounceIn .6s cubic-bezier(.68,-.55,.265,1.55) forwards; }
+  @keyframes bounceIn { from { opacity: 0; transform: scale(.3); } to { opacity: 1; transform: scale(1); } }
+  .blob { position: absolute; border-radius: 50%; filter: blur(70px); opacity: .45; animation: blobMove 15s ease-in-out infinite; }
+  @keyframes blobMove { 0%,100% { transform: translate(0,0) scale(1); } 25% { transform: translate(50px,-50px) scale(1.1); } 50% { transform: translate(-30px,30px) scale(.9); } 75% { transform: translate(40px,20px) scale(1.05); } }
+  input, select, textarea { color-scheme: dark; }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: #FF8E53 !important; box-shadow: 0 0 20px rgba(255,142,83,.25); }
+  select option { background: #161637; color: #fff; }
+  .service-card { transition: all .4s cubic-bezier(.175,.885,.32,1.275); }
+  .service-card:hover { transform: translateY(-10px) scale(1.02); }
+  .modal-overlay { background: rgba(10,10,26,.85); backdrop-filter: blur(10px); }
+  .text-gradient { background: linear-gradient(135deg, #FF6B6B, #FF8E53, #FFC837); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .text-gradient-teal { background: linear-gradient(135deg, #4ECDC4, #A8FF78); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .text-gradient-purple { background: linear-gradient(135deg, #667EEA, #F093FB); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .status-pending { background: linear-gradient(135deg, #FFC837, #FF8E53); color: #1a1a1a; }
+  .status-confirmed { background: linear-gradient(135deg, #4ECDC4, #44B09E); color: #04211f; }
+  .status-completed { background: linear-gradient(135deg, #667EEA, #764BA2); color: #fff; }
+  .status-cancelled { background: linear-gradient(135deg, #64748b, #334155); color: #fff; }
+  .nav-blur { background: rgba(10,10,26,.8); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,.06); }
+  .page { display: none; }
+  .page.active { display: block; }
+  .cat-option { cursor: pointer; transition: all .3s ease; border: 2px solid rgba(255,255,255,.1); }
+  .cat-option:hover { transform: translateY(-4px); border-color: rgba(255,255,255,.3); }
+  .cat-option.selected { border-color: #fff; transform: translateY(-4px) scale(1.03); box-shadow: 0 15px 40px rgba(255,255,255,.15); }
+  .cat-option.selected .check { opacity: 1; transform: scale(1); }
+  .cat-option .check { opacity: 0; transform: scale(.5); transition: all .3s ease; }
+  .chip { cursor: pointer; transition: all .25s ease; border: 1px solid rgba(255,255,255,.12); }
+  .chip:hover { border-color: rgba(255,255,255,.4); }
+  .chip.active { background: linear-gradient(135deg,#FF6B6B,#FF8E53); border-color: transparent; color: #fff; }
+  .toast { animation: toastIn .4s cubic-bezier(.68,-.55,.265,1.55) forwards; }
+  @keyframes toastIn { from { opacity: 0; transform: translateY(30px) scale(.9); } to { opacity: 1; transform: translateY(0) scale(1); } }
+  .spin { animation: spin 1s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .wiggle:hover i { animation: wiggle .5s ease; }
+  @keyframes wiggle { 0%,100% { transform: rotate(0); } 25% { transform: rotate(-12deg); } 75% { transform: rotate(12deg); } }
+  .scrollbar-thin::-webkit-scrollbar { height: 6px; width: 6px; }
+  .scrollbar-thin::-webkit-scrollbar-thumb { background: rgba(255,255,255,.2); border-radius: 10px; }
+  .table-row:hover { background: rgba(255,255,255,.05); }
+  .tick { display: inline-block; width: 8px; height: 8px; border-radius: 50%; animation: pulseDot 1.5s infinite; }
+  @keyframes pulseDot { 0%,100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.5); opacity: .5; } }
+  .marquee { animation: marquee 25s linear infinite; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .g-btn { background: #fff; color: #3c4043; transition: all .3s ease; }
+  .g-btn:hover { box-shadow: 0 10px 40px rgba(255,255,255,.25); transform: translateY(-2px); }
+</style>
+</head>
+<body class="gradient-bg min-h-screen text-white font-poppins">
+
+<!-- Background Blobs -->
+<div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+  <div class="blob w-96 h-96 bg-brand-coral top-10 -left-10" style="animation-delay:0s;"></div>
+  <div class="blob w-80 h-80 bg-brand-purple top-40 right-10" style="animation-delay:3s;"></div>
+  <div class="blob w-72 h-72 bg-brand-teal bottom-10 left-1/3" style="animation-delay:6s;"></div>
+  <div class="blob w-64 h-64 bg-brand-pink top-1/2 left-1/2" style="animation-delay:9s;"></div>
+  <div class="blob w-56 h-56 bg-brand-yellow bottom-1/3 right-1/4" style="animation-delay:12s;"></div>
+</div>
+
+<!-- Navigation -->
+<nav id="navbar" class="nav-blur fixed top-0 left-0 right-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <div class="flex items-center space-x-2 cursor-pointer wiggle" onclick="showPage('landing')">
+        <div class="w-10 h-10 rounded-xl hero-gradient flex items-center justify-center shadow-lg">
+          <i class="fas fa-bolt text-white text-lg"></i>
+        </div>
+        <span class="text-xl font-extrabold tracking-tight">MEP<span class="text-gradient">tech</span></span>
+      </div>
+
+      <div class="hidden md:flex items-center space-x-6 text-sm font-medium">
+        <a href="#" onclick="showPage('landing');return false;" class="text-gray-300 hover:text-white transition-colors">Home</a>
+        <a href="#" onclick="goToSection('services');return false;" class="text-gray-300 hover:text-white transition-colors">Services</a>
+        <a href="#" onclick="goToSection('how');return false;" class="text-gray-300 hover:text-white transition-colors">How it works</a>
+        <a href="#" id="nav-user-link" onclick="requireUser('dashboard');return false;" class="text-gray-300 hover:text-white transition-colors hidden">My Bookings</a>
+        <a href="#" id="nav-admin-link" onclick="showPage('admin');return false;" class="text-gray-300 hover:text-white transition-colors hidden">Admin Panel</a>
+      </div>
+
+      <div class="flex items-center space-x-3">
+        <div id="auth-area" class="flex items-center space-x-3"></div>
+        <button onclick="toggleMobileMenu()" class="md:hidden w-10 h-10 rounded-xl glass flex items-center justify-center">
+          <i id="mobile-menu-icon" class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div id="mobile-menu" class="hidden md:hidden border-t border-white/10 px-4 py-4 space-y-3 text-sm font-medium bg-[#0f0f28]/95">
+    <a href="#" onclick="showPage('landing');toggleMobileMenu();return false;" class="block py-2 text-gray-200">Home</a>
+    <a href="#" onclick="goToSection('services');toggleMobileMenu();return false;" class="block py-2 text-gray-200">Services</a>
+    <a href="#" onclick="goToSection('how');toggleMobileMenu();return false;" class="block py-2 text-gray-200">How it works</a>
+    <a href="#" id="mnav-user-link" onclick="requireUser('dashboard');toggleMobileMenu();return false;" class="block py-2 text-gray-200 hidden">My Bookings</a>
+    <a href="#" id="mnav-admin-link" onclick="showPage('admin');toggleMobileMenu();return false;" class="block py-2 text-gray-200 hidden">Admin Panel</a>
+  </div>
+</nav>
+
+<main class="relative z-10 pt-16">
+
+<!-- ================= LANDING PAGE ================= -->
+<section id="page-landing" class="page active">
+  <!-- Hero -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-20 lg:pt-24 lg:pb-28">
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <div class="slide-up">
+        <div class="inline-flex items-center space-x-2 glass rounded-full px-4 py-2 text-xs font-semibold mb-6">
+          <span class="tick bg-brand-teal"></span>
+          <span class="text-brand-teal">Pros available today</span>
+          <span class="text-gray-400">• Same-day slots open</span>
+        </div>
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black leading-tight">
+          MEP tech <span class="text-gradient">fast.</span><br>
+          Book it <span class="text-gradient-teal">faster.</span>
+        </h1>
+        <p class="mt-6 text-gray-300 text-lg max-w-lg">Verified electricians, AC mechanics & plumbers at your doorstep. Sign in with Gmail, pick a time, and we'll handle the rest. ⚡</p>
+        <div class="mt-8 flex flex-col sm:flex-row gap-4">
+          <button onclick="requireUser('booking')" class="btn btn-coral grad-coral px-8 py-4 rounded-2xl font-bold text-lg shadow-lg">
+            <i class="fas fa-calendar-check mr-2"></i>Book a Service
+          </button>
+          <button onclick="goToSection('services')" class="btn glass px-8 py-4 rounded-2xl font-bold text-lg hover:bg-white/10">
+            Explore Services <i class="fas fa-arrow-down ml-2 text-sm"></i>
+          </button>
+        </div>
+        <div class="mt-10 flex items-center gap-8">
+          <div><p class="text-3xl font-black text-gradient">12k+</p><p class="text-xs text-gray-400 font-medium">Jobs completed</p></div>
+          <div><p class="text-3xl font-black text-gradient-teal">4.9★</p><p class="text-xs text-gray-400 font-medium">Average rating</p></div>
+          <div><p class="text-3xl font-black text-gradient-purple">45min</p><p class="text-xs text-gray-400 font-medium">Avg. arrival</p></div>
+        </div>
+      </div>
+
+      <div class="relative h-[420px] hidden sm:block">
+        <div class="absolute top-0 left-6 w-60 glass rounded-3xl p-5 floating glow-coral" style="animation-delay:0s">
+          <div class="w-14 h-14 rounded-2xl grad-coral flex items-center justify-center text-2xl mb-3"><i class="fas fa-plug"></i></div>
+          <p class="font-bold">Electrician</p>
+          <p class="text-xs text-gray-400">Wiring, switches, fans, MCB & more</p>
+          <span class="inline-block mt-3 text-xs font-bold px-3 py-1 rounded-full status-confirmed">From $29</span>
+        </div>
+        <div class="absolute top-28 right-0 w-60 glass rounded-3xl p-5 floating glow-teal" style="animation-delay:1s">
+          <div class="w-14 h-14 rounded-2xl grad-teal flex items-center justify-center text-2xl mb-3"><i class="fas fa-snowflake"></i></div>
+          <p class="font-bold">AC Mechanic</p>
+          <p class="text-xs text-gray-400">Service, gas refill, install, repair</p>
+          <span class="inline-block mt-3 text-xs font-bold px-3 py-1 rounded-full status-pending">From $39</span>
+        </div>
+        <div class="absolute bottom-0 left-20 w-60 glass rounded-3xl p-5 floating glow-purple" style="animation-delay:2s">
+          <div class="w-14 h-14 rounded-2xl grad-purple flex items-center justify-center text-2xl mb-3"><i class="fas fa-faucet-drip"></i></div>
+          <p class="font-bold">Plumber</p>
+          <p class="text-xs text-gray-400">Leaks, taps, pipes, geysers, drains</p>
+          <span class="inline-block mt-3 text-xs font-bold px-3 py-1 rounded-full status-completed">From $25</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Marquee -->
+  <div class="overflow-hidden py-4 border-y border-white/5 bg-white/[0.02]">
+    <div class="flex whitespace-nowrap marquee text-sm font-bold uppercase tracking-widest">
+      <span class="mx-8 text-brand-coral">⚡ Same-day service</span><span class="mx-8 text-brand-teal">❄ Certified technicians</span><span class="mx-8 text-brand-yellow">🔧 Transparent pricing</span><span class="mx-8 text-brand-pink">🛡 30-day work guarantee</span><span class="mx-8 text-brand-purple">📱 Live booking updates</span>
+      <span class="mx-8 text-brand-coral">⚡ Same-day service</span><span class="mx-8 text-brand-teal">❄ Certified technicians</span><span class="mx-8 text-brand-yellow">🔧 Transparent pricing</span><span class="mx-8 text-brand-pink">🛡 30-day work guarantee</span><span class="mx-8 text-brand-purple">📱 Live booking updates</span>
+    </div>
+  </div>
+
+  <!-- Services -->
+  <div id="services" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <div class="text-center mb-12">
+      <span class="text-brand-teal font-bold text-sm uppercase tracking-widest">Our Services</span>
+      <h2 class="text-3xl sm:text-4xl font-black mt-2">Three trades. <span class="text-gradient">One tap.</span></h2>
+      <p class="text-gray-400 mt-3 max-w-xl mx-auto">Pick your pro, tell us how long the job might take, and choose a time that suits you.</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="service-card rounded-3xl p-1 grad-coral">
+        <div class="bg-[#12122b] rounded-[22px] p-7 h-full flex flex-col">
+          <div class="w-16 h-16 rounded-2xl grad-coral flex items-center justify-center text-3xl mb-5 shadow-lg"><i class="fas fa-plug"></i></div>
+          <h3 class="text-2xl font-black">Electrician</h3>
+          <p class="text-gray-400 text-sm mt-2 flex-1">Fan installation, wiring faults, switchboards, inverter setup, lighting & MCB tripping fixes.</p>
+          <ul class="mt-4 space-y-1 text-sm text-gray-300">
+            <li><i class="fas fa-check text-brand-coral mr-2"></i>Licensed & insured</li>
+            <li><i class="fas fa-check text-brand-coral mr-2"></i>Starting $29 / visit</li>
+          </ul>
+          <button onclick="startBooking('electrician')" class="btn btn-coral grad-coral mt-6 py-3 rounded-xl font-bold">Book Electrician</button>
+        </div>
+      </div>
+      <div class="service-card rounded-3xl p-1 grad-teal">
+        <div class="bg-[#12122b] rounded-[22px] p-7 h-full flex flex-col">
+          <div class="w-16 h-16 rounded-2xl grad-teal flex items-center justify-center text-3xl mb-5 shadow-lg"><i class="fas fa-snowflake"></i></div>
+          <h3 class="text-2xl font-black">AC Mechanic</h3>
+          <p class="text-gray-400 text-sm mt-2 flex-1">Deep cleaning, gas top-up, cooling issues, installation & uninstallation for split and window ACs.</p>
+          <ul class="mt-4 space-y-1 text-sm text-gray-300">
+            <li><i class="fas fa-check text-brand-teal mr-2"></i>Brand-trained techs</li>
+            <li><i class="fas fa-check text-brand-teal mr-2"></i>Starting $39 / visit</li>
+          </ul>
+          <button onclick="startBooking('ac')" class="btn btn-teal grad-teal mt-6 py-3 rounded-xl font-bold">Book AC Mechanic</button>
+        </div>
+      </div>
+      <div class="service-card rounded-3xl p-1 grad-purple">
+        <div class="bg-[#12122b] rounded-[22px] p-7 h-full flex flex-col">
+          <div class="w-16 h-16 rounded-2xl grad-purple flex items-center justify-center text-3xl mb-5 shadow-lg"><i class="fas fa-faucet-drip"></i></div>
+          <h3 class="text-2xl font-black">Plumber</h3>
+          <p class="text-gray-400 text-sm mt-2 flex-1">Leaking taps, blocked drains, pipe fittings, geyser installation, toilet & basin repairs.</p>
+          <ul class="mt-4 space-y-1 text-sm text-gray-300">
+            <li><i class="fas fa-check text-brand-purple mr-2"></i>Leak-free guarantee</li>
+            <li><i class="fas fa-check text-brand-purple mr-2"></i>Starting $25 / visit</li>
+          </ul>
+          <button onclick="startBooking('plumber')" class="btn btn-purple grad-purple mt-6 py-3 rounded-xl font-bold">Book Plumber</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- How it works -->
+  <div id="how" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+    <div class="text-center mb-12">
+      <span class="text-brand-pink font-bold text-sm uppercase tracking-widest">How it works</span>
+      <h2 class="text-3xl sm:text-4xl font-black mt-2">Booked in <span class="text-gradient-purple">under a minute</span></h2>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      <div class="glass rounded-3xl p-6 relative overflow-hidden">
+        <span class="absolute -top-4 -right-2 text-8xl font-black text-white/5">1</span>
+        <div class="w-12 h-12 rounded-xl grad-coral flex items-center justify-center text-xl mb-4"><i class="fab fa-google"></i></div>
+        <h4 class="font-bold text-lg">Sign in with Gmail</h4>
+        <p class="text-sm text-gray-400 mt-2">One click with your Google account. No passwords to remember.</p>
+      </div>
+      <div class="glass rounded-3xl p-6 relative overflow-hidden">
+        <span class="absolute -top-4 -right-2 text-8xl font-black text-white/5">2</span>
+        <div class="w-12 h-12 rounded-xl grad-teal flex items-center justify-center text-xl mb-4"><i class="fas fa-list-check"></i></div>
+        <h4 class="font-bold text-lg">Pick a category</h4>
+        <p class="text-sm text-gray-400 mt-2">Electrician, AC mechanic or plumber – and how long you expect the job to take.</p>
+      </div>
+      <div class="glass rounded-3xl p-6 relative overflow-hidden">
+        <span class="absolute -top-4 -right-2 text-8xl font-black text-white/5">3</span>
+        <div class="w-12 h-12 rounded-xl grad-yellow flex items-center justify-center text-xl mb-4"><i class="fas fa-clock"></i></div>
+        <h4 class="font-bold text-lg">Choose date & time</h4>
+        <p class="text-sm text-gray-400 mt-2">Select a convenient slot and share your phone number so the pro can reach you.</p>
+      </div>
+      <div class="glass rounded-3xl p-6 relative overflow-hidden">
+        <span class="absolute -top-4 -right-2 text-8xl font-black text-white/5">4</span>
+        <div class="w-12 h-12 rounded-xl grad-purple flex items-center justify-center text-xl mb-4"><i class="fas fa-bell"></i></div>
+        <h4 class="font-bold text-lg">Get confirmed</h4>
+        <p class="text-sm text-gray-400 mt-2">Track your request status in "My Bookings" — pending, confirmed, completed.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
+    <div class="hero-gradient rounded-[32px] p-[2px]">
+      <div class="bg-[#0d0d24]/90 rounded-[30px] px-8 py-12 md:px-14 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div>
+          <h3 class="text-3xl md:text-4xl font-black">Something broken? <span class="text-gradient">Let's fix it now.</span></h3>
+          <p class="text-gray-300 mt-2">Book in seconds. Pay only after the job is done.</p>
+        </div>
+        <button onclick="requireUser('booking')" class="btn btn-coral grad-coral px-10 py-4 rounded-2xl font-bold text-lg whitespace-nowrap">
+          <i class="fas fa-bolt mr-2"></i>Book Now
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BOOKING PAGE ================= -->
+<section id="page-booking" class="page">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <button onclick="showPage('landing')" class="text-sm text-gray-400 hover:text-white mb-6"><i class="fas fa-arrow-left mr-2"></i>Back to home</button>
+    <div class="grid lg:grid-cols-3 gap-8">
+      <div class="lg:col-span-2">
+        <h2 class="text-3xl sm:text-4xl font-black">Book your <span class="text-gradient">service</span></h2>
+        <p class="text-gray-400 mt-2">Fill in the details below and we'll match you with the nearest available pro.</p>
+
+        <form id="booking-form" class="mt-8 space-y-8" onsubmit="submitBooking(event)" novalidate>
+          <!-- Category -->
+          <div>
+            <label class="font-bold text-sm uppercase tracking-wider text-gray-300 flex items-center"><span class="w-6 h-6 rounded-full grad-coral text-xs flex items-center justify-center mr-2">1</span>Select Category <span class="text-brand-coral ml-1">*</span></label>
+            <div class="grid sm:grid-cols-3 gap-4 mt-4" id="category-options">
+              <div class="cat-option rounded-2xl p-5 glass relative" data-cat="electrician" onclick="selectCategory('electrician')">
+                <div class="check absolute top-3 right-3 w-6 h-6 rounded-full bg-white text-brand-coral flex items-center justify-center text-xs"><i class="fas fa-check"></i></div>
+                <div class="w-12 h-12 rounded-xl grad-coral flex items-center justify-center text-xl mb-3"><i class="fas fa-plug"></i></div>
+                <p class="font-bold">Electrician</p><p class="text-xs text-gray-400">From $29</p>
+              </div>
+              <div class="cat-option rounded-2xl p-5 glass relative" data-cat="ac" onclick="selectCategory('ac')">
+                <div class="check absolute top-3 right-3 w-6 h-6 rounded-full bg-white text-brand-teal flex items-center justify-center text-xs"><i class="fas fa-check"></i></div>
+                <div class="w-12 h-12 rounded-xl grad-teal flex items-center justify-center text-xl mb-3"><i class="fas fa-snowflake"></i></div>
+                <p class="font-bold">AC Mechanic</p><p class="text-xs text-gray-400">From $39</p>
+              </div>
+              <div class="cat-option rounded-2xl p-5 glass relative" data-cat="plumber" onclick="selectCategory('plumber')">
+                <div class="check absolute top-3 right-3 w-6 h-6 rounded-full bg-white text-brand-purple flex items-center justify-center text-xs"><i class="fas fa-check"></i></div>
+                <div class="w-12 h-12 rounded-xl grad-purple flex items-center justify-center text-xl mb-3"><i class="fas fa-faucet-drip"></i></div>
+                <p class="font-bold">Plumber</p><p class="text-xs text-gray-400">From $25</p>
+              </div>
+            </div>
+            <p id="err-category" class="text-brand-red text-xs mt-2 hidden"><i class="fas fa-circle-exclamation mr-1"></i>Please choose a service category.</p>
+          </div>
+
+          <!-- Work time -->
+          <div>
+            <label class="font-bold text-sm uppercase tracking-wider text-gray-300 flex items-center"><span class="w-6 h-6 rounded-full grad-teal text-xs flex items-center justify-center mr-2">2</span>Expected Work Time <span class="text-brand-coral ml-1">*</span></label>
+            <div class="flex flex-wrap gap-3 mt-4" id="duration-options">
+              <div class="chip rounded-full px-5 py-2 text-sm font-semibold glass" data-dur="Quick fix (under 1 hr)" data-mult="1" onclick="selectDuration(this)">⚡ Quick fix (&lt;1 hr)</div>
+              <div class="chip rounded-full px-5 py-2 text-sm font-semibold glass" data-dur="1 – 2 hours" data-mult="1.5" onclick="selectDuration(this)">🕐 1 – 2 hours</div>
+              <div class="chip rounded-full px-5 py-2 text-sm font-semibold glass" data-dur="2 – 4 hours" data-mult="2.5" onclick="selectDuration(this)">🕓 2 – 4 hours</div>
+              <div class="chip rounded-full px-5 py-2 text-sm font-semibold glass" data-dur="Half day (4 – 6 hrs)" data-mult="4" onclick="selectDuration(this)">🌤 Half day</div>
+              <div class="chip rounded-full px-5 py-2 text-sm font-semibold glass" data-dur="Full day (6+ hrs)" data-mult="7" onclick="selectDuration(this)">☀️ Full day</div>
+            </div>
+            <p id="err-duration" class="text-brand-red text-xs mt-2 hidden"><i class="fas fa-circle-exclamation mr-1"></i>Please select the expected work time.</p>
+          </div>
+
+          <!-- Date & Time -->
+          <div>
+            <label class="font-bold text-sm uppercase tracking-wider text-gray-300 flex items-center"><span class="w-6 h-6 rounded-full grad-yellow text-xs flex items-center justify-center mr-2">3</span>Convenient Date & Time <span class="text-brand-coral ml-1">*</span></label>
+            <div class="grid sm:grid-cols-2 gap-4 mt-4">
+              <div>
+                <div class="relative">
+                  <i class="fas fa-calendar-days absolute left-4 top-1/2 -translate-y-1/2 text-brand-yellow"></i>
+                  <input type="date" id="f-date" class="w-full glass rounded-xl pl-11 pr-4 py-3.5 bg-transparent text-white font-medium" onchange="updateSummary()">
+                </div>
+                <p id="err-date" class="text-brand-red text-xs mt-2 hidden"><i class="fas fa-circle-exclamation mr-1"></i>Pick a valid date (today or later).</p>
+              </div>
+              <div>
+                <div class="relative">
+                  <i class="fas fa-clock absolute left-4 top-1/2 -translate-y-1/2 text-brand-yellow"></i>
+                  <select id="f-time" class="w-full glass rounded-xl pl-11 pr-4 py-3.5 bg-transparent text-white font-medium appearance-none" onchange="updateSummary()">
+                    <option value="">Select time slot</option>
+                  </select>
+                  <i class="fas fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 text-xs pointer-events-none"></i>
+                </div>
+                <p id="err-time" class="text-brand-red text-xs mt-2 hidden"><i class="fas fa-circle-exclamation mr-1"></i>Please choose a time slot.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact -->
+          <div>
+            <label class="font-bold text-sm uppercase tracking-wider text-gray-300 flex items-center"><span class="w-6 h-6 rounded-full grad-purple text-xs flex items-center justify-center mr-2">4</span>Contact Details</label>
+            <div class="grid sm:grid-cols-2 gap-4 mt-4">
+              <div>
+                <label class="text-xs text-gray-400 font-semibold mb-1 block">Phone Number <span class="text-brand-coral">*</span></label>
+                <div class="relative">
+                  <i class="fas fa-phone absolute left-4 top-1/2 -translate-y-1/2 text-brand-purple"></i>
+                  <input type="tel" id="f-phone" placeholder="+1 555 123 4567" maxlength="18" class="w-full glass rounded-xl pl-11 pr-4 py-3.5 bg-transparent text-white font-medium placeholder-gray-500" oninput="updateSummary()">
+                </div>
+                <p id="err-phone" class="text-brand-red text-xs mt-2 hidden"><i class="fas fa-circle-exclamation mr-1"></i>Enter a valid phone number (10–15 digits).</p>
+              </div>
+              <div>
+                <label class="text-xs text-gray-400 font-semibold mb-1 block">Gmail (signed in)</label>
+                <div class="relative">
+                  <i class="fab fa-google absolute left-4 top-1/2 -translate-y-1/2 text-brand-coral"></i>
+                  <input type="email" id="f-email" readonly class="w-full glass rounded-xl pl-11 pr-4 py-3.5 bg-transparent text-gray-300 font-medium cursor-not-allowed">
+                </div>
+              </div>
+            </div>
+            <div class="mt-4">
+              <label class="text-xs text-gray-400 font-semibold mb-1 block">Service Address <span class="text-brand-coral">*</span></label>
+              <div class="relative">
+                <i class="fas fa-location-dot absolute left-4 top-4 text-brand-pink"></i>
+                <input type="text" id="f-address" placeholder="House no, street, area, city" class="w-full glass rounded-xl pl-11 pr-4 py-3.5 bg-transparent text-white font-medium placeholder-gray-500">
+              </div>
+              <p id="err-address" class="text-brand-red text-xs mt-2 hidden"><i class="fas fa-circle-exclamation mr-1"></i>Please enter your service address.</p>
+            </div>
+            <div class="mt-4">
+              <label class="text-xs text-gray-400 font-semibold mb-1 block">Describe the problem <span class="text-gray-500">(optional)</span></label>
+              <textarea id="f-notes" rows="3" placeholder="e.g. AC is not cooling, making a rattling noise..." class="w-full glass rounded-xl px-4 py-3.5 bg-transparent text-white font-medium placeholder-gray-500 resize-none"></textarea>
+            </div>
+          </div>
+
+          <button type="submit" id="submit-btn" class="btn btn-coral grad-coral w-full py-4 rounded-2xl font-bold text-lg shadow-lg">
+            <i class="fas fa-paper-plane mr-2"></i>Confirm Booking Request
+          </button>
+        </form>
+      </div>
+
+      <!-- Summary -->
+      <aside class="lg:col-span-1">
+        <div class="glass rounded-3xl p-6 sticky top-24">
+          <h4 class="font-black text-lg mb-4">Booking Summary</h4>
+          <div id="summary-cat" class="rounded-2xl p-4 grad-coral opacity-40 transition-all flex items-center space-x-3">
+            <div class="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center text-xl"><i id="summary-icon" class="fas fa-question"></i></div>
+            <div><p id="summary-cat-name" class="font-bold">No service selected</p><p id="summary-cat-sub" class="text-xs text-white/80">Choose a category</p></div>
+          </div>
+          <div class="mt-5 space-y-3 text-sm">
+            <div class="flex justify-between"><span class="text-gray-400">Work time</span><span id="summary-dur" class="font-semibold text-right">—</span></div>
+            <div class="flex justify-between"><span class="text-gray-400">Date</span><span id="summary-date" class="font-semibold">—</span></div>
+            <div class="flex justify-between"><span class="text-gray-400">Time</span><span id="summary-time" class="font-semibold">—</span></div>
+            <div class="flex justify-between"><span class="text-gray-400">Phone</span><span id="summary-phone" class="font-semibold">—</span></div>
+          </div>
+          <div class="border-t border-white/10 mt-5 pt-5 flex items-end justify-between">
+            <div><p class="text-gray-400 text-xs">Estimated cost</p><p class="text-xs text-gray-500">Final quote after inspection</p></div>
+            <p id="summary-price" class="text-3xl font-black text-gradient">$0</p>
+          </div>
+          <div class="mt-5 grid grid-cols-3 gap-2 text-center text-[11px] text-gray-300">
+            <div class="glass rounded-xl py-2"><i class="fas fa-shield-halved text-brand-teal block mb-1"></i>Insured</div>
+            <div class="glass rounded-xl py-2"><i class="fas fa-rotate-left text-brand-yellow block mb-1"></i>30-day fix</div>
+            <div class="glass rounded-xl py-2"><i class="fas fa-hand-holding-dollar text-brand-pink block mb-1"></i>Pay later</div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ================= USER DASHBOARD ================= -->
+<section id="page-dashboard" class="page">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+      <div>
+        <p class="text-brand-teal font-bold text-sm uppercase tracking-widest">My Bookings</p>
+        <h2 class="text-3xl sm:text-4xl font-black mt-1">Hey, <span id="dash-name" class="text-gradient">there</span> 👋</h2>
+        <p class="text-gray-400 mt-1 text-sm">Only you can see these appointments. <i class="fas fa-lock text-xs ml-1"></i></p>
+      </div>
+      <button onclick="showPage('booking')" class="btn btn-coral grad-coral px-6 py-3 rounded-xl font-bold"><i class="fas fa-plus mr-2"></i>New Booking</button>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8" id="user-stats"></div>
+
+    <div class="flex flex-wrap gap-2 mt-8" id="user-filter">
+      <div class="chip active rounded-full px-4 py-1.5 text-xs font-bold glass" data-f="all" onclick="setUserFilter(this)">All</div>
+      <div class="chip rounded-full px-4 py-1.5 text-xs font-bold glass" data-f="pending" onclick="setUserFilter(this)">Pending</div>
+      <div class="chip rounded-full px-4 py-1.5 text-xs font-bold glass" data-f="confirmed" onclick="setUserFilter(this)">Confirmed</div>
+      <div class="chip rounded-full px-4 py-1.5 text-xs font-bold glass" data-f="completed" onclick="setUserFilter(this)">Completed</div>
+      <div class="chip rounded-full px-4 py-1.5 text-xs font-bold glass" data-f="cancelled" onclick="setUserFilter(this)">Cancelled</div>
+    </div>
+
+    <div id="user-bookings" class="grid md:grid-cols-2 gap-5 mt-6"></div>
+  </div>
+</section>
+
+<!-- ================= ADMIN DASHBOARD ================= -->
+<section id="page-admin" class="page">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+      <div>
+        <p class="text-brand-pink font-bold text-sm uppercase tracking-widest"><i class="fas fa-user-shield mr-1"></i>Admin Console</p>
+        <h2 class="text-3xl sm:text-4xl font-black mt-1">All Service <span class="text-gradient-purple">Requests</span></h2>
+        <p class="text-gray-400 mt-1 text-sm">Overview of every user's booking request across all categories.</p>
+      </div>
+      <div class="flex gap-2">
+        <button onclick="exportCSV()" class="btn glass px-5 py-3 rounded-xl font-bold text-sm hover:bg-white/10"><i class="fas fa-file-csv mr-2 text-brand-teal"></i>Export CSV</button>
+        <button onclick="renderAdmin()" class="btn glass px-5 py-3 rounded-xl font-bold text-sm hover:bg-white/10"><i class="fas fa-rotate mr-2 text-brand-yellow"></i>Refresh</button>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4 mt-8" id="admin-stats"></div>
+
+    <div class="glass rounded-3xl p-5 mt-8">
+      <div class="flex flex-col lg:flex-row gap-4 lg:items-center justify-between">
+        <div class="flex flex-wrap gap-2" id="admin-cat-filter">
+          <div class="chip active rounded-full px-4 py-1.5 text-xs font-bold glass" data-f="all" onclick="setAdminCat(this)">All categories</div>
+          <div class="chip rounded-full px-4 py-1.5 text-xs font-bold glass" data-f="electrician" onclick="setAdminCat(this)"><i class="fas fa-plug mr-1"></i>Electrician</div>
+          <div class="chip rounded-full px-4 py-1.5 text-xs font-bold glass" data-f="ac" onclick="setAdminCat(this)"><i class="fas fa-snowflake mr-1"></i>AC Mechanic</div>
+          <div class="chip rounded-full px-4 py-1.5 text-xs font-bold glass" data-f="plumber" onclick="setAdminCat(this)"><i class="fas fa-faucet-drip mr-1"></i>Plumber</div>
+        </div>
+        <div class="flex gap-3">
+          <div class="relative">
+            <i class="fas fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
+            <input id="admin-search" oninput="renderAdmin()" placeholder="Search email, phone, ID..." class="glass rounded-xl pl-10 pr-4 py-2.5 bg-transparent text-sm w-full lg:w-64 placeholder-gray-500">
+          </div>
+          <div class="relative">
+            <select id="admin-status" onchange="renderAdmin()" class="glass rounded-xl pl-4 pr-9 py-2.5 bg-transparent text-sm appearance-none">
+              <option value="all">All statuses</option>
+              <option value="pending">Pending</option>
+              <option value="confirmed">Confirmed</option>
+              <option value="completed">Completed</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+            <i class="fas fa-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-xs text-gray-400 pointer-events-none"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="overflow-x-auto scrollbar-thin mt-6 -mx-5 px-5">
+        <table class="w-full text-sm min-w-[900px]">
+          <thead>
+            <tr class="text-left text-xs uppercase tracking-wider text-gray-400 border-b border-white/10">
+              <th class="pb-3 pr-4 font-bold">ID</th>
+              <th class="pb-3 pr-4 font-bold">User</th>
+              <th class="pb-3 pr-4 font-bold">Category</th>
+              <th class="pb-3 pr-4 font-bold">Work time</th>
+              <th class="pb-3 pr-4 font-bold">Date & Time</th>
+              <th class="pb-3 pr-4 font-bold">Phone</th>
+              <th class="pb-3 pr-4 font-bold">Status</th>
+              <th class="pb-3 font-bold text-right">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="admin-rows"></tbody>
+        </table>
+        <div id="admin-empty" class="hidden text-center py-16 text-gray-400">
+          <i class="fas fa-inbox text-5xl text-white/10 mb-4 block"></i>No requests match your filters.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- Footer -->
+<footer class="relative z-10 border-t border-white/5 mt-10">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 grid md:grid-cols-4 gap-8 text-sm">
+    <div class="md:col-span-2">
+      <div class="flex items-center space-x-2 mb-3">
+        <div class="w-9 h-9 rounded-xl hero-gradient flex items-center justify-center"><i class="fas fa-bolt"></i></div>
+        <span class="text-lg font-extrabold">MEP<span class="text-gradient">tech</span></span>
+      </div>
+      <p class="text-gray-400 max-w-sm">Your on-demand home repair squad. Electricians, AC mechanics and plumbers — verified, punctual and priced fairly.</p>
+      <div class="flex gap-3 mt-4">
+        <a href="#" class="w-9 h-9 rounded-lg glass flex items-center justify-center hover:bg-white/10"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="w-9 h-9 rounded-lg glass flex items-center justify-center hover:bg-white/10"><i class="fab fa-x-twitter"></i></a>
+        <a href="#" class="w-9 h-9 rounded-lg glass flex items-center justify-center hover:bg-white/10"><i class="fab fa-facebook-f"></i></a>
+      </div>
+    </div>
+    <div>
+      <p class="font-bold mb-3">Services</p>
+      <ul class="space-y-2 text-gray-400">
+        <li><a href="#" onclick="startBooking('electrician');return false;" class="hover:text-brand-coral">Electrician</a></li>
+        <li><a href="#" onclick="startBooking('ac');return false;" class="hover:text-brand-teal">AC Mechanic</a></li>
+        <li><a href="#" onclick="startBooking('plumber');return false;" class="hover:text-brand-purple">Plumber</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="font-bold mb-3">Support</p>
+      <ul class="space-y-2 text-gray-400">
+        <li><i class="fas fa-phone mr-2 text-brand-teal"></i>+1 800 FIX NOW</li>
+        <li><i class="fas fa-envelope mr-2 text-brand-coral"></i>help@meptech.app</li>
+        <li><a href="#" onclick="openLogin('admin');return false;" class="hover:text-white"><i class="fas fa-user-shield mr-2 text-brand-pink"></i>Admin login</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="border-t border-white/5 py-4 text-center text-xs text-gray-500">© <span id="year"></span> MEPtech. All rights reserved.</div>
+</footer>
+
+<!-- ================= LOGIN MODAL ================= -->
+<div id="login-modal" class="fixed inset-0 z-[100] modal-overlay hidden items-center justify-center p-4">
+  <div class="glass rounded-3xl w-full max-w-md p-8 relative bounce-in bg-[#12122b]/90">
+    <button onclick="closeLogin()" class="absolute top-4 right-4 w-9 h-9 rounded-full glass flex items-center justify-center hover:bg-white/10"><i class="fas fa-xmark"></i></button>
+    <div class="w-14 h-14 rounded-2xl hero-gradient flex items-center justify-center text-2xl mx-auto mb-4"><i class="fas fa-bolt"></i></div>
+    <h3 class="text-2xl font-black text-center">Welcome to MEP<span class="text-gradient">tech</span></h3>
+    <p class="text-gray-400 text-sm text-center mt-1">Sign in to book and track your services</p>
+
+    <div class="flex glass rounded-xl p-1 mt-6">
+      <button id="tab-user" onclick="switchLoginTab('user')" class="flex-1 py-2 rounded-lg text-sm font-bold grad-coral">Customer</button>
+      <button id="tab-admin" onclick="switchLoginTab('admin')" class="flex-1 py-2 rounded-lg text-sm font-bold text-gray-300">Admin</button>
+    </div>
+
+    <!-- Customer / Gmail -->
+    <div id="login-user" class="mt-6">
+      <div id="g_id_signin" class="flex justify-center"></div>
+      <button onclick="googleSignIn()" id="google-btn" class="g-btn w-full py-3.5 rounded-xl font-semibold flex items-center justify-center gap-3">
+        <svg width="20" height="20" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+        Sign in with Google
+      </button>
+      <p class="text-[11px] text-gray-500 text-center mt-4"><i class="fas fa-lock mr-1"></i>Only Gmail accounts are accepted. Your bookings stay private to you.</p>
+    </div>
+
+    <!-- Gmail chooser (fallback when no OAuth client id is configured) -->
+    <div id="login-gmail-form" class="mt-6 hidden">
+      <div class="glass rounded-2xl p-4">
+        <p class="text-xs text-gray-400 mb-3 flex items-center gap-2"><svg width="16" height="16" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>Continue with your Google account</p>
+        <label class="text-xs text-gray-400 font-semibold mb-1 block">Your name</label>
+        <input id="g-name" placeholder="Alex Johnson" class="w-full glass rounded-xl px-4 py-3 bg-transparent text-white text-sm placeholder-gray-500 mb-3">
+        <label class="text-xs text-gray-400 font-semibold mb-1 block">Gmail address</label>
+        <div class="relative">
+          <i class="fas fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-brand-coral"></i>
+          <input id="g-email" type="email" placeholder="you@gmail.com" class="w-full glass rounded-xl pl-11 pr-4 py-3 bg-transparent text-white text-sm placeholder-gray-500" onkeydown="if(event.key==='Enter')completeGmailLogin()">
+        </div>
+        <p id="err-gmail" class="text-brand-red text-xs mt-2 hidden"><i class="fas fa-circle-exclamation mr-1"></i>Please enter a valid <b>@gmail.com</b> address.</p>
+        <button onclick="completeGmailLogin()" id="gmail-continue" class="btn btn-coral grad-coral w-full py-3 rounded-xl font-bold mt-4">Continue <i class="fas fa-arrow-right ml-2 text-sm"></i></button>
+        <button onclick="backToGoogleBtn()" class="w-full text-xs text-gray-400 hover:text-white mt-3">← Back</button>
+      </div>
+    </div>
+
+    <!-- Admin -->
+    <div id="login-admin" class="mt-6 hidden">
+      <label class="text-xs text-gray-400 font-semibold mb-1 block">Admin email</label>
+      <div class="relative mb-3">
+        <i class="fas fa-user-shield absolute left-4 top-1/2 -translate-y-1/2 text-brand-pink"></i>
+        <input id="a-email" type="email" placeholder="admin@meptech.com" class="w-full glass rounded-xl pl-11 pr-4 py-3 bg-transparent text-white text-sm placeholder-gray-500">
+      </div>
+      <label class="text-xs text-gray-400 font-semibold mb-1 block">Password</label>
+      <div class="relative">
+        <i class="fas fa-key absolute left-4 top-1/2 -translate-y-1/2 text-brand-pink"></i>
+        <input id="a-pass" type="password" placeholder="••••••••" class="w-full glass rounded-xl pl-11 pr-4 py-3 bg-transparent text-white text-sm placeholder-gray-500" onkeydown="if(event.key==='Enter')adminLogin()">
+      </div>
+      <p id="err-admin" class="text-brand-red text-xs mt-2 hidden"><i class="fas fa-circle-exclamation mr-1"></i>Invalid admin credentials.</p>
+      <button onclick="adminLogin()" class="btn btn-purple grad-purple w-full py-3 rounded-xl font-bold mt-5"><i class="fas fa-right-to-bracket mr-2"></i>Login as Admin</button>
+      <p class="text-[11px] text-gray-500 text-center mt-4">Demo credentials: <span class="text-gray-300">admin@meptech.com</span> / <span class="text-gray-300">admin123</span></p>
+    </div>
+  </div>
+</div>
+
+<!-- ================= SUCCESS MODAL ================= -->
+<div id="success-modal" class="fixed inset-0 z-[100] modal-overlay hidden items-center justify-center p-4">
+  <div class="glass rounded-3xl w-full max-w-md p-8 text-center bounce-in bg-[#12122b]/90 relative overflow-hidden">
+    <div class="absolute -top-10 -right-10 w-40 h-40 rounded-full grad-teal blur-3xl opacity-40"></div>
+    <div class="absolute -bottom-10 -left-10 w-40 h-40 rounded-full grad-coral blur-3xl opacity-40"></div>
+    <div class="w-20 h-20 rounded-full grad-teal flex items-center justify-center text-4xl mx-auto mb-5 glow-teal"><i class="fas fa-check"></i></div>
+    <h3 class="text-2xl font-black">Request Sent! 🎉</h3>
+    <p class="text-gray-400 text-sm mt-2">Your booking <span id="success-id" class="font-bold text-white"></span> is <span class="text-brand-yellow font-bold">pending</span>. We'll confirm shortly and the pro will call you on your number.</p>
+    <div id="success-details" class="glass rounded-2xl p-4 mt-5 text-left text-sm space-y-1"></div>
+    <div class="flex gap-3 mt-6">
+      <button onclick="closeSuccess();showPage('dashboard')" class="btn btn-teal grad-teal flex-1 py-3 rounded-xl font-bold">View My Bookings</button>
+      <button onclick="closeSuccess();resetForm();" class="btn glass flex-1 py-3 rounded-xl font-bold hover:bg-white/10">Book Another</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= DETAIL MODAL ================= -->
+<div id="detail-modal" class="fixed inset-0 z-[100] modal-overlay hidden items-center justify-center p-4" onclick="if(event.target===this)closeDetail()">
+  <div class="glass rounded-3xl w-full max-w-lg p-7 bounce-in bg-[#12122b]/95 relative">
+    <button onclick="closeDetail()" class="absolute top-4 right-4 w-9 h-9 rounded-full glass flex items-center justify-center hover:bg-white/10"><i class="fas fa-xmark"></i></button>
+    <div id="detail-body"></div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast-wrap" class="fixed bottom-5 right-5 z-[120] space-y-3"></div>
+
+<script>
+/* =========================================================
+   CONFIG — set your Google OAuth Client ID for production.
+   When empty, a secure Gmail-address chooser is used so the
+   flow still works everywhere (including iframes/previews).
+   ========================================================= */
+const GOOGLE_CLIENT_ID = '';
+const ADMIN_CREDENTIALS = { email: 'admin@meptech.com', password: 'admin123' };
+
+const CATEGORIES = {
+  electrician: { name: 'Electrician', icon: 'fa-plug', grad: 'grad-coral', color: '#FF6B6B', base: 29, sub: 'Wiring, fans, switches, MCB' },
+  ac:          { name: 'AC Mechanic', icon: 'fa-snowflake', grad: 'grad-teal', color: '#4ECDC4', base: 39, sub: 'Service, gas refill, install' },
+  plumber:     { name: 'Plumber', icon: 'fa-faucet-drip', grad: 'grad-purple', color: '#667EEA', base: 25, sub: 'Leaks, taps, pipes, drains' }
+};
+const STATUS_LABEL = { pending: 'Pending', confirmed: 'Confirmed', completed: 'Completed', cancelled: 'Cancelled' };
+
+/* ---------------- State ---------------- */
+let currentUser = JSON.parse(localStorage.getItem('mep_user') || 'null');
+let bookings = JSON.parse(localStorage.getItem('mep_bookings') || 'null');
+let selectedCategory = null, selectedDuration = null, selectedMult = 1;
+let userFilter = 'all', adminCat = 'all', loginTab = 'user', pendingRedirect = null;
+
+if (!bookings) { bookings = seedBookings(); saveBookings(); }
+
+function seedBookings() {
+  const d = n => { const x = new Date(); x.setDate(x.getDate() + n); return x.toISOString().slice(0,10); };
+  return [
+    { id: 'MEP-1042', userEmail: 'priya.sharma@gmail.com', userName: 'Priya Sharma', category: 'ac', duration: '1 – 2 hours', date: d(1), time: '10:00', phone: '+91 98765 43210', address: '14 Lake View Rd, Pune', notes: 'AC not cooling, water dripping from indoor unit.', status: 'confirmed', createdAt: Date.now() - 86400000 * 2, estimate: 59 },
+    { id: 'MEP-1043', userEmail: 'mike.torres@gmail.com', userName: 'Mike Torres', category: 'electrician', duration: 'Quick fix (under 1 hr)', date: d(0), time: '15:00', phone: '+1 415 555 0192', address: '220 Mission St, San Francisco', notes: 'Kitchen socket sparking.', status: 'pending', createdAt: Date.now() - 3600000 * 5, estimate: 29 },
+    { id: 'MEP-1044', userEmail: 'aisha.k@gmail.com', userName: 'Aisha Khan', category: 'plumber', duration: '2 – 4 hours', date: d(-2), time: '09:00', phone: '+44 7700 900123', address: '8 Baker St, London', notes: 'Replace bathroom basin tap & fix drain.', status: 'completed', createdAt: Date.now() - 86400000 * 4, estimate: 63 },
+    { id: 'MEP-1045', userEmail: 'daniel.wu@gmail.com', userName: 'Daniel Wu', category: 'electrician', duration: 'Half day (4 – 6 hrs)', date: d(3), time: '11:00', phone: '+65 8123 4567', address: 'Blk 21 Tampines Ave 3', notes: 'Full house rewiring inspection for new lights.', status: 'pending', createdAt: Date.now() - 3600000 * 20, estimate: 116 }
+  ];
+}
+function saveBookings() { localStorage.setItem('mep_bookings', JSON.stringify(bookings)); }
+function saveUser() { currentUser ? localStorage.setItem('mep_user', JSON.stringify(currentUser)) : localStorage.removeItem('mep_user'); }
+
+/* ---------------- Helpers ---------------- */
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmtDate = d => { if(!d) return '—'; const [y,m,dd] = d.split('-'); return new Date(y, m-1, dd).toLocaleDateString(undefined, { weekday:'short', month:'short', day:'numeric', year:'numeric' }); };
+const fmtTime = t => { if(!t) return '—'; const [h,m] = t.split(':').map(Number); const ap = h>=12?'PM':'AM'; return `${((h+11)%12)+1}:${String(m).padStart(2,'0')} ${ap}`; };
+const initials = n => (n||'?').split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+const avatarGrad = e => ['grad-coral','grad-teal','grad-purple','grad-pink','grad-yellow','grad-sky'][(e||'').split('').reduce((a,c)=>a+c.charCodeAt(0),0)%6];
+const genId = () => 'MEP-' + (1000 + Math.floor(Math.random()*9000));
+
+function toast(msg, type='success') {
+  const colors = { success: 'grad-teal', error: 'grad-yellow', info: 'grad-purple' };
+  const icons = { success: 'fa-circle-check', error: 'fa-triangle-exclamation', info: 'fa-circle-info' };
+  const el = document.createElement('div');
+  el.className = `toast ${colors[type]} px-5 py-3.5 rounded-2xl shadow-2xl flex items-center gap-3 text-sm font-semibold max-w-xs`;
+  el.innerHTML = `<i class="fas ${icons[type]} text-lg"></i><span>${esc(msg)}</span>`;
+  $('toast-wrap').appendChild(el);
+  setTimeout(() => { el.style.transition='all .4s'; el.style.opacity='0'; el.style.transform='translateY(20px)'; setTimeout(()=>el.remove(), 400); }, 3200);
+}
+
+/* ---------------- Navigation ---------------- */
+function showPage(name) {
+  if (name === 'admin' && (!currentUser || currentUser.role !== 'admin')) { openLogin('admin'); return; }
+  if ((name === 'booking' || name === 'dashboard') && (!currentUser || currentUser.role !== 'user')) { pendingRedirect = name; openLogin('user'); return; }
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const pg = $('page-' + name); pg.classList.add('active'); pg.classList.remove('fade-in'); void pg.offsetWidth; pg.classList.add('fade-in');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  if (name === 'booking') { $('f-email').value = currentUser.email; setMinDate(); updateSummary(); }
+  if (name === 'dashboard') renderDashboard();
+  if (name === 'admin') renderAdmin();
+}
+function goToSection(id) {
+  if (!$('page-landing').classList.contains('active')) showPage('landing');
+  setTimeout(() => { const el = $(id); if (el) window.scrollTo({ top: el.offsetTop - 70, behavior: 'smooth' }); }, 80);
+}
+function requireUser(page) { showPage(page); }
+function startBooking(cat) { if (!currentUser || currentUser.role !== 'user') { pendingRedirect = 'booking'; selectedCategory = cat; openLogin('user'); return; } showPage('booking'); selectCategory(cat); }
+function toggleMobileMenu() { const m = $('mobile-menu'); m.classList.toggle('hidden'); $('mobile-menu-icon').className = m.classList.contains('hidden') ? 'fas fa-bars' : 'fas fa-xmark'; }
+
+/* ---------------- Auth UI ---------------- */
+function renderAuth() {
+  const area = $('auth-area');
+  const isUser = currentUser && currentUser.role === 'user';
+  const isAdmin = currentUser && currentUser.role === 'admin';
+  ['nav-user-link','mnav-user-link'].forEach(i => $(i).classList.toggle('hidden', !isUser));
+  ['nav-admin-link','mnav-admin-link'].forEach(i => $(i).classList.toggle('hidden', !isAdmin));
+  if (!currentUser) {
+    area.innerHTML = `<button onclick="openLogin('user')" class="btn btn-coral grad-coral px-5 py-2.5 rounded-xl font-bold text-sm"><i class="fab fa-google mr-2"></i>Sign in</button>`;
+    return;
+  }
+  area.innerHTML = `
+    <div class="flex items-center gap-2 glass rounded-full pl-1 pr-3 py-1 cursor-pointer" onclick="showPage('${isAdmin?'admin':'dashboard'}')">
+      ${currentUser.picture ? `<img src="${esc(currentUser.picture)}" class="w-8 h-8 rounded-full" referrerpolicy="no-referrer">` : `<div class="w-8 h-8 rounded-full ${isAdmin?'grad-pink':avatarGrad(currentUser.email)} flex items-center justify-center text-xs font-bold">${isAdmin?'<i class="fas fa-user-shield"></i>':initials(currentUser.name)}</div>`}
+      <span class="text-sm font-semibold hidden sm:block max-w-[120px] truncate">${esc(currentUser.name)}</span>
+      ${isAdmin?'<span class="text-[10px] font-black uppercase px-2 py-0.5 rounded-full grad-pink">Admin</span>':''}
+    </div>
+    <button onclick="logout()" title="Sign out" class="w-10 h-10 rounded-xl glass flex items-center justify-center hover:bg-white/10 text-gray-300"><i class="fas fa-right-from-bracket"></i></button>`;
+}
+function openLogin(tab='user') {
+  switchLoginTab(tab);
+  $('login-modal').classList.remove('hidden'); $('login-modal').classList.add('flex');
+  backToGoogleBtn();
+  ['a-email','a-pass','g-email','g-name'].forEach(i=>$(i).value='');
+  ['err-admin','err-gmail'].forEach(i=>$(i).classList.add('hidden'));
+  initGoogle();
+}
+function closeLogin() { $('login-modal').classList.add('hidden'); $('login-modal').classList.remove('flex'); pendingRedirect = null; }
+function switchLoginTab(tab) {
+  loginTab = tab;
+  $('tab-user').className = 'flex-1 py-2 rounded-lg text-sm font-bold ' + (tab==='user' ? 'grad-coral' : 'text-gray-300');
+  $('tab-admin').className = 'flex-1 py-2 rounded-lg text-sm font-bold ' + (tab==='admin' ? 'grad-purple' : 'text-gray-300');
+  $('login-user').classList.toggle('hidden', tab!=='user');
+  $('login-gmail-form').classList.add('hidden');
+  $('login-admin').classList.toggle('hidden', tab!=='admin');
+  if (tab==='user') $('login-user').classList.remove('hidden');
+}
+
+/* ---- Google Identity Services (live) with graceful fallback ---- */
+let gisReady = false;
+function initGoogle() {
+  if (!GOOGLE_CLIENT_ID || gisReady || !window.google || !google.accounts) return;
+  try {
+    google.accounts.id.initialize({ client_id: GOOGLE_CLIENT_ID, callback: handleGoogleCredential, ux_mode: 'popup' });
+    google.accounts.id.renderButton($('g_id_signin'), { theme: 'filled_black', size: 'large', shape: 'pill', width: 320, text: 'signin_with' });
+    $('google-btn').classList.add('hidden');
+    gisReady = true;
+  } catch (e) { console.warn('GIS init failed, using fallback', e); }
+}
+function handleGoogleCredential(resp) {
+  try {
+    const payload = JSON.parse(decodeURIComponent(atob(resp.credential.split('.')[1].replace(/-/g,'+').replace(/_/g,'/')).split('').map(c=>'%'+('00'+c.charCodeAt(0).toString(16)).slice(-2)).join('')));
+    if (!/@gmail\.com$/i.test(payload.email)) { toast('Please sign in with a Gmail account.', 'error'); return; }
+    finishUserLogin({ email: payload.email.toLowerCase(), name: payload.name || payload.email.split('@')[0], picture: payload.picture || '' });
+  } catch (e) { toast('Google sign-in failed. Try again.', 'error'); }
+}
+function googleSignIn() {
+  if (gisReady) { google.accounts.id.prompt(); return; }
+  $('login-user').classList.add('hidden'); $('login-gmail-form').classList.remove('hidden');
+  setTimeout(()=>$('g-email').focus(), 50);
+}
+function backToGoogleBtn() { $('login-gmail-form').classList.add('hidden'); if (loginTab==='user') $('login-user').classList.remove('hidden'); }
+function completeGmailLogin() {
+  const email = $('g-email').value.trim().toLowerCase();
+  const name = $('g-name').value.trim() || email.split('@')[0].replace(/[._]/g,' ').replace(/\b\w/g, c=>c.toUpperCase());
+  if (!/^[a-z0-9._%+-]+@gmail\.com$/.test(email)) { $('err-gmail').classList.remove('hidden'); $('g-email').focus(); return; }
+  $('err-gmail').classList.add('hidden');
+  const btn = $('gmail-continue'); btn.innerHTML = '<i class="fas fa-circle-notch spin mr-2"></i>Signing in...'; btn.disabled = true;
+  setTimeout(() => { btn.innerHTML = 'Continue <i class="fas fa-arrow-right ml-2 text-sm"></i>'; btn.disabled = false; finishUserLogin({ email, name, picture: '' }); }, 900);
+}
+function finishUserLogin(u) {
+  currentUser = { role: 'user', ...u }; saveUser(); renderAuth();
+  $('login-modal').classList.add('hidden'); $('login-modal').classList.remove('flex');
+  toast(`Welcome, ${u.name.split(' ')[0]}! 🎉`);
+  const dest = pendingRedirect || 'booking'; pendingRedirect = null;
+  showPage(dest);
+  if (dest === 'booking' && selectedCategory) selectCategory(selectedCategory);
+}
+function adminLogin() {
+  const e = $('a-email').value.trim().toLowerCase(), p = $('a-pass').value;
+  if (e !== ADMIN_CREDENTIALS.email || p !== ADMIN_CREDENTIALS.password) { $('err-admin').classList.remove('hidden'); return; }
+  $('err-admin').classList.add('hidden');
+  currentUser = { role: 'admin', email: e, name: 'Admin', picture: '' }; saveUser(); renderAuth();
+  $('login-modal').classList.add('hidden'); $('login-modal').classList.remove('flex');
+  toast('Admin access granted', 'info'); showPage('admin');
+}
+function logout() {
+  currentUser = null; saveUser(); renderAuth(); resetForm();
+  if (window.google && google.accounts && gisReady) google.accounts.id.disableAutoSelect();
+  showPage('landing'); toast('Signed out. See you soon!', 'info');
+}
+
+/* ---------------- Booking Form ---------------- */
+function setMinDate() { const t = new Date(); const s = t.toISOString().slice(0,10); $('f-date').min = s; }
+function populateTimes() {
+  const sel = $('f-time');
+  for (let h = 8; h <= 19; h++) { const v = `${String(h).padStart(2,'0')}:00`; const o = document.createElement('option'); o.value = v; o.textContent = fmtTime(v); sel.appendChild(o); }
+}
+function selectCategory(cat) {
+  selectedCategory = cat;
+  document.querySelectorAll('.cat-option').forEach(el => el.classList.toggle('selected', el.dataset.cat === cat));
+  $('err-category').classList.add('hidden'); updateSummary();
+}
+function selectDuration(el) {
+  document.querySelectorAll('#duration-options .chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active'); selectedDuration = el.dataset.dur; selectedMult = parseFloat(el.dataset.mult);
+  $('err-duration').classList.add('hidden'); updateSummary();
+}
+function estimate() { return selectedCategory ? Math.round(CATEGORIES[selectedCategory].base * (selectedDuration ? selectedMult : 1)) : 0; }
+function updateSummary() {
+  const c = selectedCategory ? CATEGORIES[selectedCategory] : null;
+  const box = $('summary-cat');
+  box.className = `rounded-2xl p-4 transition-all flex items-center space-x-3 ${c ? c.grad + ' opacity-100' : 'grad-coral opacity-40'}`;
+  $('summary-icon').className = `fas ${c ? c.icon : 'fa-question'}`;
+  $('summary-cat-name').textContent = c ? c.name : 'No service selected';
+  $('summary-cat-sub').textContent = c ? c.sub : 'Choose a category';
+  $('summary-dur').textContent = selectedDuration || '—';
+  $('summary-date').textContent = $('f-date').value ? fmtDate($('f-date').value) : '—';
+  $('summary-time').textContent = $('f-time').value ? fmtTime($('f-time').value) : '—';
+  $('summary-phone').textContent = $('f-phone').value.trim() || '—';
+  $('summary-price').textContent = '$' + estimate();
+}
+function validPhone(p) { const digits = p.replace(/\D/g,''); return /^\+?[0-9\s\-().]+$/.test(p) && digits.length >= 10 && digits.length <= 15; }
+function submitBooking(e) {
+  e.preventDefault();
+  if (!currentUser || currentUser.role !== 'user') { openLogin('user'); return; }
+  let ok = true;
+  const date = $('f-date').value, time = $('f-time').value, phone = $('f-phone').value.trim(), address = $('f-address').value.trim();
+  const today = new Date().toISOString().slice(0,10);
+  const show = (id, cond) => { $(id).classList.toggle('hidden', !cond); if (cond) ok = false; };
+  show('err-category', !selectedCategory);
+  show('err-duration', !selectedDuration);
+  show('err-date', !date || date < today);
+  show('err-time', !time);
+  show('err-phone', !validPhone(phone));
+  show('err-address', !address);
+  if (!ok) { toast('Please complete the highlighted fields.', 'error'); const first = document.querySelector('#booking-form p[id^="err-"]:not(.hidden)'); first && first.scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
+  // Prevent double-booking the same slot for this user
+  if (bookings.some(b => b.userEmail === currentUser.email && b.date === date && b.time === time && b.status !== 'cancelled')) { toast('You already have a booking at this time slot.', 'error'); return; }
+
+  const btn = $('submit-btn'); btn.disabled = true; btn.innerHTML = '<i class="fas fa-circle-notch spin mr-2"></i>Sending request...';
+  setTimeout(() => {
+    const b = { id: genId(), userEmail: currentUser.email, userName: currentUser.name, category: selectedCategory, duration: selectedDuration, date, time, phone, address, notes: $('f-notes').value.trim(), status: 'pending', createdAt: Date.now(), estimate: estimate() };
+    bookings.unshift(b); saveBookings();
+    btn.disabled = false; btn.innerHTML = '<i class="fas fa-paper-plane mr-2"></i>Confirm Booking Request';
+    $('success-id').textContent = b.id;
+    const c = CATEGORIES[b.category];
+    $('success-details').innerHTML = `
+      <p><i class="fas ${c.icon} w-5 text-brand-teal"></i><b>${c.name}</b> · ${esc(b.duration)}</p>
+      <p><i class="fas fa-calendar w-5 text-brand-yellow"></i>${fmtDate(b.date)} at ${fmtTime(b.time)}</p>
+      <p><i class="fas fa-phone w-5 text-brand-purple"></i>${esc(b.phone)}</p>
+      <p><i class="fas fa-location-dot w-5 text-brand-pink"></i>${esc(b.address)}</p>`;
+    $('success-modal').classList.remove('hidden'); $('success-modal').classList.add('flex');
+  }, 1000);
+}
+function closeSuccess() { $('success-modal').classList.add('hidden'); $('success-modal').classList.remove('flex'); }
+function resetForm() {
+  selectedCategory = null; selectedDuration = null; selectedMult = 1;
+  document.querySelectorAll('.cat-option').forEach(el => el.classList.remove('selected'));
+  document.querySelectorAll('#duration-options .chip').forEach(c => c.classList.remove('active'));
+  ['f-date','f-time','f-phone','f-address','f-notes'].forEach(i => $(i).value = '');
+  document.querySelectorAll('#booking-form p[id^="err-"]').forEach(p => p.classList.add('hidden'));
+  updateSummary();
+}
+
+/* ---------------- User Dashboard (own bookings only) ---------------- */
+function myBookings() { return bookings.filter(b => b.userEmail === currentUser.email); }
+function setUserFilter(el) { document.querySelectorAll('#user-filter .chip').forEach(c=>c.classList.remove('active')); el.classList.add('active'); userFilter = el.dataset.f; renderDashboard(); }
+function renderDashboard() {
+  if (!currentUser || currentUser.role !== 'user') return;
+  $('dash-name').textContent = currentUser.name.split(' ')[0];
+  const mine = myBookings();
+  const count = s => mine.filter(b => b.status === s).length;
+  $('user-stats').innerHTML = [
+    ['Total', mine.length, 'grad-sky', 'fa-list'], ['Pending', count('pending'), 'grad-yellow', 'fa-hourglass-half'],
+    ['Confirmed', count('confirmed'), 'grad-teal', 'fa-circle-check'], ['Completed', count('completed'), 'grad-purple', 'fa-flag-checkered']
+  ].map(([l,v,g,i]) => `<div class="${g} rounded-2xl p-4 relative overflow-hidden"><i class="fas ${i} absolute -right-2 -bottom-2 text-6xl text-white/15"></i><p class="text-3xl font-black">${v}</p><p class="text-xs font-bold uppercase tracking-wider text-white/85">${l}</p></div>`).join('');
+
+  const list = userFilter === 'all' ? mine : mine.filter(b => b.status === userFilter);
+  const wrap = $('user-bookings');
+  if (!list.length) {
+    wrap.innerHTML = `<div class="md:col-span-2 glass rounded-3xl p-12 text-center"><div class="w-20 h-20 rounded-full hero-gradient flex items-center justify-center text-3xl mx-auto mb-4 floating"><i class="fas fa-calendar-plus"></i></div><h4 class="font-bold text-xl">No bookings ${userFilter!=='all'?'in this status':'yet'}</h4><p class="text-gray-400 text-sm mt-1">Book your first service and it'll show up here.</p><button onclick="showPage('booking')" class="btn btn-coral grad-coral mt-5 px-6 py-3 rounded-xl font-bold">Book a Service</button></div>`;
+    return;
+  }
+  wrap.innerHTML = list.sort((a,b)=>b.createdAt-a.createdAt).map((b, idx) => {
+    const c = CATEGORIES[b.category];
+    return `<div class="glass rounded-3xl p-5 slide-up relative overflow-hidden" style="animation-delay:${idx*0.06}s">
+      <div class="absolute top-0 left-0 right-0 h-1 ${c.grad}"></div>
+      <div class="flex items-start justify-between gap-3">
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 rounded-xl ${c.grad} flex items-center justify-center text-xl"><i class="fas ${c.icon}"></i></div>
+          <div><p class="font-bold">${c.name}</p><p class="text-xs text-gray-400">${esc(b.id)} · ${esc(b.duration)}</p></div>
+        </div>
+        <span class="status-${b.status} text-[11px] font-black uppercase px-3 py-1 rounded-full">${STATUS_LABEL[b.status]}</span>
+      </div>
+      <div class="grid grid-cols-2 gap-3 mt-4 text-sm">
+        <div class="glass rounded-xl p-3"><p class="text-[10px] text-gray-400 uppercase font-bold">Date</p><p class="font-semibold">${fmtDate(b.date)}</p></div>
+        <div class="glass rounded-xl p-3"><p class="text-[10px] text-gray-400 uppercase font-bold">Time</p><p class="font-semibold">${fmtTime(b.time)}</p></div>
+        <div class="glass rounded-xl p-3"><p class="text-[10px] text-gray-400 uppercase font-bold">Phone</p><p class="font-semibold">${esc(b.phone)}</p></div>
+        <div class="glass rounded-xl p-3"><p class="text-[10px] text-gray-400 uppercase font-bold">Estimate</p><p class="font-semibold text-gradient">$${b.estimate}</p></div>
+      </div>
+      <p class="text-xs text-gray-400 mt-3 truncate"><i class="fas fa-location-dot mr-1 text-brand-pink"></i>${esc(b.address)}</p>
+      <div class="flex gap-2 mt-4">
+        <button onclick="openDetail('${b.id}')" class="btn glass flex-1 py-2 rounded-xl text-sm font-bold hover:bg-white/10"><i class="fas fa-eye mr-1"></i>Details</button>
+        ${b.status==='pending' ? `<button onclick="cancelBooking('${b.id}')" class="btn flex-1 py-2 rounded-xl text-sm font-bold bg-brand-red/20 text-brand-red hover:bg-brand-red/30"><i class="fas fa-ban mr-1"></i>Cancel</button>` : ''}
+      </div>
+    </div>`;
+  }).join('');
+}
+function cancelBooking(id) {
+  const b = bookings.find(x => x.id === id && x.userEmail === currentUser.email);
+  if (!b || b.status !== 'pending') return;
+  if (!confirm('Cancel this booking request?')) return;
+  b.status = 'cancelled'; saveBookings(); renderDashboard(); toast('Booking cancelled.', 'info');
+}
+
+/* ---------------- Detail Modal ---------------- */
+function openDetail(id) {
+  const b = bookings.find(x => x.id === id); if (!b) return;
+  if (currentUser.role === 'user' && b.userEmail !== currentUser.email) return; // privacy guard
+  const c = CATEGORIES[b.category];
+  $('detail-body').innerHTML = `
+    <div class="flex items-center gap-3 mb-5">
+      <div class="w-14 h-14 rounded-2xl ${c.grad} flex items-center justify-center text-2xl"><i class="fas ${c.icon}"></i></div>
+      <div><p class="text-xs text-gray-400 font-bold">${esc(b.id)}</p><h3 class="text-2xl font-black">${c.name}</h3></div>
+      <span class="status-${b.status} ml-auto text-[11px] font-black uppercase px-3 py-1 rounded-full">${STATUS_LABEL[b.status]}</span>
+    </div>
+    <div class="grid sm:grid-cols-2 gap-3 text-sm">
+      ${currentUser.role==='admin' ? `<div class="glass rounded-xl p-3 sm:col-span-2"><p class="text-[10px] text-gray-400 uppercase font-bold">Customer</p><p class="font-semibold">${esc(b.userName)} · <span class="text-gray-300">${esc(b.userEmail)}</span></p></div>` : ''}
+      <div class="glass rounded-xl p-3"><p class="text-[10px] text-gray-400 uppercase font-bold">Expected work time</p><p class="font-semibold">${esc(b.duration)}</p></div>
+      <div class="glass rounded-xl p-3"><p class="text-[10px] text-gray-400 uppercase font-bold">Estimate</p><p class="font-semibold text-gradient text-lg">$${b.estimate}</p></div>
+      <div class="glass rounded-xl p-3"><p class="text-[10px] text-gray-400 uppercase font-bold">Date</p><p class="font-semibold">${fmtDate(b.date)}</p></div>
+      <div class="glass rounded-xl p-3"><p class="text-[10px] text-gray-400 uppercase font-bold">Time</p><p class="font-semibold">${fmtTime(b.time)}</p></div>
+      <div class="glass rounded-xl p-3"><p class="text-[10px] text-gray-400 uppercase font-bold">Phone</p><p class="font-semibold"><a href="tel:${esc(b.phone)}" class="hover:text-brand-teal">${esc(b.phone)}</a></p></div>
+      <div class="glass rounded-xl p-3"><p class="text-[10px] text-gray-400 uppercase font-bold">Requested on</p><p class="font-semibold">${new Date(b.createdAt).toLocaleString()}</p></div>
+      <div class="glass rounded-xl p-3 sm:col-span-2"><p class="text-[10px] text-gray-400 uppercase font-bold">Address</p><p class="font-semibold">${esc(b.address)}</p></div>
+      <div class="glass rounded-xl p-3 sm:col-span-2"><p class="text-[10px] text-gray-400 uppercase font-bold">Problem description</p><p class="text-gray-300">${b.notes ? esc(b.notes) : '<span class="text-gray-500">No description provided</span>'}</p></div>
+    </div>`;
+  $('detail-modal').classList.remove('hidden'); $('detail-modal').classList.add('flex');
+}
+function closeDetail() { $('detail-modal').classList.add('hidden'); $('detail-modal').classList.remove('flex'); }
+
+/* ---------------- Admin (all users' requests) ---------------- */
+function setAdminCat(el) { document.querySelectorAll('#admin-cat-filter .chip').forEach(c=>c.classList.remove('active')); el.classList.add('active'); adminCat = el.dataset.f; renderAdmin(); }
+function renderAdmin() {
+  if (!currentUser || currentUser.role !== 'admin') return;
+  const count = s => bookings.filter(b => b.status === s).length;
+  const catCount = c => bookings.filter(b => b.category === c).length;
+  $('admin-stats').innerHTML = [
+    ['Total', bookings.length, 'grad-sky', 'fa-list'], ['Pending', count('pending'), 'grad-yellow', 'fa-hourglass-half'],
+    ['Confirmed', count('confirmed'), 'grad-teal', 'fa-circle-check'], ['Completed', count('completed'), 'grad-purple', 'fa-flag-checkered'],
+    ['Electrician', catCount('electrician'), 'grad-coral', 'fa-plug'], ['AC Mechanic', catCount('ac'), 'grad-teal', 'fa-snowflake'], ['Plumber', catCount('plumber'), 'grad-purple', 'fa-faucet-drip']
+  ].map(([l,v,g,i]) => `<div class="${g} rounded-2xl p-4 relative overflow-hidden"><i class="fas ${i} absolute -right-2 -bottom-2 text-5xl text-white/15"></i><p class="text-2xl font-black">${v}</p><p class="text-[10px] font-bold uppercase tracking-wider text-white/85">${l}</p></div>`).join('');
+
+  const q = $('admin-search').value.trim().toLowerCase(), st = $('admin-status').value;
+  const list = bookings.filter(b => (adminCat==='all' || b.category===adminCat) && (st==='all' || b.status===st) &&
+    (!q || b.userEmail.toLowerCase().includes(q) || (b.userName||'').toLowerCase().includes(q) || b.phone.toLowerCase().includes(q) || b.id.toLowerCase().includes(q)))
+    .sort((a,b)=>b.createdAt-a.createdAt);
+  $('admin-empty').classList.toggle('hidden', list.length>0);
+  $('admin-rows').innerHTML = list.map(b => {
+    const c = CATEGORIES[b.category];
+    const actions = [];
+    if (b.status==='pending') actions.push(`<button onclick="setStatus('${b.id}','confirmed')" title="Confirm" class="w-8 h-8 rounded-lg grad-teal flex items-center justify-center hover:scale-110 transition"><i class="fas fa-check text-xs"></i></button>`);
+    if (b.status==='confirmed') actions.push(`<button onclick="setStatus('${b.id}','completed')" title="Mark completed" class="w-8 h-8 rounded-lg grad-purple flex items-center justify-center hover:scale-110 transition"><i class="fas fa-flag-checkered text-xs"></i></button>`);
+    if (b.status==='pending'||b.status==='confirmed') actions.push(`<button onclick="setStatus('${b.id}','cancelled')" title="Cancel" class="w-8 h-8 rounded-lg bg-brand-red/25 text-brand-red flex items-center justify-center hover:scale-110 transition"><i class="fas fa-ban text-xs"></i></button>`);
+    actions.push(`<button onclick="openDetail('${b.id}')" title="View" class="w-8 h-8 rounded-lg glass flex items-center justify-center hover:bg-white/10"><i class="fas fa-eye text-xs"></i></button>`);
+    return `<tr class="table-row border-b border-white/5 transition">
+      <td class="py-3 pr-4 font-bold text-gray-300">${esc(b.id)}</td>
+      <td class="py-3 pr-4"><div class="flex items-center gap-2"><div class="w-8 h-8 rounded-full ${avatarGrad(b.userEmail)} flex items-center justify-center text-[10px] font-bold shrink-0">${initials(b.userName)}</div><div><p class="font-semibold leading-tight">${esc(b.userName)}</p><p class="text-[11px] text-gray-400">${esc(b.userEmail)}</p></div></div></td>
+      <td class="py-3 pr-4"><span class="inline-flex items-center gap-1.5 text-xs font-bold px-2.5 py-1 rounded-full ${c.grad}"><i class="fas ${c.icon}"></i>${c.name}</span></td>
+      <td class="py-3 pr-4 text-gray-300">${esc(b.duration)}</td>
+      <td class="py-3 pr-4"><p class="font-semibold">${fmtDate(b.date)}</p><p class="text-[11px] text-gray-400">${fmtTime(b.time)}</p></td>
+      <td class="py-3 pr-4"><a href="tel:${esc(b.phone)}" class="text-brand-teal hover:underline">${esc(b.phone)}</a></td>
+      <td class="py-3 pr-4"><span class="status-${b.status} text-[10px] font-black uppercase px-2.5 py-1 rounded-full">${STATUS_LABEL[b.status]}</span></td>
+      <td class="py-3"><div class="flex gap-1.5 justify-end">${actions.join('')}</div></td>
+    </tr>`;
+  }).join('');
+}
+function setStatus(id, status) {
+  if (!currentUser || currentUser.role !== 'admin') return;
+  const b = bookings.find(x => x.id === id); if (!b) return;
+  if (status==='cancelled' && !confirm('Cancel this request?')) return;
+  b.status = status; saveBookings(); renderAdmin(); toast(`${id} marked as ${STATUS_LABEL[status]}`, status==='cancelled'?'info':'success');
+}
+function exportCSV() {
+  const head = ['ID','Name','Email','Category','Work Time','Date','Time','Phone','Address','Notes','Status','Estimate','Created'];
+  const rows = bookings.map(b => [b.id,b.userName,b.userEmail,CATEGORIES[b.category].name,b.duration,b.date,b.time,b.phone,b.address,b.notes,b.status,b.estimate,new Date(b.createdAt).toISOString()].map(v=>`"${String(v??'').replace(/"/g,'""')}"`).join(','));
+  const blob = new Blob([[head.join(','),...rows].join('\n')], { type: 'text/csv' });
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'meptech-requests.csv'; a.click(); URL.revokeObjectURL(a.href);
+  toast('CSV exported', 'info');
+}
+
+/* ---------------- Init ---------------- */
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeLogin(); closeDetail(); closeSuccess(); } });
+$('login-modal').addEventListener('click', e => { if (e.target === $('login-modal')) closeLogin(); });
+$('year').textContent = new Date().getFullYear();
+populateTimes(); setMinDate(); renderAuth(); updateSummary();
+window.addEventListener('load', initGoogle);
+</script>
+</body>
+</html>

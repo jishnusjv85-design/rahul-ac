@@ -1,0 +1,2167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b0912">
+  <title>Fixly — Book Trusted Home Service Experts</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+    :root {
+      --bg: #0b0912;
+      --surface: #15121f;
+      --surface-2: #1c1828;
+      --line: rgba(255,255,255,.1);
+      --text: #fff;
+      --muted: #a9a3b6;
+      --pink: #ff356a;
+      --orange: #ff8a00;
+      --cyan: #00dffb;
+      --violet: #8b5cf6;
+      --green: #35e498;
+      --radius: 26px;
+      --shadow: 0 28px 80px rgba(0,0,0,.38);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 8% 5%, rgba(255,53,106,.16), transparent 26rem),
+        radial-gradient(circle at 93% 20%, rgba(0,223,251,.13), transparent 30rem),
+        var(--bg);
+      color: var(--text);
+      font-family: "DM Sans", sans-serif;
+      overflow-x: hidden;
+    }
+
+    body.modal-open { overflow: hidden; }
+
+    button, input, textarea { font: inherit; }
+
+    button, a { -webkit-tap-highlight-color: transparent; }
+
+    button { color: inherit; }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: min(1180px, calc(100% - 40px));
+      margin-inline: auto;
+    }
+
+    .display {
+      font-family: "Space Grotesk", sans-serif;
+      letter-spacing: -.045em;
+    }
+
+    .gradient-text {
+      color: transparent;
+      background: linear-gradient(100deg, var(--pink), var(--orange) 43%, var(--cyan));
+      background-clip: text;
+      -webkit-background-clip: text;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      border-bottom: 1px solid var(--line);
+      background: rgba(11,9,18,.78);
+      backdrop-filter: blur(22px);
+    }
+
+    .nav-inner {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      font: 700 27px/1 "Space Grotesk", sans-serif;
+      letter-spacing: -.05em;
+    }
+
+    .brand-mark {
+      width: 43px;
+      height: 43px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--pink), var(--orange) 48%, var(--cyan));
+      box-shadow: 0 10px 30px rgba(255,53,106,.3);
+      transform: rotate(-4deg);
+    }
+
+    .brand-mark svg { width: 25px; }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      color: #c6c1cf;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .nav-links a:hover { color: #fff; }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .button {
+      border: 0;
+      cursor: pointer;
+      min-height: 47px;
+      padding: 0 20px;
+      border-radius: 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      font-weight: 700;
+      transition: transform .2s, background .2s, border-color .2s, box-shadow .2s;
+    }
+
+    .button:hover { transform: translateY(-2px); }
+    .button:active { transform: translateY(0) scale(.98); }
+
+    .button-primary {
+      color: #0b0912;
+      background: #fff;
+      box-shadow: 0 10px 25px rgba(255,255,255,.12);
+    }
+
+    .button-gradient {
+      color: #fff;
+      background: linear-gradient(110deg, var(--pink), #ff6251 48%, var(--orange));
+      box-shadow: 0 14px 35px rgba(255,53,106,.28);
+    }
+
+    .button-ghost {
+      background: rgba(255,255,255,.055);
+      border: 1px solid var(--line);
+    }
+
+    .button-ghost:hover { background: rgba(255,255,255,.1); }
+
+    .button-small {
+      min-height: 40px;
+      padding-inline: 15px;
+      border-radius: 13px;
+      font-size: 13px;
+    }
+
+    .profile-chip {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 5px 11px 5px 5px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,.05);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .avatar {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: #101018;
+      background: linear-gradient(135deg, var(--cyan), var(--green));
+      font-weight: 800;
+    }
+
+    .hero {
+      padding: 80px 0 60px;
+      position: relative;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.08fr .92fr;
+      gap: 70px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      width: fit-content;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 8px 13px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,.045);
+      color: #dfdbe5;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .live-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 0 6px rgba(53,228,152,.12);
+      animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+      50% { box-shadow: 0 0 0 10px rgba(53,228,152,0); }
+    }
+
+    h1 {
+      max-width: 720px;
+      margin: 24px 0 22px;
+      font-size: clamp(48px, 6.8vw, 86px);
+      line-height: .96;
+    }
+
+    .hero-copy {
+      max-width: 620px;
+      color: var(--muted);
+      font-size: clamp(17px, 2vw, 20px);
+      line-height: 1.65;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 31px;
+    }
+
+    .hero-actions .button {
+      min-height: 56px;
+      padding-inline: 25px;
+      border-radius: 18px;
+    }
+
+    .trust-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 14px;
+      margin-top: 31px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .avatar-stack { display: flex; }
+
+    .avatar-stack span {
+      width: 34px;
+      height: 34px;
+      margin-left: -8px;
+      display: grid;
+      place-items: center;
+      border: 3px solid var(--bg);
+      border-radius: 50%;
+      color: #14111d;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .avatar-stack span:first-child { margin-left: 0; background: #ffd166; }
+    .avatar-stack span:nth-child(2) { background: #7df9ff; }
+    .avatar-stack span:nth-child(3) { background: #ff81a1; }
+
+    .stars { color: #ffd166; letter-spacing: 1px; }
+
+    .hero-visual {
+      position: relative;
+      min-height: 515px;
+      display: grid;
+      place-items: center;
+    }
+
+    .orbit {
+      position: absolute;
+      width: 465px;
+      height: 465px;
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 50%;
+      animation: spin 28s linear infinite;
+    }
+
+    .orbit::before, .orbit::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+    }
+
+    .orbit::before {
+      width: 18px;
+      height: 18px;
+      top: 56px;
+      right: 45px;
+      background: var(--cyan);
+      box-shadow: 0 0 30px var(--cyan);
+    }
+
+    .orbit::after {
+      width: 13px;
+      height: 13px;
+      bottom: 75px;
+      left: 31px;
+      background: var(--pink);
+      box-shadow: 0 0 25px var(--pink);
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .live-card {
+      position: relative;
+      z-index: 2;
+      width: min(400px, 100%);
+      padding: 10px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 35px;
+      background: linear-gradient(145deg, rgba(255,53,106,.24), rgba(139,92,246,.12), rgba(0,223,251,.18));
+      box-shadow: var(--shadow);
+      transform: rotate(2deg);
+    }
+
+    .live-card-inner {
+      padding: 28px;
+      border-radius: 27px;
+      background: rgba(14,12,22,.94);
+    }
+
+    .live-card-top, .mini-row, .request-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .live-label {
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .1em;
+    }
+
+    .bolt {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      border-radius: 17px;
+      background: linear-gradient(135deg, #ffd000, var(--orange));
+      font-size: 26px;
+      box-shadow: 0 12px 26px rgba(255,138,0,.25);
+    }
+
+    .live-number {
+      margin-top: 4px;
+      font: 700 27px/1.2 "Space Grotesk", sans-serif;
+    }
+
+    .activity-track {
+      height: 9px;
+      margin: 24px 0;
+      overflow: hidden;
+      border-radius: 999px;
+      background: #292535;
+    }
+
+    .activity-track span {
+      display: block;
+      width: 82%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--pink), var(--orange), var(--cyan));
+      background-size: 200%;
+      animation: shimmer 3s linear infinite;
+    }
+
+    @keyframes shimmer { to { background-position: 200% 0; } }
+
+    .mini-request {
+      padding: 14px;
+      margin-top: 11px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255,255,255,.045);
+    }
+
+    .mini-service { display: flex; align-items: center; gap: 11px; }
+
+    .mini-icon {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: var(--surface-2);
+      font-size: 19px;
+    }
+
+    .mini-request strong { display: block; font-size: 14px; }
+    .mini-request small { color: var(--muted); }
+
+    .status {
+      padding: 6px 9px;
+      border-radius: 999px;
+      color: var(--green);
+      background: rgba(53,228,152,.1);
+      font-size: 10px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .float-tag {
+      position: absolute;
+      z-index: 3;
+      padding: 12px 16px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(28,24,40,.9);
+      box-shadow: 0 15px 35px rgba(0,0,0,.25);
+      backdrop-filter: blur(12px);
+      font-size: 13px;
+      font-weight: 700;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .tag-one { top: 43px; left: -5px; }
+    .tag-two { right: -5px; bottom: 46px; animation-delay: -2s; }
+
+    @keyframes float {
+      50% { transform: translateY(-11px) rotate(-2deg); }
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border: 1px solid var(--line);
+      border-radius: 25px;
+      background: rgba(255,255,255,.035);
+    }
+
+    .stat {
+      padding: 24px;
+      text-align: center;
+      border-right: 1px solid var(--line);
+    }
+
+    .stat:last-child { border-right: 0; }
+
+    .stat strong {
+      display: block;
+      font: 700 27px/1.1 "Space Grotesk", sans-serif;
+    }
+
+    .stat span { color: var(--muted); font-size: 13px; }
+
+    .section { padding: 95px 0; }
+
+    .section-head {
+      max-width: 680px;
+      margin-bottom: 35px;
+    }
+
+    .kicker {
+      display: block;
+      margin-bottom: 12px;
+      color: var(--pink);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(37px, 5vw, 58px);
+      line-height: 1.04;
+    }
+
+    .section-head p {
+      margin: 16px 0 0;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.65;
+    }
+
+    .service-showcase {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .service-tile {
+      position: relative;
+      min-height: 300px;
+      padding: 27px;
+      overflow: hidden;
+      cursor: pointer;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      transition: transform .25s, border-color .25s, box-shadow .25s;
+    }
+
+    .service-tile:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 50px rgba(0,0,0,.27);
+    }
+
+    .service-tile:nth-child(1):hover { border-color: var(--orange); }
+    .service-tile:nth-child(2):hover { border-color: var(--cyan); }
+    .service-tile:nth-child(3):hover { border-color: var(--pink); }
+
+    .service-tile::after {
+      content: "";
+      position: absolute;
+      width: 170px;
+      height: 170px;
+      right: -75px;
+      bottom: -85px;
+      border-radius: 50%;
+      filter: blur(3px);
+      opacity: .16;
+    }
+
+    .service-tile:nth-child(1)::after { background: var(--orange); }
+    .service-tile:nth-child(2)::after { background: var(--cyan); }
+    .service-tile:nth-child(3)::after { background: var(--pink); }
+
+    .service-symbol {
+      width: 61px;
+      height: 61px;
+      display: grid;
+      place-items: center;
+      border-radius: 19px;
+      font-size: 29px;
+    }
+
+    .electric { background: linear-gradient(135deg, #ffd400, var(--orange)); }
+    .ac { background: linear-gradient(135deg, var(--cyan), #3478ff); }
+    .plumber { background: linear-gradient(135deg, #9d5cff, var(--pink)); }
+
+    .service-tile h3 {
+      margin: 25px 0 8px;
+      font: 700 28px/1.1 "Space Grotesk", sans-serif;
+      letter-spacing: -.04em;
+    }
+
+    .service-tile p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .tile-foot {
+      position: absolute;
+      left: 27px;
+      right: 27px;
+      bottom: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .tile-foot span:first-child { color: var(--green); }
+    .arrow { font-size: 21px; }
+
+    .booking-section {
+      padding: 95px 0;
+      background:
+        radial-gradient(circle at 10% 40%, rgba(255,53,106,.14), transparent 28rem),
+        radial-gradient(circle at 90% 50%, rgba(0,223,251,.12), transparent 28rem);
+    }
+
+    .booking-shell {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 330px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 34px;
+      background: rgba(21,18,31,.92);
+      box-shadow: var(--shadow);
+    }
+
+    .booking-main { padding: 36px; }
+
+    .progress {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-bottom: 38px;
+    }
+
+    .progress-item {
+      position: relative;
+      color: #6f697b;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .progress-item::before {
+      content: "";
+      display: block;
+      height: 5px;
+      margin-bottom: 10px;
+      border-radius: 10px;
+      background: #2b2637;
+    }
+
+    .progress-item.active { color: #fff; }
+
+    .progress-item.active::before {
+      background: linear-gradient(90deg, var(--pink), var(--orange));
+    }
+
+    .form-step { display: none; animation: slideIn .25s ease; }
+    .form-step.active { display: block; }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(8px); }
+    }
+
+    .form-step h3 {
+      margin: 0 0 7px;
+      font: 700 31px/1.15 "Space Grotesk", sans-serif;
+      letter-spacing: -.04em;
+    }
+
+    .step-subtitle {
+      margin: 0 0 27px;
+      color: var(--muted);
+    }
+
+    .choice-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .choice-card {
+      min-height: 145px;
+      padding: 19px;
+      cursor: pointer;
+      text-align: left;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: rgba(255,255,255,.035);
+      transition: transform .2s, border-color .2s, background .2s;
+    }
+
+    .choice-card:hover {
+      transform: translateY(-3px);
+      background: rgba(255,255,255,.065);
+    }
+
+    .choice-card.selected {
+      border-color: var(--pink);
+      background: rgba(255,53,106,.09);
+      box-shadow: inset 0 0 0 1px var(--pink);
+    }
+
+    .choice-card .service-symbol {
+      width: 47px;
+      height: 47px;
+      border-radius: 14px;
+      font-size: 22px;
+    }
+
+    .choice-card strong { display: block; margin-top: 14px; }
+    .choice-card small { color: var(--muted); }
+
+    .duration-grid, .time-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .option-button {
+      min-height: 63px;
+      padding: 10px;
+      cursor: pointer;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(255,255,255,.035);
+      font-size: 14px;
+      font-weight: 700;
+      transition: .2s;
+    }
+
+    .option-button:hover { background: rgba(255,255,255,.08); }
+
+    .option-button.selected {
+      border-color: var(--cyan);
+      color: var(--cyan);
+      background: rgba(0,223,251,.09);
+      box-shadow: inset 0 0 0 1px var(--cyan);
+    }
+
+    .option-button:disabled {
+      cursor: not-allowed;
+      opacity: .28;
+    }
+
+    .field { margin-top: 20px; }
+
+    .field label {
+      display: block;
+      margin-bottom: 8px;
+      color: #ddd8e5;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .input {
+      width: 100%;
+      min-height: 53px;
+      padding: 14px 16px;
+      outline: none;
+      color: #fff;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: #100e18;
+      transition: border .2s, box-shadow .2s;
+    }
+
+    textarea.input {
+      min-height: 106px;
+      resize: vertical;
+    }
+
+    .input:focus {
+      border-color: var(--cyan);
+      box-shadow: 0 0 0 4px rgba(0,223,251,.09);
+    }
+
+    .input::placeholder { color: #696375; }
+
+    input[type="date"] { color-scheme: dark; }
+
+    .date-time-grid {
+      display: grid;
+      grid-template-columns: .82fr 1.18fr;
+      gap: 20px;
+    }
+
+    .time-grid { grid-template-columns: repeat(3, 1fr); }
+
+    .two-fields {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .step-actions {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .step-actions .button { min-width: 125px; }
+
+    .booking-summary {
+      padding: 35px 28px;
+      border-left: 1px solid var(--line);
+      background:
+        linear-gradient(155deg, rgba(255,53,106,.12), transparent 42%),
+        rgba(8,7,13,.46);
+    }
+
+    .summary-title {
+      margin: 0 0 24px;
+      font: 700 23px/1.2 "Space Grotesk", sans-serif;
+    }
+
+    .summary-list { display: grid; gap: 18px; }
+
+    .summary-row {
+      display: grid;
+      grid-template-columns: 39px 1fr;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .summary-icon {
+      width: 39px;
+      height: 39px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(255,255,255,.05);
+    }
+
+    .summary-row small {
+      display: block;
+      color: var(--muted);
+    }
+
+    .summary-row strong {
+      display: block;
+      margin-top: 2px;
+      font-size: 14px;
+    }
+
+    .summary-notice {
+      margin-top: 28px;
+      padding: 16px;
+      border: 1px solid rgba(53,228,152,.18);
+      border-radius: 17px;
+      background: rgba(53,228,152,.07);
+      color: #c9f9e2;
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .secure-note {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 17px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 19px;
+    }
+
+    .how-card {
+      padding: 26px;
+      border: 1px solid var(--line);
+      border-radius: 23px;
+      background: rgba(255,255,255,.035);
+    }
+
+    .how-number {
+      width: 43px;
+      height: 43px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--pink), var(--orange));
+      font-weight: 800;
+    }
+
+    .how-card:nth-child(2) .how-number { background: linear-gradient(135deg, var(--cyan), var(--violet)); }
+    .how-card:nth-child(3) .how-number { background: linear-gradient(135deg, var(--violet), var(--pink)); }
+
+    .how-card h3 {
+      margin: 22px 0 8px;
+      font: 700 21px/1.2 "Space Grotesk", sans-serif;
+    }
+
+    .how-card p { margin: 0; color: var(--muted); line-height: 1.55; }
+
+    .cta-panel {
+      position: relative;
+      overflow: hidden;
+      padding: 58px;
+      border-radius: 33px;
+      background: linear-gradient(115deg, #ff2862, #ff6b22 47%, #8150e8);
+      box-shadow: 0 30px 70px rgba(255,53,106,.22);
+    }
+
+    .cta-panel::after {
+      content: "";
+      position: absolute;
+      width: 360px;
+      height: 360px;
+      top: -210px;
+      right: -70px;
+      border: 65px solid rgba(255,255,255,.11);
+      border-radius: 50%;
+    }
+
+    .cta-panel h2 {
+      max-width: 640px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-panel p {
+      max-width: 520px;
+      position: relative;
+      z-index: 1;
+      margin: 14px 0 25px;
+      color: rgba(255,255,255,.82);
+      font-size: 17px;
+    }
+
+    .cta-panel .button { position: relative; z-index: 1; }
+
+    footer {
+      padding: 35px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .footer-links { display: flex; flex-wrap: wrap; gap: 21px; }
+    .footer-links button {
+      padding: 0;
+      cursor: pointer;
+      color: inherit;
+      border: 0;
+      background: none;
+    }
+    .footer-links button:hover, .footer-links a:hover { color: #fff; }
+
+    .modal-wrap {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: none;
+      padding: 20px;
+      place-items: center;
+      background: rgba(5,4,9,.76);
+      backdrop-filter: blur(13px);
+    }
+
+    .modal-wrap.open { display: grid; }
+
+    .modal {
+      width: min(470px, 100%);
+      max-height: calc(100vh - 40px);
+      overflow: auto;
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 29px;
+      background: #15121f;
+      box-shadow: var(--shadow);
+      animation: modalPop .24s ease;
+    }
+
+    .modal.wide { width: min(1050px, 100%); }
+
+    @keyframes modalPop {
+      from { opacity: 0; transform: scale(.96) translateY(12px); }
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 24px 25px 0;
+    }
+
+    .modal-header h3 {
+      margin: 0;
+      font: 700 26px/1.15 "Space Grotesk", sans-serif;
+      letter-spacing: -.04em;
+    }
+
+    .modal-header p { margin: 7px 0 0; color: var(--muted); font-size: 13px; }
+
+    .close-button {
+      flex: 0 0 auto;
+      width: 38px;
+      height: 38px;
+      cursor: pointer;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(255,255,255,.05);
+      font-size: 20px;
+    }
+
+    .modal-body { padding: 25px; }
+
+    .google-heading {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      padding: 14px;
+      margin-bottom: 20px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(255,255,255,.035);
+    }
+
+    .google-icon {
+      width: 39px;
+      height: 39px;
+      padding: 8px;
+      border-radius: 11px;
+      background: #fff;
+    }
+
+    .google-heading strong { display: block; }
+    .google-heading small { color: var(--muted); }
+
+    .form-error {
+      display: none;
+      margin-top: 14px;
+      padding: 11px 13px;
+      border-radius: 12px;
+      color: #ffc5d2;
+      background: rgba(255,53,106,.1);
+      font-size: 13px;
+    }
+
+    .form-error.show { display: block; }
+
+    .modal-body .button-gradient { width: 100%; margin-top: 20px; }
+
+    .legal {
+      margin: 14px 0 0;
+      color: var(--muted);
+      text-align: center;
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    .success-hero {
+      padding: 32px 25px 12px;
+      text-align: center;
+    }
+
+    .success-check {
+      width: 78px;
+      height: 78px;
+      margin: 0 auto 21px;
+      display: grid;
+      place-items: center;
+      border-radius: 25px;
+      background: linear-gradient(135deg, var(--green), var(--cyan));
+      color: #08130e;
+      font-size: 37px;
+      box-shadow: 0 18px 40px rgba(53,228,152,.2);
+    }
+
+    .success-hero h3 {
+      margin: 0;
+      font: 700 30px/1.15 "Space Grotesk", sans-serif;
+    }
+
+    .success-hero p { margin: 9px 0 0; color: var(--muted); }
+
+    .success-details {
+      margin: 18px 25px;
+      padding: 17px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255,255,255,.04);
+    }
+
+    .success-details div {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 7px 0;
+      font-size: 13px;
+    }
+
+    .success-details span { color: var(--muted); }
+
+    .success-actions {
+      display: flex;
+      gap: 10px;
+      padding: 4px 25px 25px;
+    }
+
+    .success-actions .button { flex: 1; }
+
+    .dashboard-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .read-only {
+      padding: 7px 11px;
+      border-radius: 999px;
+      color: var(--cyan);
+      background: rgba(0,223,251,.09);
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .search {
+      max-width: 260px;
+      min-height: 43px;
+    }
+
+    .request-list { display: grid; gap: 12px; }
+
+    .request-card {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 19px;
+      background: rgba(255,255,255,.035);
+    }
+
+    .request-id {
+      color: var(--cyan);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .08em;
+    }
+
+    .request-card h4 {
+      margin: 5px 0 0;
+      font: 700 18px/1.25 "Space Grotesk", sans-serif;
+    }
+
+    .request-meta {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 13px;
+      margin-top: 16px;
+    }
+
+    .request-meta div {
+      padding: 10px;
+      border-radius: 12px;
+      background: rgba(255,255,255,.035);
+    }
+
+    .request-meta small { display: block; color: var(--muted); }
+    .request-meta strong { display: block; margin-top: 3px; font-size: 12px; overflow-wrap: anywhere; }
+
+    .empty-state {
+      padding: 50px 20px;
+      text-align: center;
+      border: 1px dashed var(--line);
+      border-radius: 20px;
+      color: var(--muted);
+    }
+
+    .admin-table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+    }
+
+    .admin-table {
+      width: 100%;
+      min-width: 850px;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+
+    .admin-table th {
+      padding: 13px 15px;
+      color: var(--muted);
+      text-align: left;
+      background: rgba(255,255,255,.04);
+    }
+
+    .admin-table td {
+      padding: 15px;
+      border-top: 1px solid var(--line);
+      vertical-align: top;
+    }
+
+    .admin-table strong { display: block; font-size: 13px; }
+    .admin-table small { color: var(--muted); }
+
+    .toast {
+      position: fixed;
+      z-index: 200;
+      right: 22px;
+      bottom: 22px;
+      max-width: min(360px, calc(100% - 44px));
+      padding: 14px 17px;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(15px);
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: #211c2d;
+      box-shadow: var(--shadow);
+      transition: .25s;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .toast.show { opacity: 1; transform: none; }
+
+    .mobile-book {
+      display: none;
+      position: fixed;
+      z-index: 35;
+      left: 18px;
+      right: 18px;
+      bottom: 15px;
+      box-shadow: 0 15px 45px rgba(255,53,106,.4);
+    }
+
+    @media (max-width: 980px) {
+      .nav-links { display: none; }
+      .hero-grid { grid-template-columns: 1fr; gap: 35px; }
+      .hero-visual { min-height: 460px; }
+      .service-showcase { grid-template-columns: 1fr 1fr; }
+      .service-tile:last-child { grid-column: span 2; }
+      .booking-shell { grid-template-columns: 1fr; }
+      .booking-summary {
+        border-top: 1px solid var(--line);
+        border-left: 0;
+      }
+      .summary-list { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 700px) {
+      .container { width: min(100% - 28px, 1180px); }
+      .nav-inner { min-height: 69px; }
+      .brand { font-size: 24px; }
+      .brand-mark { width: 39px; height: 39px; }
+      .nav-actions .button-ghost, .profile-chip span { display: none; }
+      .hero { padding-top: 52px; }
+      .hero-visual { min-height: 410px; }
+      .orbit { width: 350px; height: 350px; }
+      .float-tag { font-size: 11px; }
+      .tag-one { left: 0; }
+      .tag-two { right: 0; }
+      .stats { grid-template-columns: 1fr 1fr; }
+      .stat:nth-child(2) { border-right: 0; }
+      .stat:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+      .service-showcase { grid-template-columns: 1fr; }
+      .service-tile:last-child { grid-column: auto; }
+      .section, .booking-section { padding: 70px 0; }
+      .booking-main { padding: 25px 18px; }
+      .progress-item { font-size: 9px; }
+      .choice-grid { grid-template-columns: 1fr; }
+      .choice-card {
+        min-height: auto;
+        display: grid;
+        grid-template-columns: 48px 1fr;
+        gap: 13px;
+        align-items: center;
+      }
+      .choice-card strong { margin-top: 0; }
+      .duration-grid { grid-template-columns: 1fr 1fr; }
+      .date-time-grid, .two-fields { grid-template-columns: 1fr; }
+      .summary-list { grid-template-columns: 1fr; }
+      .steps-grid { grid-template-columns: 1fr; }
+      .cta-panel { padding: 38px 25px; }
+      .footer-inner { align-items: flex-start; flex-direction: column; }
+      .request-meta { grid-template-columns: 1fr 1fr; }
+      .dashboard-toolbar { align-items: stretch; flex-direction: column; }
+      .search { max-width: none; }
+      .mobile-book { display: inline-flex; }
+      footer { padding-bottom: 90px; }
+    }
+
+    @media (max-width: 450px) {
+      h1 { font-size: 46px; }
+      .hero-actions { display: grid; }
+      .hero-actions .button { width: 100%; }
+      .hero-visual { min-height: 380px; }
+      .live-card-inner { padding: 20px; }
+      .float-tag { display: none; }
+      .time-grid { grid-template-columns: 1fr 1fr; }
+      .success-actions { flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="#" class="brand" aria-label="Fixly home">
+        <span class="brand-mark">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round">
+            <path d="M14.5 6.5a4.2 4.2 0 0 0-5.3 5.3L3.8 17.2a2.1 2.1 0 0 0 3 3l5.4-5.4a4.2 4.2 0 0 0 5.3-5.3l-2.7 2.7-2.9-.1-.1-2.9 2.7-2.7Z"/>
+          </svg>
+        </span>
+        Fixly
+      </a>
+
+      <div class="nav-links">
+        <a href="#services">Services</a>
+        <a href="#booking">Book a pro</a>
+        <a href="#how">How it works</a>
+      </div>
+
+      <div class="nav-actions" id="navActions"></div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow"><span class="live-dot"></span> Same-day experts available</div>
+          <h1 class="display">Home repairs, <span class="gradient-text">handled fast.</span></h1>
+          <p class="hero-copy">Book a verified electrician, AC mechanic, or plumber at a time that works for you. Clear requests, quick confirmation, zero stress.</p>
+
+          <div class="hero-actions">
+            <button class="button button-gradient" type="button" onclick="scrollToBooking()">Book an expert <span>→</span></button>
+            <a class="button button-ghost" href="#services">Explore services</a>
+          </div>
+
+          <div class="trust-row">
+            <div class="avatar-stack" aria-hidden="true">
+              <span>MK</span><span>AJ</span><span>SL</span>
+            </div>
+            <span><strong style="color:#fff">48,000+</strong> happy homeowners</span>
+            <span class="stars">★★★★★</span>
+            <span>4.9 average</span>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-label="Live booking activity">
+          <div class="orbit"></div>
+          <div class="float-tag tag-one">⚡ 12 electricians nearby</div>
+          <div class="float-tag tag-two">✓ Average reply: 8 min</div>
+
+          <div class="live-card">
+            <div class="live-card-inner">
+              <div class="live-card-top">
+                <div>
+                  <div class="live-label">● LIVE RIGHT NOW</div>
+                  <div class="live-number">1,842 requests today</div>
+                </div>
+                <div class="bolt">⚡</div>
+              </div>
+
+              <div class="activity-track"><span></span></div>
+
+              <div class="mini-request">
+                <div class="mini-row">
+                  <div class="mini-service">
+                    <span class="mini-icon">❄️</span>
+                    <div><strong>AC Mechanic</strong><small>Today · 2:30 PM</small></div>
+                  </div>
+                  <span class="status">MATCHED</span>
+                </div>
+              </div>
+
+              <div class="mini-request">
+                <div class="mini-row">
+                  <div class="mini-service">
+                    <span class="mini-icon">🔧</span>
+                    <div><strong>Plumber</strong><small>Tomorrow · 10:00 AM</small></div>
+                  </div>
+                  <span class="status">CONFIRMED</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="stats">
+          <div class="stat"><strong>48k+</strong><span>customers served</span></div>
+          <div class="stat"><strong>4.9★</strong><span>average rating</span></div>
+          <div class="stat"><strong>8 min</strong><span>average response</span></div>
+          <div class="stat"><strong>7 days</strong><span>weekly availability</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <div class="container">
+        <div class="section-head">
+          <span class="kicker">Choose your expert</span>
+          <h2 class="display">The right pro for every fix.</h2>
+          <p>Qualified local professionals ready for urgent repairs, installations, and regular maintenance.</p>
+        </div>
+
+        <div class="service-showcase">
+          <article class="service-tile" onclick="prefillService('Electrician')">
+            <div class="service-symbol electric">⚡</div>
+            <h3>Electrician</h3>
+            <p>Wiring, switches, outlets, breakers, lighting, fans, and electrical troubleshooting.</p>
+            <div class="tile-foot"><span>✓ Verified professionals</span><span class="arrow">→</span></div>
+          </article>
+
+          <article class="service-tile" onclick="prefillService('AC Mechanic')">
+            <div class="service-symbol ac">❄️</div>
+            <h3>AC Mechanic</h3>
+            <p>AC repair, servicing, installation, cooling issues, gas refills, and maintenance.</p>
+            <div class="tile-foot"><span>✓ Same-day availability</span><span class="arrow">→</span></div>
+          </article>
+
+          <article class="service-tile" onclick="prefillService('Plumber')">
+            <div class="service-symbol plumber">🔧</div>
+            <h3>Plumber</h3>
+            <p>Leaks, blocked drains, faucets, toilets, pipe repair, fixtures, and installations.</p>
+            <div class="tile-foot"><span>✓ Fast local response</span><span class="arrow">→</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="booking-section" id="booking">
+      <div class="container">
+        <div class="section-head">
+          <span class="kicker">Book in minutes</span>
+          <h2 class="display">Tell us what you need.</h2>
+          <p>Select your service, estimated work time, and a convenient appointment slot.</p>
+        </div>
+
+        <div class="booking-shell">
+          <form class="booking-main" id="bookingForm" onsubmit="submitBooking(event)">
+            <div class="progress" id="progress">
+              <div class="progress-item active">Service</div>
+              <div class="progress-item">Work time</div>
+              <div class="progress-item">Schedule</div>
+              <div class="progress-item">Contact</div>
+            </div>
+
+            <div class="form-step active" data-step="1">
+              <h3>Select a category</h3>
+              <p class="step-subtitle">What kind of expert do you need?</p>
+              <div class="choice-grid">
+                <button class="choice-card" type="button" data-service="Electrician" onclick="selectService('Electrician')">
+                  <span class="service-symbol electric">⚡</span>
+                  <span><strong>Electrician</strong><small>Electrical repairs</small></span>
+                </button>
+                <button class="choice-card" type="button" data-service="AC Mechanic" onclick="selectService('AC Mechanic')">
+                  <span class="service-symbol ac">❄️</span>
+                  <span><strong>AC Mechanic</strong><small>Cooling and service</small></span>
+                </button>
+                <button class="choice-card" type="button" data-service="Plumber" onclick="selectService('Plumber')">
+                  <span class="service-symbol plumber">🔧</span>
+                  <span><strong>Plumber</strong><small>Pipes and fixtures</small></span>
+                </button>
+              </div>
+              <div class="step-actions"><span></span><button class="button button-gradient" type="button" onclick="nextStep()">Continue →</button></div>
+            </div>
+
+            <div class="form-step" data-step="2">
+              <h3>Expected work time</h3>
+              <p class="step-subtitle">A rough estimate helps us assign the right professional.</p>
+              <div class="duration-grid">
+                <button class="option-button" type="button" data-duration="Up to 45 min" onclick="selectDuration('Up to 45 min')">Up to 45 min</button>
+                <button class="option-button" type="button" data-duration="1–2 hours" onclick="selectDuration('1–2 hours')">1–2 hours</button>
+                <button class="option-button" type="button" data-duration="2–4 hours" onclick="selectDuration('2–4 hours')">2–4 hours</button>
+                <button class="option-button" type="button" data-duration="Half day" onclick="selectDuration('Half day')">Half day</button>
+              </div>
+              <div class="field">
+                <label for="notes">Describe the issue <span style="color:var(--muted);font-weight:400">(optional)</span></label>
+                <textarea class="input" id="notes" maxlength="500" placeholder="Example: The kitchen outlet stopped working..." oninput="booking.notes=this.value"></textarea>
+              </div>
+              <div class="step-actions">
+                <button class="button button-ghost" type="button" onclick="previousStep()">← Back</button>
+                <button class="button button-gradient" type="button" onclick="nextStep()">Continue →</button>
+              </div>
+            </div>
+
+            <div class="form-step" data-step="3">
+              <h3>Choose a date and time</h3>
+              <p class="step-subtitle">Pick the most convenient available appointment slot.</p>
+              <div class="date-time-grid">
+                <div class="field" style="margin-top:0">
+                  <label for="dateInput">Appointment date</label>
+                  <input class="input" id="dateInput" type="date" required onchange="setDate(this.value)">
+                </div>
+                <div class="field" style="margin-top:0">
+                  <label>Available time</label>
+                  <div class="time-grid" id="timeGrid"></div>
+                </div>
+              </div>
+              <div class="step-actions">
+                <button class="button button-ghost" type="button" onclick="previousStep()">← Back</button>
+                <button class="button button-gradient" type="button" onclick="nextStep()">Continue →</button>
+              </div>
+            </div>
+
+            <div class="form-step" data-step="4">
+              <h3>Your contact details</h3>
+              <p class="step-subtitle">We’ll call or text to confirm your request.</p>
+              <div class="two-fields">
+                <div class="field" style="margin-top:0">
+                  <label for="phone">Phone number *</label>
+                  <input class="input" id="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+1 555 123 4567" required oninput="booking.phone=this.value">
+                </div>
+                <div class="field" style="margin-top:0">
+                  <label for="area">Service area *</label>
+                  <input class="input" id="area" type="text" autocomplete="street-address" maxlength="120" placeholder="Address or neighborhood" required oninput="booking.area=this.value">
+                </div>
+              </div>
+              <div class="summary-notice">A Gmail login is required before your request is submitted. Your appointments remain private and only appear in your account.</div>
+              <div class="step-actions">
+                <button class="button button-ghost" type="button" onclick="previousStep()">← Back</button>
+                <button class="button button-gradient" type="submit">Request appointment</button>
+              </div>
+            </div>
+          </form>
+
+          <aside class="booking-summary">
+            <h3 class="summary-title">Request summary</h3>
+            <div class="summary-list">
+              <div class="summary-row">
+                <span class="summary-icon">🛠️</span>
+                <div><small>Category</small><strong id="summaryService">Not selected</strong></div>
+              </div>
+              <div class="summary-row">
+                <span class="summary-icon">⏱️</span>
+                <div><small>Expected work time</small><strong id="summaryDuration">Not selected</strong></div>
+              </div>
+              <div class="summary-row">
+                <span class="summary-icon">📅</span>
+                <div><small>Date</small><strong id="summaryDate">Not selected</strong></div>
+              </div>
+              <div class="summary-row">
+                <span class="summary-icon">🕒</span>
+                <div><small>Time</small><strong id="summaryTime">Not selected</strong></div>
+              </div>
+            </div>
+
+            <div class="summary-notice">✓ No payment required now<br>✓ Request confirmation by phone<br>✓ Your bookings stay private</div>
+            <div class="secure-note">🔒 Protected account access</div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="how">
+      <div class="container">
+        <div class="section-head">
+          <span class="kicker">Simple from start to finish</span>
+          <h2 class="display">Fixed in three easy steps.</h2>
+        </div>
+        <div class="steps-grid">
+          <article class="how-card">
+            <div class="how-number">1</div>
+            <h3>Choose your service</h3>
+            <p>Select an electrician, AC mechanic, or plumber and describe what needs attention.</p>
+          </article>
+          <article class="how-card">
+            <div class="how-number">2</div>
+            <h3>Pick your time</h3>
+            <p>Tell us the expected work duration and choose a convenient date and available slot.</p>
+          </article>
+          <article class="how-card">
+            <div class="how-number">3</div>
+            <h3>Get confirmation</h3>
+            <p>Sign in using Gmail and receive a call or message confirming your professional.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:20px">
+      <div class="container">
+        <div class="cta-panel">
+          <h2 class="display">Something broken? Let’s get it fixed.</h2>
+          <p>Trusted local professionals are ready when you are.</p>
+          <button class="button button-primary" type="button" onclick="scrollToBooking()">Book your expert →</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <a class="brand" href="#">
+        <span class="brand-mark" style="width:35px;height:35px;border-radius:11px">⚒</span>
+        Fixly
+      </a>
+      <div>© 2026 Fixly. Fast help from trusted professionals.</div>
+      <div class="footer-links">
+        <a href="#services">Services</a>
+        <a href="#how">How it works</a>
+        <button type="button" onclick="openAdminLogin()">Admin portal</button>
+      </div>
+    </div>
+  </footer>
+
+  <button class="button button-gradient mobile-book" type="button" onclick="scrollToBooking()">Book an expert →</button>
+
+  <div class="modal-wrap" id="gmailModal" aria-hidden="true" onclick="backdropClose(event,'gmailModal')">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="gmailTitle">
+      <div class="modal-header">
+        <div>
+          <h3 id="gmailTitle">Sign in to continue</h3>
+          <p>Your requests are private to your Gmail account.</p>
+        </div>
+        <button class="close-button" type="button" aria-label="Close" onclick="closeModal('gmailModal')">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="google-heading">
+          <svg class="google-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="#4285F4" d="M21.6 12.23c0-.71-.06-1.4-.18-2.07H12v3.92h5.38a4.6 4.6 0 0 1-2 3.02v2.55h3.24c1.9-1.75 2.98-4.33 2.98-7.42Z"/>
+            <path fill="#34A853" d="M12 22c2.7 0 4.98-.9 6.63-2.35l-3.24-2.55c-.9.6-2.05.96-3.39.96-2.61 0-4.82-1.76-5.61-4.13H3.04v2.63A10 10 0 0 0 12 22Z"/>
+            <path fill="#FBBC05" d="M6.39 13.93A6 6 0 0 1 6.08 12c0-.67.11-1.32.31-1.93V7.44H3.04A10 10 0 0 0 2 12c0 1.64.39 3.19 1.04 4.56l3.35-2.63Z"/>
+            <path fill="#EA4335" d="M12 5.94c1.47 0 2.79.5 3.83 1.5l2.87-2.87A9.62 9.62 0 0 0 12 2a10 10 0 0 0-8.96 5.44l3.35 2.63C7.18 7.7 9.39 5.94 12 5.94Z"/>
+          </svg>
+          <div><strong>Continue with Gmail</strong><small>Only @gmail.com accounts are accepted</small></div>
+        </div>
+
+        <form onsubmit="signInWithGmail(event)">
+          <div class="field" style="margin-top:0">
+            <label for="gmailName">Full name</label>
+            <input class="input" id="gmailName" type="text" autocomplete="name" required placeholder="Your name">
+          </div>
+          <div class="field">
+            <label for="gmailEmail">Gmail address</label>
+            <input class="input" id="gmailEmail" type="email" autocomplete="email" required placeholder="you@gmail.com">
+          </div>
+          <div class="form-error" id="gmailError">Please enter a valid @gmail.com address.</div>
+          <button class="button button-gradient" type="submit">Continue securely →</button>
+          <p class="legal">By continuing, you agree to Fixly’s terms and privacy policy. This browser demo stores account data locally.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-wrap" id="adminLoginModal" aria-hidden="true" onclick="backdropClose(event,'adminLoginModal')">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="adminTitle">
+      <div class="modal-header">
+        <div>
+          <h3 id="adminTitle">Admin portal</h3>
+          <p>Read-only access to submitted service requests.</p>
+        </div>
+        <button class="close-button" type="button" aria-label="Close" onclick="closeModal('adminLoginModal')">×</button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="adminSignIn(event)">
+          <div class="field" style="margin-top:0">
+            <label for="adminEmail">Staff email</label>
+            <input class="input" id="adminEmail" type="email" required value="admin@fixly.team">
+          </div>
+          <div class="field">
+            <label for="adminCode">Access code</label>
+            <input class="input" id="adminCode" type="password" required value="246810">
+          </div>
+          <div class="form-error" id="adminError">Invalid staff credentials.</div>
+          <button class="button button-gradient" type="submit">Open request inbox →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-wrap" id="successModal" aria-hidden="true" onclick="backdropClose(event,'successModal')">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="successTitle">
+      <div class="success-hero">
+        <div class="success-check">✓</div>
+        <h3 id="successTitle">Request received!</h3>
+        <p>We’ll contact you shortly to confirm your expert.</p>
+      </div>
+      <div class="success-details" id="successDetails"></div>
+      <div class="success-actions">
+        <button class="button button-ghost" type="button" onclick="closeModal('successModal');resetBooking()">Book another</button>
+        <button class="button button-gradient" type="button" onclick="closeModal('successModal');openUserRequests()">My requests</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-wrap" id="userRequestsModal" aria-hidden="true" onclick="backdropClose(event,'userRequestsModal')">
+    <div class="modal wide" role="dialog" aria-modal="true" aria-labelledby="userRequestsTitle">
+      <div class="modal-header">
+        <div>
+          <h3 id="userRequestsTitle">My requests</h3>
+          <p>Only requests associated with your Gmail account are shown.</p>
+        </div>
+        <button class="close-button" type="button" aria-label="Close" onclick="closeModal('userRequestsModal')">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="request-list" id="userRequestList"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-wrap" id="adminDashboardModal" aria-hidden="true" onclick="backdropClose(event,'adminDashboardModal')">
+    <div class="modal wide" role="dialog" aria-modal="true" aria-labelledby="adminDashboardTitle">
+      <div class="modal-header">
+        <div>
+          <h3 id="adminDashboardTitle">Service request inbox</h3>
+          <p>All submitted requests. Customer accounts and unrelated activity are not accessible.</p>
+        </div>
+        <button class="close-button" type="button" aria-label="Close" onclick="closeModal('adminDashboardModal')">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="dashboard-toolbar">
+          <span class="read-only">READ-ONLY ADMIN VIEW</span>
+          <input class="input search" type="search" placeholder="Search requests..." oninput="renderAdminRequests(this.value)">
+        </div>
+        <div id="adminRequestList"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status"></div>
+
+  <script>
+    const booking = {
+      service: "",
+      duration: "",
+      date: "",
+      time: "",
+      notes: "",
+      phone: "",
+      area: ""
+    };
+
+    let currentStep = 1;
+    let pendingSubmission = false;
+    let session = JSON.parse(localStorage.getItem("fixly_session") || "null");
+
+    const slots = ["8:00 AM", "10:00 AM", "12:30 PM", "2:30 PM", "4:30 PM", "6:00 PM"];
+
+    function localDateISO(date) {
+      const y = date.getFullYear();
+      const m = String(date.getMonth() + 1).padStart(2, "0");
+      const d = String(date.getDate()).padStart(2, "0");
+      return `${y}-${m}-${d}`;
+    }
+
+    function futureDate(days) {
+      const date = new Date();
+      date.setDate(date.getDate() + days);
+      return localDateISO(date);
+    }
+
+    function seedRequests() {
+      if (localStorage.getItem("fixly_requests")) return;
+      const seed = [
+        { id:"FX-10482", name:"Mia Parker", email:"mia.parker@gmail.com", service:"AC Mechanic", duration:"1–2 hours", date:futureDate(1), time:"10:00 AM", phone:"+1 555 103 4402", area:"Downtown", notes:"AC is running but not cooling.", status:"Confirmed", created:Date.now()-7200000 },
+        { id:"FX-10467", name:"Daniel Lee", email:"daniel.lee@gmail.com", service:"Electrician", duration:"Up to 45 min", date:futureDate(2), time:"2:30 PM", phone:"+1 555 722 1980", area:"North Park", notes:"Bedroom outlet has no power.", status:"Request received", created:Date.now()-10200000 },
+        { id:"FX-10441", name:"Sara Khan", email:"sara.khan@gmail.com", service:"Plumber", duration:"2–4 hours", date:futureDate(3), time:"8:00 AM", phone:"+1 555 244 7811", area:"Riverside", notes:"Leak beneath kitchen sink.", status:"Assigned", created:Date.now()-18000000 }
+      ];
+      localStorage.setItem("fixly_requests", JSON.stringify(seed));
+    }
+
+    function getRequests() {
+      return JSON.parse(localStorage.getItem("fixly_requests") || "[]");
+    }
+
+    function saveRequests(requests) {
+      localStorage.setItem("fixly_requests", JSON.stringify(requests));
+    }
+
+    function escapeHTML(value) {
+      return String(value || "").replace(/[&<>"']/g, char => ({
+        "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#039;"
+      })[char]);
+    }
+
+    function renderNav() {
+      const actions = document.getElementById("navActions");
+
+      if (!session) {
+        actions.innerHTML = `
+          <button class="button button-ghost button-small" type="button" onclick="openAdminLogin()">Admin</button>
+          <button class="button button-primary button-small" type="button" onclick="openGmailLogin()">Sign in with Gmail</button>
+        `;
+        return;
+      }
+
+      if (session.role === "admin") {
+        actions.innerHTML = `
+          <button class="button button-ghost button-small" type="button" onclick="openAdminDashboard()">Requests inbox</button>
+          <div class="profile-chip"><div class="avatar">A</div><span>Admin</span></div>
+          <button class="button button-ghost button-small" type="button" onclick="logout()">Log out</button>
+        `;
+        return;
+      }
+
+      const initial = escapeHTML(session.name.charAt(0).toUpperCase());
+      actions.innerHTML = `
+        <button class="button button-ghost button-small" type="button" onclick="openUserRequests()">My requests</button>
+        <div class="profile-chip"><div class="avatar">${initial}</div><span>${escapeHTML(session.name.split(" ")[0])}</span></div>
+        <button class="button button-ghost button-small" type="button" onclick="logout()">Log out</button>
+      `;
+    }
+
+    function scrollToBooking() {
+      document.getElementById("booking").scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function prefillService(service) {
+      selectService(service);
+      setStep(1);
+      scrollToBooking();
+    }
+
+    function selectService(service) {
+      booking.service = service;
+      document.querySelectorAll("[data-service]").forEach(el => {
+        el.classList.toggle("selected", el.dataset.service === service);
+      });
+      updateSummary();
+    }
+
+    function selectDuration(duration) {
+      booking.duration = duration;
+      document.querySelectorAll("[data-duration]").forEach(el => {
+        el.classList.toggle("selected", el.dataset.duration === duration);
+      });
+      updateSummary();
+    }
+
+    function setDate(value) {
+      booking.date = value;
+      if (booking.time && isSlotPast(booking.time)) booking.time = "";
+      renderTimeSlots();
+      updateSummary();
+    }
+
+    function parseTime(time) {
+      const [clock, period] = time.split(" ");
+      let [hour, minute] = clock.split(":").map(Number);
+      if (period === "PM" && hour !== 12) hour += 12;
+      if (period === "AM" && hour === 12) hour = 0;
+      return { hour, minute };
+    }
+
+    function isSlotPast(slot) {
+      if (!booking.date || booking.date !== localDateISO(new Date())) return false;
+      const now = new Date();
+      const parsed = parseTime(slot);
+      const appointment = new Date();
+      appointment.setHours(parsed.hour, parsed.minute, 0, 0);
+      return appointment <= now;
+    }
+
+    function renderTimeSlots() {
+      const grid = document.getElementById("timeGrid");
+      grid.innerHTML = slots.map(slot => {
+        const disabled = isSlotPast(slot);
+        return `<button class="option-button ${booking.time === slot ? "selected" : ""}" type="button" ${disabled ? "disabled" : ""} onclick="selectTime('${slot}')">${slot}</button>`;
+      }).join("");
+    }
+
+    function selectTime(time) {
+      booking.time = time;
+      renderTimeSlots();
+      updateSummary();
+    }
+
+    function formatDate(value) {
+      if (!value) return "Not selected";
+      return new Intl.DateTimeFormat("en-US", {
+        weekday:"short", month:"short", day:"numeric", year:"numeric"
+      }).format(new Date(value + "T12:00:00"));
+    }
+
+    function updateSummary() {
+      document.getElementById("summaryService").textContent = booking.service || "Not selected";
+      document.getElementById("summaryDuration").textContent = booking.duration || "Not selected";
+      document.getElementById("summaryDate").textContent = formatDate(booking.date);
+      document.getElementById("summaryTime").textContent = booking.time || "Not selected";
+    }
+
+    function setStep(step) {
+      currentStep = step;
+      document.querySelectorAll(".form-step").forEach(el => {
+        el.classList.toggle("active", Number(el.dataset.step) === step);
+      });
+      document.querySelectorAll(".progress-item").forEach((el, index) => {
+        el.classList.toggle("active", index + 1 <= step);
+      });
+    }
+
+    function nextStep() {
+      if (currentStep === 1 && !booking.service) return showToast("Please select a service category.");
+      if (currentStep === 2 && !booking.duration) return showToast("Please select the expected work time.");
+      if (currentStep === 3 && (!booking.date || !booking.time)) return showToast("Please choose a convenient date and time.");
+      if (currentStep < 4) setStep(currentStep + 1);
+    }
+
+    function previousStep() {
+      if (currentStep > 1) setStep(currentStep - 1);
+    }
+
+    function validPhone(phone) {
+      return phone.replace(/\D/g, "").length >= 10;
+    }
+
+    function submitBooking(event) {
+      event.preventDefault();
+      booking.phone = document.getElementById("phone").value.trim();
+      booking.area = document.getElementById("area").value.trim();
+      booking.notes = document.getElementById("notes").value.trim();
+
+      if (!booking.service || !booking.duration || !booking.date || !booking.time) {
+        showToast("Please complete all booking steps.");
+        return;
+      }
+
+      if (!validPhone(booking.phone)) {
+        showToast("Please enter a valid phone number.");
+        document.getElementById("phone").focus();
+        return;
+      }
+
+      if (!booking.area) {
+        showToast("Please enter the service location.");
+        return;
+      }
+
+      if (!session || session.role !== "user") {
+        pendingSubmission = true;
+        openGmailLogin();
+        return;
+      }
+
+      createRequest();
+    }
+
+    function createRequest() {
+      const request = {
+        id: "FX-" + Math.floor(10000 + Math.random() * 89999),
+        name: session.name,
+        email: session.email,
+        service: booking.service,
+        duration: booking.duration,
+        date: booking.date,
+        time: booking.time,
+        phone: booking.phone,
+        area: booking.area,
+        notes: booking.notes,
+        status: "Request received",
+        created: Date.now()
+      };
+
+      const requests = getRequests();
+      requests.unshift(request);
+      saveRequests(requests);
+
+      document.getElementById("successDetails").innerHTML = `
+        <div><span>Request ID</span><strong>${escapeHTML(request.id)}</strong></div>
+        <div><span>Service</span><strong>${escapeHTML(request.service)}</strong></div>
+        <div><span>Appointment</span><strong>${escapeHTML(formatDate(request.date))} · ${escapeHTML(request.time)}</strong></div>
+        <div><span>Contact</span><strong>${escapeHTML(request.phone)}</strong></div>
+      `;
+
+      openModal("successModal");
+      pendingSubmission = false;
+    }
+
+    function resetBooking() {
+      Object.assign(booking, { service:"", duration:"", date:"", time:"", notes:"", phone:"", area:"" });
+      document.getElementById("bookingForm").reset();
+      document.querySelectorAll(".selected").forEach(el => el.classList.remove("selected"));
+      setStep(1);
+      renderTimeSlots();
+      updateSummary();
+      scrollToBooking();
+    }
+
+    function openGmailLogin() {
+      if (session?.role === "admin") {
+        showToast("Admin accounts have read-only request access.");
+        return;
+      }
+      openModal("gmailModal");
+      setTimeout(() => document.getElementById("gmailName").focus(), 100);
+    }
+
+    function signInWithGmail(event) {
+      event.preventDefault();
+      const name = document.getElementById("gmailName").value.trim();
+      const email = document.getElementById("gmailEmail").value.trim().toLowerCase();
+      const error = document.getElementById("gmailError");
+      const valid = /^[^\s@]+@gmail\.com$/i.test(email);
+
+      error.classList.toggle("show", !valid);
+      if (!valid || !name) return;
+
+      session = { role:"user", name, email };
+      localStorage.setItem("fixly_session", JSON.stringify(session));
+      closeModal("gmailModal");
+      renderNav();
+      showToast(`Welcome, ${name.split(" ")[0]}!`);
+
+      if (pendingSubmission) createRequest();
+    }
+
+    function openAdminLogin() {
+      if (session?.role === "admin") return openAdminDashboard();
+      openModal("adminLoginModal");
+    }
+
+    function adminSignIn(event) {
+      event.preventDefault();
+      const email = document.getElementById("adminEmail").value.trim().toLowerCase();
+      const code = document.getElementById("adminCode").value;
+      const valid = email === "admin@fixly.team" && code === "246810";
+      document.getElementById("adminError").classList.toggle("show", !valid);
+      if (!valid) return;
+
+      session = { role:"admin", name:"Fixly Admin", email };
+      localStorage.setItem("fixly_session", JSON.stringify(session));
+      closeModal("adminLoginModal");
+      renderNav();
+      openAdminDashboard();
+    }
+
+    function logout() {
+      session = null;
+      localStorage.removeItem("fixly_session");
+      renderNav();
+      closeAllModals();
+      showToast("You have been logged out.");
+    }
+
+    function openUserRequests() {
+      if (!session || session.role !== "user") return openGmailLogin();
+      const requests = getRequests().filter(request => request.email.toLowerCase() === session.email.toLowerCase());
+      const list = document.getElementById("userRequestList");
+
+      if (!requests.length) {
+        list.innerHTML = `<div class="empty-state">You have no requests yet.<br><br><button class="button button-gradient" onclick="closeModal('userRequestsModal');scrollToBooking()">Book an expert</button></div>`;
+      } else {
+        list.innerHTML = requests.map(request => `
+          <article class="request-card">
+            <div class="request-head">
+              <div>
+                <span class="request-id">${escapeHTML(request.id)}</span>
+                <h4>${escapeHTML(request.service)}</h4>
+              </div>
+              <span class="status">${escapeHTML(request.status).toUpperCase()}</span>
+            </div>
+            <div class="request-meta">
+              <div><small>Appointment</small><strong>${escapeHTML(formatDate(request.date))}<br>${escapeHTML(request.time)}</strong></div>
+              <div><small>Expected time</small><strong>${escapeHTML(request.duration)}</strong></div>
+              <div><small>Phone</small><strong>${escapeHTML(request.phone)}</strong></div>
+              <div><small>Service area</small><strong>${escapeHTML(request.area)}</strong></div>
+            </div>
+          </article>
+        `).join("");
+      }
+
+      openModal("userRequestsModal");
+    }
+
+    function openAdminDashboard() {
+      if (!session || session.role !== "admin") return openAdminLogin();
+      renderAdminRequests("");
+      openModal("adminDashboardModal");
+    }
+
+    function renderAdminRequests(query = "") {
+      const normalized = query.trim().toLowerCase();
+      const requests = getRequests().filter(request => {
+        return !normalized || Object.values(request).some(value =>
+          String(value).toLowerCase().includes(normalized)
+        );
+      });
+
+      const target = document.getElementById("adminRequestList");
+
+      if (!requests.length) {
+        target.innerHTML = `<div class="empty-state">No matching requests found.</div>`;
+        return;
+      }
+
+      target.innerHTML = `
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Request</th>
+                <th>Customer</th>
+                <th>Service</th>
+                <th>Schedule</th>
+                <th>Contact</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${requests.map(request => `
+                <tr>
+                  <td><strong>${escapeHTML(request.id)}</strong><small>${new Date(request.created).toLocaleDateString()}</small></td>
+                  <td><strong>${escapeHTML(request.name)}</strong><small>${escapeHTML(request.email)}</small></td>
+                  <td><strong>${escapeHTML(request.service)}</strong><small>${escapeHTML(request.duration)} · ${escapeHTML(request.area)}</small></td>
+                  <td><strong>${escapeHTML(formatDate(request.date))}</strong><small>${escapeHTML(request.time)}</small></td>
+                  <td><strong>${escapeHTML(request.phone)}</strong><small>${escapeHTML(request.notes || "No notes provided")}</small></td>
+                  <td><span class="status">${escapeHTML(request.status).toUpperCase()}</span></td>
+                </tr>
+              `).join("")}
+            </tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    function openModal(id) {
+      closeAllModals();
+      const modal = document.getElementById(id);
+      modal.classList.add("open");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("modal-open");
+    }
+
+    function closeModal(id) {
+      const modal = document.getElementById(id);
+      modal.classList.remove("open");
+      modal.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("modal-open");
+    }
+
+    function closeAllModals() {
+      document.querySelectorAll(".modal-wrap.open").forEach(modal => {
+        modal.classList.remove("open");
+        modal.setAttribute("aria-hidden", "true");
+      });
+      document.body.classList.remove("modal-open");
+    }
+
+    function backdropClose(event, id) {
+      if (event.target.id === id) closeModal(id);
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById("toast");
+      toast.textContent = message;
+      toast.classList.add("show");
+      clearTimeout(showToast.timer);
+      showToast.timer = setTimeout(() => toast.classList.remove("show"), 3000);
+    }
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") closeAllModals();
+    });
+
+    function initialize() {
+      seedRequests();
+      renderNav();
+      renderTimeSlots();
+
+      const today = new Date();
+      const max = new Date();
+      max.setDate(max.getDate() + 90);
+      const input = document.getElementById("dateInput");
+      input.min = localDateISO(today);
+      input.max = localDateISO(max);
+    }
+
+    initialize();
+  </script>
+</body>
+</html>
